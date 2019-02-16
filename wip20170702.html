@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer&#39;s Diary: Recent Posts</title>
+<title>Developer&#39;s Diary: Configuration saves the day</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -49,57 +49,38 @@
   </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function(){initNavTree('index.html','');});
+$(document).ready(function(){initNavTree('wip20170702.html','');});
 </script>
 <div id="doc-content">
 <div class="header">
   <div class="headertitle">
-<div class="title">Recent Posts </div>  </div>
+<div class="title">Configuration saves the day </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="h201707"></a></p>
+<div class="toc"><h3>Table of Contents</h3>
+<ul><li class="level1"><a href="#autotoc_md93">The unwanted &#39;0&#39; prefix</a></li>
+<li class="level1"><a href="#autotoc_md94">Interesting web pages</a></li>
+</ul>
+</div>
+<div class="textblock"><p><a class="anchor" id="h20170702"></a><em>Sunday 2<sup>nd</sup> July, 2017</em></p>
+<h1><a class="anchor" id="autotoc_md93"></a>
+The unwanted '0' prefix</h1>
+<p>Last night I discovered an <a href="https://bitbucket.org/terry_ebdon/webdoxy/issues/3/daily-page-title-has-0-prefix-on-date" title="Bug #3 in issue tracker">annoying date issue:</a> WebDoxy's -d option was adding a leading '0' to the date. As I suspected, it was fixable with a simple configuration change. Java's <code>SimpleDateFormat</code> class pads the day number when multiple 'd' characters are used. WebDoxy reads date format strings from a configuration file, config.groovy, so this was a <a href="https://bitbucket.org/terry_ebdon/webdoxy/commits/5774dabb93b8" title="Diff for the fix to issue #3">really simple fix:</a></p>
+<div class="image">
+<img src="WebDoxy-fix-for-issue-3.PNG" alt="WebDoxy-fix-for-issue-3.PNG" width="50%"/>
+</div>
+ <h1><a class="anchor" id="autotoc_md94"></a>
+Interesting web pages</h1>
 <ul>
-<li><a class="el" href="wip20170711.html">Parsing SimpleMind XML - Part One</a></li>
-<li><a class="el" href="wip20170710.html">Splitting the windows path</a></li>
-<li><a class="el" href="wip20170709.html">Verifying Checksums with Ant &amp; Groovy</a></li>
-<li><a class="el" href="wip20170708.html">Using Zotero with Doxygen</a></li>
-<li><a class="el" href="wip20170707.html">Doxygen Citations</a></li>
-<li><a class="el" href="wip20170706.html">New code and new bio</a><ul>
-<li>Smelly code &ndash; a candidate for refactoring?</li>
-<li>WebDoxy superscript enhancement</li>
-<li>Bio update, photography and kit</li>
-</ul>
-</li>
-<li><a class="el" href="wip20170705.html">Problems, old &amp; new</a><ul>
-<li>Superscript problem solved.</li>
-<li>Doxygen TREEVIEW_WIDTH &ndash; configuration ignored.</li>
-<li>Related Pages excludes days in current month.</li>
-</ul>
-</li>
-<li><a class="el" href="wip20170704.html">Fixing Doxygen</a><ul>
-<li>Tricky quotes in markdown tables</li>
-<li>Doxygen Sites on Small Screens</li>
-</ul>
-</li>
-<li><a class="el" href="wip20170703.html">HSPs, skinning &amp; data generation</a><ul>
-<li>Web Hosts and Platforms</li>
-<li>Doxygen theme</li>
-<li>Creating Test Data for Doxygen</li>
-</ul>
-</li>
-<li><a class="el" href="wip20170702.html">Configuration saves the day</a><ul>
-<li>A fix for that annoying '0' bug.</li>
-</ul>
-</li>
-<li><a class="el" href="wip20170701.html">A nice Mercurial 'trick' and a tricky bug</a><ul>
-<li>Committing the code auto-closes the bug. Nice!</li>
-<li>Daily page title has '0' prefix on date.</li>
-</ul>
-</li>
+<li><a href="https://docs.oracle.com/javase/8/docs/api/java/text/SimpleDateFormat.html">Class SimpleDateFormat</a> &ndash; Java 8 API; Oracle, 2016.</li>
+<li><a href="https://stackoverflow.com/questions/27571377/datetimeformatter-support-for-single-digit-day-of-month-and-month-of-year">DateTimeFormatter Support for Single Digit Day of Month and Month of Year</a> &ndash; stack overflow.</li>
+<li><a href="https://stackoverflow.com/questions/8836294/remove-leading-0-in-day-of-month-simpledateformat">Remove Leading “0” in day of month SimpleDateFormat</a> &ndash; stack overflow.</li>
 </ul>
 <p> 
 <hr/>
-<a class='btn' href='wip201706.html'>June 2017 &#x1F448;</a>
+<a class='btn' href='wip20170701.html'>1<sup>st</sup> July &#x1F448;</a>
+<a class='btn' href='#h20170702'>Top of page</a>
+<a class='btn' href='wip20170703.html'>👉 3<sup>rd</sup> July</a>
  <span class="copyright">&copy; 2017 <a class="el" href="_about_me.html">Terry Ebdon</a></span> <p>Find me on coding on <a title="terry_ebdon on BitBucket"
 href="https://bitbucket.org/terry_ebdon/">BitBucket,</a> networking on <a
 title="Terry Ebdon on LinkedIn"
@@ -110,7 +91,7 @@ title="@terry_ebdon" href="https://twitter.com/@terry_ebdon">twitter.</a> </p>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Jul 14 2017 00:02:49 for Developer&#39;s Diary by
+    <li class="footer">Generated on Fri Jul 14 2017 00:02:35 for Developer&#39;s Diary by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
   </ul>

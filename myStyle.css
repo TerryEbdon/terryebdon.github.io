@@ -1,0 +1,83 @@
+/**
+ * @file
+ * @author  Terry Ebdon
+ * @date    01-MAY-2017
+ * @brief   CSS customisation for Doxygen projects.
+ */
+/*
+ body, table, div, p, dl {
+ 	font: 400 14px/22px Roboto,sans-serif;
+ }
+*/
+
+body, table, div, p, dl {
+font-family: Lucida Grande, Verdana, Geneva, Arial, sans-serif;
+    font-size: medium;
+	line-height: 1.5;
+}
+
+/* Ensure that <CODE> and <TT> text is as big as the <BODY> text and use a nicer font */
+code, tt {
+    font-family: Consolas, Courier, monospace;
+    font-size: medium;
+    color: green;
+}
+
+div.line {
+    font-size: medium;
+}
+/* Need this as <PRE> makes the text look smaller due to different font */
+pre {
+    font-size: 105%;
+}
+
+span.copyright {
+	white-space: nowrap;
+
+	/* Prevent it bumping into buttons above,
+	 * on very narrow screens, when wrapped.
+	 */
+	line-height: 2;
+}
+
+a.btn {
+  background-color: #008cda;
+  border-radius   : 7px;
+  color           : #ffffff;
+  padding         : 6px 10px;
+  white-space     : nowrap;
+  text-decoration : none;
+
+  /* Prevent it bumping into buttons above,
+   * on very narrow screens, when wrapped.
+   */
+  line-height: 2.5;
+}
+
+a.btn:visited {
+	color: #ffffff;
+}
+a.btn:hover {
+  background-color: #000000;
+}
+
+.image
+{
+   text-align: left;
+}
+
+.plantumlgraph
+{
+   text-align: left;
+}
+
+.dotgraph
+{
+   text-align: left;
+}
+
+.word-frame
+{
+	  overflow-y: hidden;
+	  height: 200px;
+}

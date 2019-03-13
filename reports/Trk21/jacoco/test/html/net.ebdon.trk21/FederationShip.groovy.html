@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FederationShip.groovy</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Trk21</a> &gt; <a href="index.source.html" class="el_package">net.ebdon.trk21</a> &gt; <span class="el_source">FederationShip.groovy</span></div><h1>FederationShip.groovy</h1><pre class="source lang-java linenums">package net.ebdon.trk21;
+
+import static GameSpace.*;
+import static Quadrant.*;
+/**
+ * @file
+ * @author      Terry Ebdon
+ * @date        January 2019
+ * @copyright
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/// @todo consider using an enum class for #allowedConditions
+@groovy.util.logging.Log4j2
+final class FederationShip {
+    final int energyAtStart         = 3000;               ///&lt; E0% in TREK.BAS
+<span class="fc" id="L27">    final int lowEnergyThreshold    = energyAtStart / 10; ///&lt; Triggers condition yellow</span>
+    int energyNow                   = energyAtStart;      ///&lt; E% in TREK.BAS
+    String condition                = &quot;GREEN&quot;;            ///&lt; C$ in TREK.BAS
+    final int maxTorpedoes          = 10;
+    int numTorpedoes                = maxTorpedoes;
+    int energyUsedByLastMove        = 0 // N%
+<span class="fc" id="L33">    Position position               = new Position();</span>
+
+<span class="fc" id="L35">    final allowedConditions = [</span>
+      'GREEN',
+      'YELLOW',
+      'RED',
+      'DOCKED'
+    ];
+
+    private void useEnergyForMove( final int energyUsedByLastMove ) {
+<span class="pc bpc" id="L43" title="4 of 6 branches missed.">      energyNow -= energyUsedByLastMove</span>
+<span class="pc bpc" id="L44" title="1 of 2 branches missed.">      log.info &quot;Ship's movement used $energyUsedByLastMove units of energy.&quot;</span>
+<span class="pc bpc" id="L45" title="3 of 4 branches missed.">      logFuelReduction()</span>
+    }
+
+    private void energyReducedByEnemyAttack( final int damagelevel ) {
+<span class="pc bpc" id="L49" title="4 of 6 branches missed.">      energyNow -= damagelevel</span>
+<span class="pc bpc" id="L50" title="1 of 2 branches missed.">      log.info &quot;Hit with $damagelevel units of energy.&quot;</span>
+<span class="pc bpc" id="L51" title="3 of 4 branches missed.">      logFuelReduction()</span>
+    }
+
+    void energyReducedByPhaserUse( final int phaserEnergyUsed ) {
+<span class="nc bnc" id="L55" title="All 6 branches missed.">      energyNow -= phaserEnergyUsed</span>
+<span class="nc bnc" id="L56" title="All 2 branches missed.">      log.info &quot;Firing phasers used $phaserEnergyUsed units of energy.&quot;</span>
+<span class="nc bnc" id="L57" title="All 4 branches missed.">      logFuelReduction()</span>
+    }
+
+    private void logFuelReduction() {
+<span class="pc bpc" id="L61" title="1 of 2 branches missed.">      log.info &quot;Energy reserves reduced to $energyNow&quot;</span>
+<span class="pc bpc" id="L62" title="5 of 8 branches missed.">      if ( deadInSpace() ) {</span>
+<span class="pc" id="L63">        log.info &quot;The ship is dead in space.&quot;</span>
+      }
+    }
+
+<span class="pc bpc" id="L67" title="5 of 8 branches missed.">    boolean isValid() {</span>
+<span class="pc bpc" id="L68" title="15 of 20 branches missed.">        energyNow &gt;= 0 &amp;&amp; energyNow &lt;= energyAtStart &amp;&amp;</span>
+<span class="pc bpc" id="L69" title="18 of 24 branches missed.">        numTorpedoes &gt;= 0 &amp;&amp; numTorpedoes &lt;= maxTorpedoes &amp;&amp;</span>
+<span class="pc bpc" id="L70" title="6 of 8 branches missed.">        allowedConditions.contains( condition ) &amp;&amp;</span>
+<span class="pc bpc" id="L71" title="2 of 4 branches missed.">        position.isValid()</span>
+    }
+
+    String toString() {
+<span class="pc" id="L75">        &quot;energy: $energyNow, condition: $condition, &quot; +</span>
+<span class="fc" id="L76">        &quot;torpedoes: $numTorpedoes, &quot; +</span>
+        &quot;energyUsedByLastMove: $energyUsedByLastMove, &quot; +
+        &quot;energyAtStart: $energyAtStart, $position&quot;
+    }
+
+
+    /// There's a design flaw here. The ship doesn't have enough information to
+    /// move, and it has no access to the current sector or the galaxy.
+    ///
+    /// It doesn't know:
+    /// - It's position in the current quadrant.
+    /// - The position of the current quadrant in the galaxy.
+    /// - The position of objects it might collide with.
+    ///
+    /// @note Should this be handled in the FederationShip class?
+    ///
+    /// @arg The desired course as a ShipVector.
+    ///
+    void move( final ShipVector sv ) {
+<span class="pc bpc" id="L95" title="1 of 2 branches missed.">      assert( sv.isValid() ) /// @pre The provided Shipvector is valid.</span>
+<span class="pc bpc" id="L96" title="1 of 2 branches missed.">      log.info( &quot;Ship moving: $sv&quot; )</span>
+
+<span class="fc" id="L98">      energyUsedByLastMove = sv.warpFactor * 8</span>
+          // 1 warp factor:
+          //  - uses 1 unit of energy
+          //  - moves the ship by 1 quadrant.
+
+<span class="pc bpc" id="L103" title="3 of 4 branches missed.">      useEnergyForMove energyUsedByLastMove</span>
+    }
+
+    boolean deadInSpace() {
+<span class="pc bpc" id="L107" title="7 of 12 branches missed.">      final boolean dis = energyNow &lt;= 0</span>
+<span class="pc bpc" id="L108" title="1 of 4 branches missed.">      if ( dis ) log.info &quot;Ship is dead in space.\n$this&quot;</span>
+<span class="pc" id="L109">      dis</span>
+    }
+
+    void setCondition( final newCond ) {
+<span class="pc bpc" id="L113" title="1 of 2 branches missed.">        assert allowedConditions.contains( newCond )</span>
+<span class="fc" id="L114">        final def oldCond = this.condition</span>
+<span class="fc" id="L115">        this.condition = newCond</span>
+<span class="pc bpc" id="L116" title="1 of 2 branches missed.">        log.trace( &quot;Conditon changed from $oldCond to ${this.condition}&quot; )</span>
+    }
+
+  /// Attempt to dock if adjacent to a @ref StarBase.
+  /// @todo attemptDocking() hard-codes 'DOCKED' condition
+  /// @pre the current sector is inside the quadrant
+  /// @note It's not possible to dock with a @ref StarBase
+  ///       in an adjacent quadrant.
+  def attemptDocking( final quadrant ) {
+<span class="fc" id="L125">    final String logCheckForStarBase = 'Checking for star base in {}, value is {}'</span>
+<span class="fc" id="L126">    final String logNowDocked = 'Now docked in sector {} to star base in sector {}'</span>
+<span class="fc" id="L127">    final String logDockCheck = 'Checking if I can dock from sector {}'</span>
+<span class="fc" id="L128">    final String logAtEdge = 'Ship at board edge, sector {} is outside quadrant.'</span>
+<span class="fc" id="L129">    log.debug 'attemptDocking'</span>
+
+<span class="pc" id="L131">    position.sector.with {</span>
+<span class="pc bpc" id="L132" title="1 of 2 branches missed.">      assert quadrant[ row, col ] != Thing.base  // Ship can't be in same sector as a star base.</span>
+<span class="pc bpc" id="L133" title="1 of 2 branches missed.">      assert quadrant.contains( [row, col] )</span>
+<span class="pc bpc" id="L134" title="1 of 2 branches missed.">      assert quadrant[ row, col ] != Thing.base  // Ship can't be in same sector as a star base.</span>
+<span class="pc bpc" id="L135" title="1 of 2 branches missed.">      log.debug logDockCheck, logFmtCoords(row,col) /// @bug fixme!</span>
+<span class="pc bpc" id="L136" title="10 of 20 branches missed.">      for ( int i = row - 1; i &lt;= row + 1 &amp;&amp; condition != &quot;DOCKED&quot;; i++) { // 1530</span>
+<span class="pc bpc" id="L137" title="7 of 12 branches missed.">        for ( int j = col - 1; j &lt;= col + 1 &amp;&amp; condition != &quot;DOCKED&quot;; j++) { // 1530</span>
+<span class="pc bpc" id="L138" title="3 of 4 branches missed.">          if ( quadrant.contains(i,j) ) {</span>
+<span class="pc bpc" id="L139" title="3 of 4 branches missed.">            log.trace logCheckForStarBase, logFmtCoords(i,j), quadrant[i,j]</span>
+<span class="pc bpc" id="L140" title="2 of 4 branches missed.">            if ( quadrant[i,j] == Thing.base ) {</span>
+<span class="pc" id="L141">              condition       = 'DOCKED'</span>
+<span class="pc" id="L142">              numTorpedoes    = maxTorpedoes</span>
+<span class="pc" id="L143">              energyNow       = energyAtStart</span>
+<span class="pc bpc" id="L144" title="3 of 4 branches missed.">              log.info logNowDocked,</span>
+<span class="pc" id="L145">                logFmtCoords(row,col), logFmtCoords(i,j)</span>
+            }
+          } else {
+<span class="pc bnc" id="L148" title="All 4 branches missed.">            log.debug logAtEdge, logFmtCoords(i,j)</span>
+          }
+        }
+      }
+    }
+  }
+
+  private void battleStations( final numEnemyShipsHere ) {
+<span class="pc bpc" id="L156" title="1 of 2 branches missed.">    log.info &quot;There are $numEnemyShipsHere enemy craft in quadrant &quot; +</span>
+      position.quadrant
+<span class="pc bpc" id="L158" title="1 of 2 branches missed.">    log.info &quot;Condition RED: there are $numEnemyShipsHere enemy craft here!&quot;</span>
+<span class="fc" id="L159">    condition = &quot;RED&quot;</span>
+  }
+
+  /// @todo Remove commented out code
+  def shortRangeScan( final Galaxy galaxy ) {
+    // logException {
+
+<span class="pc bpc" id="L166" title="1 of 2 branches missed.">      log.debug &quot;shortRangeScan() called for quadrant &quot; + position.quadrant</span>
+<span class="fc" id="L167">      final int minGalaxyDimension = 4                // Galaxy must be at least this &quot;long&quot;.</span>
+<span class="fc" id="L168">      final int minGalaxyArea = minGalaxyDimension**2 // Galaxy is square.</span>
+
+<span class="pc bpc" id="L170" title="1 of 2 branches missed.">      assert galaxy.size() &gt;= minGalaxyArea</span>
+<span class="pc bpc" id="L171" title="1 of 2 branches missed.">      assert galaxy.insideGalaxy( position.quadrant )</span>
+
+<span class="fc" id="L173">      final int numEnemyShipsHere = galaxy[ position.quadrant ] / 100</span>
+<span class="pc bpc" id="L174" title="9 of 16 branches missed.">      if ( numEnemyShipsHere &gt; 0 ) {</span>
+<span class="pc" id="L175">        battleStations( numEnemyShipsHere )</span>
+        // battleStations( numEnemyShipsHere, entQuadX, entQuadY )
+      } else {
+<span class="pc" id="L178">        setNonBattleCondition( galaxy )</span>
+      }
+      // attemptDocking()
+    // }
+  }
+
+  /// @todo Refactor - Extract method setNonBattleCondition()
+<span class="pc bpc" id="L185" title="5 of 8 branches missed.">  private void setNonBattleCondition( final galaxy ) {</span>
+
+<span class="pc bpc" id="L187" title="4 of 8 branches missed.">    if ( energyNow &gt; lowEnergyThreshold ) {</span>
+<span class="pc bpc" id="L188" title="3 of 4 branches missed.">      log.debug &quot;$energyNow is above threshold of $lowEnergyThreshold&quot;</span>
+<span class="pc" id="L189">      condition = &quot;GREEN&quot;</span>
+<span class="pc" id="L190">      scanAdjacentQuadrants( galaxy )</span>
+    } else {
+<span class="pc bpc" id="L192" title="3 of 4 branches missed.">      log.debug &quot;$energyNow is below threshold of $lowEnergyThreshold&quot;</span>
+<span class="pc" id="L193">      condition = &quot;YELLOW&quot;</span>
+<span class="pc bpc" id="L194" title="3 of 4 branches missed.">      log.info &quot;Low on energy: $this&quot;</span>
+    }
+  }
+
+  /// @todo Refactor - Extract method scanAdjacentQuadrants()
+  /// @todo Remove commented out lines.
+  private void scanAdjacentQuadrants( final galaxy ) {
+
+<span class="fc" id="L202">    (position.quadrant.row - 1).upto( position.quadrant.row + 1) { i -&gt;</span>
+<span class="pc" id="L203">      (position.quadrant.col - 1).upto( position.quadrant.col + 1) { j -&gt;</span>
+<span class="fc bfc" id="L204" title="All 2 branches covered.">        if ( insideGalaxy( i, j ) ) {</span>
+<span class="fc" id="L205">          final int quadrantStatus = galaxy[i,j]</span>
+<span class="pc bpc" id="L206" title="8 of 16 branches missed.">          if ( quadrantStatus &gt; 99 ) {</span>
+<span class="pc bpc" id="L207" title="3 of 4 branches missed.">            condition = &quot;YELLOW&quot;</span>
+<span class="pc bpc" id="L208" title="3 of 4 branches missed.">            log.info &quot;adjacent quadrant [$i,$j] = $quadrantStatus has enemy ships!&quot;</span>
+          } else {
+<span class="pc bpc" id="L210" title="1 of 2 branches missed.">            log.debug &quot;adjacent quadrant [$i,$j] = $quadrantStatus is clear.&quot;</span>
+          }
+        } else {
+<span class="pc" id="L213">          log.debug &quot;adjacent quadrant [$i,$j] is outside the galaxy.&quot;</span>
+        }
+      }
+    }
+  }
+
+  boolean insideGalaxy( x, y ) { /// @todo insideGalaxy() should be in a new Galaxy class.
+<span class="pc" id="L220">    [1..8].flatten().containsAll( [x,y] ) /// @todo insideGalaxy() uses hardcoded galaxy size</span>
+  }
+
+  /// @deprecated Use Quadrant.contains()
+  private boolean inQuadrant(x,y) { /// @todo inQuadrant() should be in a new Galaxy class.
+<span class="nc" id="L225">    insideGalaxy(x,y)</span>
+  }
+
+  boolean isProtectedByStarBase() {
+<span class="pc" id="L229">    'DOCKED' == condition</span>
+  }
+
+  void hitFromEnemy( damagelevel ) {
+<span class="pc bpc" id="L233" title="1 of 4 branches missed.">    assert !isProtectedByStarBase()</span>
+<span class="pc bpc" id="L234" title="1 of 2 branches missed.">    assert 'RED' == condition</span>
+<span class="fc" id="L235">    energyReducedByEnemyAttack damagelevel</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

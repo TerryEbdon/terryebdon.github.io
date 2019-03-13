@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ShipVector.groovy</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Trk21</a> &gt; <a href="index.source.html" class="el_package">net.ebdon.trk21</a> &gt; <span class="el_source">ShipVector.groovy</span></div><h1>ShipVector.groovy</h1><pre class="source lang-java linenums">package net.ebdon.trk21;
+/**
+ * @file
+ * @author      Terry Ebdon
+ * @date        January 2019
+ * @copyright
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+@brief  ShipVector holds details of the ship's direction and speed.
+@author Terry Ebdon
+@date   JAN-2019
+*/
+final class ShipVector {
+  float course        = 0;
+  float warpFactor    = 0;
+
+  static final float minCourse = 1;
+  static final float maxCourse = 8.999999;
+  static final float minWarpFactor = 0.125;
+  static final float maxWarpFactor = 12;
+
+<span class="pc bpc" id="L34" title="6 of 12 branches missed.">  boolean isValid() {</span>
+<span class="pc bpc" id="L35" title="2 of 4 branches missed.">    isValidCourse( course ) &amp;&amp;</span>
+<span class="pc bpc" id="L36" title="4 of 8 branches missed.">    isValidWarpFactor( warpFactor ) &amp;&amp;</span>
+<span class="pc bpc" id="L37" title="6 of 8 branches missed.">    course * warpFactor &gt; 0</span>
+  }
+
+<span class="pc bpc" id="L40" title="4 of 8 branches missed.">  static boolean isValidCourse( final float newCourse ) {</span>
+<span class="pc bpc" id="L41" title="10 of 16 branches missed.">    newCourse &gt;= minCourse &amp;&amp; newCourse &lt;= maxCourse</span>
+  }
+
+<span class="pc bpc" id="L44" title="4 of 8 branches missed.">  static boolean isValidWarpFactor( final float newWarpFactor ) {</span>
+<span class="pc bpc" id="L45" title="8 of 16 branches missed.">    newWarpFactor &gt;= minWarpFactor &amp;&amp; newWarpFactor &lt;= maxWarpFactor</span>
+  }
+
+  String toString() {
+<span class="pc" id="L49">      &quot;course: $course, warpFactor: $warpFactor&quot;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

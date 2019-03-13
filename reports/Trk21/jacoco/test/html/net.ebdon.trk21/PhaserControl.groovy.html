@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PhaserControl.groovy</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Trk21</a> &gt; <a href="index.source.html" class="el_package">net.ebdon.trk21</a> &gt; <span class="el_source">PhaserControl.groovy</span></div><h1>PhaserControl.groovy</h1><pre class="source lang-java linenums">package net.ebdon.trk21;
+
+import static ShipDevice.*;
+import static GameSpace.*;
+/**
+ * @file
+ * @author      Terry Ebdon
+ * @date        January 2019
+ * @copyright
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+@groovy.util.logging.Log4j2
+final class PhaserControl {
+
+  final DamageControl damageControl;
+  Closure report;
+  FederationShip ship;  /// @todo Break the dependency on FederationShip
+  Battle battle;
+
+  PhaserControl( final DamageControl aDc, final Closure reporter, aShip, aBattle ) {
+<span class="fc" id="L32">    damageControl = aDc</span>
+<span class="fc" id="L33">    report = reporter</span>
+<span class="fc" id="L34">    ship = aShip</span>
+<span class="fc" id="L35">    battle = aBattle</span>
+  }
+
+  /// @todo Localiser PhaserControl.phasersDisabled()
+  private void phasersDisabled() {
+<span class="nc" id="L40">    log.info &quot;Phaser control is disabled.&quot;</span>
+<span class="nc" id="L41">    report &quot;Phaser control is disabled.&quot;</span>
+  }
+
+  /// @todo Localiser PhaserControl.phasersOnTarget()
+  private void phasersOnTarget() {
+<span class="pc bpc" id="L46" title="1 of 2 branches missed.">    log.info &quot;Phaser control is enabled. Energy available $ship.energyNow&quot;</span>
+<span class="fc" id="L47">    report &quot;Phasers locked in on target. Energy available $ship.energyNow&quot;</span>
+  }
+
+  /// @todo Localiser PhaserControl.commandRefused()
+  private void commandRefused() {
+<span class="fc" id="L52">    log.warn &quot;Command refused; insufficient energy available.&quot;</span>
+<span class="fc" id="L53">    report   &quot;Command refused; insufficient energy available.&quot;</span>
+  }
+
+  private def phaserVariance() {
+<span class="pc" id="L57">    2 + new Random().nextFloat()</span>
+  }
+
+  private float rangeTo( target ) {
+<span class="pc bpc" id="L61" title="1 of 2 branches missed.">    log.info &quot;Fire from ${ship.position.sector} at $target&quot;</span>
+<span class="pc" id="L62">    distanceBetween( ship.position.sector, target.sector )</span>
+  }
+
+<span class="pc bpc" id="L65" title="2 of 4 branches missed.">  private int targetDamageAmount( fired, distance ) {</span>
+<span class="pc" id="L66">    [fired, fired / distance * phaserVariance()].min()</span>
+  }
+
+  private void fireAt( energyAmount, target ) {
+<span class="fc" id="L70">    log.debug 'in fireAt()'</span>
+<span class="pc bpc" id="L71" title="1 of 2 branches missed.">    assert ship.position.isValid()</span>
+<span class="pc bpc" id="L72" title="1 of 2 branches missed.">    assert target.sector.isValid()</span>
+<span class="pc bpc" id="L73" title="1 of 2 branches missed.">    assert energyAmount &gt; 0</span>
+
+<span class="fc" id="L75">    final float distance = rangeTo( target )</span>
+<span class="pc bpc" id="L76" title="1 of 2 branches missed.">    log.debug sprintf(</span>
+      &quot;Calculating hit on %s with %d units, range %+1.3f sectors&quot;,
+      target.name, energyAmount, distance )
+<span class="pc bpc" id="L79" title="2 of 4 branches missed.">    assert distance &gt; 0</span>
+    // final float energyHit = energyAmount / distance * phaserVariance()
+<span class="fc" id="L81">    final int energyHit = targetDamageAmount( energyAmount, distance )</span>
+
+<span class="pc bpc" id="L83" title="1 of 2 branches missed.">    log.info '{} hit with {} of the {} units fired at it.',</span>
+        target.name, energyHit, energyAmount
+
+<span class="fc" id="L86">    battle.hitOnFleetShip target, energyHit</span>
+  }
+
+  void fire( energyAmount ) {
+<span class="pc bpc" id="L90" title="1 of 2 branches missed.">    log.info &quot;Firing phasers with $energyAmount units.&quot;</span>
+<span class="pc bpc" id="L91" title="3 of 6 branches missed.">    assert damageControl &amp;&amp; report</span>
+<span class="pc bpc" id="L92" title="1 of 2 branches missed.">    assert energyAmount &gt; 0</span>
+
+<span class="pc bpc" id="L94" title="6 of 10 branches missed.">    if ( damageControl.isDamaged( DeviceType.phasers ) ) {</span>
+<span class="nc" id="L95">        phasersDisabled()</span>
+    } else {
+<span class="pc" id="L97">      phasersOnTarget()</span>
+<span class="pc bpc" id="L98" title="2 of 4 branches missed.">      if (energyAmount &gt; ship.energyNow) {</span>
+<span class="pc" id="L99">        commandRefused()</span>
+      } else {
+<span class="pc" id="L101">        ship.energyReducedByPhaserUse energyAmount</span>
+<span class="pc" id="L102">        def target</span>
+<span class="pc bpc" id="L103" title="2 of 4 branches missed.">        while ( target = battle.getNextTarget() ) {</span>
+<span class="pc" id="L104">          fireAt energyAmount, target</span>
+        }
+      }
+    }
+<span class="fc" id="L108">    log.info 'Firing phasers -- complete'</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

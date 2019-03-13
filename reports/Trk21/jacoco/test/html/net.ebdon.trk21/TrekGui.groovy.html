@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TrekGui.groovy</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Trk21</a> &gt; <a href="index.source.html" class="el_package">net.ebdon.trk21</a> &gt; <span class="el_source">TrekGui.groovy</span></div><h1>TrekGui.groovy</h1><pre class="source lang-java linenums">package net.ebdon.trk21;
+
+import groovy.swing.SwingBuilder;
+import java.awt.BorderLayout;
+import javax.swing.BorderFactory;
+import javax.swing.*;
+import java.awt.*;
+import java.text.MessageFormat;
+/**
+ * @file
+ * @author      Terry Ebdon
+ * @date        January 2019
+ * @copyright
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+@brief  GUI for A Groovy version of the 1973 BASIC-PLUS program TREK.BAS
+@author Terry Ebdon
+@date   JAN-2019
+*/
+@groovy.util.logging.Log4j2
+final class TrekGui extends UiBase {
+<span class="nc" id="L34">  def swing = new SwingBuilder();</span>
+
+  static main( args ) {
+<span class="nc" id="L37">      new TrekGui().run()</span>
+  }
+
+  @Override void outln( final String str ) {
+<span class="nc" id="L41">    swing.output.text += &quot;$str\n&quot;</span>
+  }
+
+  @Override void setConditionText( final String displayableCondition ) {
+<span class="nc" id="L45">    swing.condition.text = displayableCondition</span>
+  }
+
+  def setDefaultFonts() {
+    // see: https://www.rgagnon.com/javadetails/java-0335.html
+    // Font f2 = new Font( 'monospaced', Font.BOLD, 20 ) // 28 )
+<span class="nc" id="L51">    Font f2 = new Font( *(config.gui.font.standard) )</span>
+<span class="nc" id="L52">    java.util.Enumeration keys = UIManager.getDefaults().keys();</span>
+<span class="nc bnc" id="L53" title="All 2 branches missed.">    while (keys.hasMoreElements()) {</span>
+<span class="nc" id="L54">      Object key = keys.nextElement();</span>
+<span class="nc" id="L55">      Object value = UIManager.get (key);</span>
+<span class="nc bnc" id="L56" title="All 2 branches missed.">      if (value instanceof javax.swing.plaf.FontUIResource) {</span>
+<span class="nc" id="L57">        UIManager.put (key, f2);</span>
+      }
+    }
+  }
+
+  @Override Float getFloatInput( final String prompt ) {
+<span class="nc" id="L63">    String rv = ''</span>
+<span class="nc bnc" id="L64" title="All 4 branches missed.">    while( !rv.isFloat() ) {</span>
+<span class="nc" id="L65">      rv = JOptionPane.showInputDialog( swing.trekFrame, btnText( prompt ) )</span>
+<span class="nc bnc" id="L66" title="All 2 branches missed.">      if ( rv ) {</span>
+<span class="nc bnc" id="L67" title="All 4 branches missed.">        if ( !rv.isFloat() ) {</span>
+<span class="nc" id="L68">          JOptionPane.showMessageDialog( swing.trekFrame, pleaseEnterNumber() )</span>
+        }
+      } else {
+<span class="nc" id="L71">        rv = '0'</span>
+      }
+    }
+<span class="nc" id="L74">    Float.parseFloat( rv )</span>
+  }
+
+  /// @return A localised display string for the ship's condition
+  /// @todo Move displayableCondition() into FederationShip
+  /// @todo Localise via the #rb resource bundle.
+  /// @bug  Code assumes that all condition values, other than &quot;DOCKED&quot;,
+  ///       are also valid HTML colours. This is currently true for ENGLISH
+  ///       locales, but will fail for other languages. Colours and language
+  ///       should be orthogonal.
+  /// @todo Consider splitting into two methods, to allow use where HTML is
+  ///       not appropriate.
+  String displayableCondition() {
+<span class="nc" id="L87">    trek.ship.with {</span>
+      /// @bug Can be condition GREEN without being docked.
+      ///       e.g. if energy &gt; 10% &amp;&amp; no enemy in current
+      ///       or surrounding sectors.
+      /// @todo Font size should be based on cong, not HTML.
+<span class="nc bnc" id="L92" title="All 2 branches missed.">      def colour = condition != 'DOCKED' ? condition : 'GREEN'</span>
+<span class="nc" id="L93">      &quot;&lt;html&gt;&lt;font size=+2 color=$colour&gt;${condition}&lt;/font&gt;&lt;/html&gt;&quot;</span>
+    }
+  }
+
+  @Override void run() {
+    // assert damage
+<span class="nc" id="L99">    trek.setupGame()</span>
+
+<span class="nc bnc" id="L101" title="All 2 branches missed.">    log.info &quot;Message font: ${config.gui.font.message}&quot;</span>
+<span class="nc" id="L102">    Font f2 = new Font( *(config.gui.font.message) )</span>
+<span class="nc bnc" id="L103" title="All 4 branches missed.">    setDefaultFonts()</span>
+
+<span class="nc" id="L105">    javax.swing.UIManager.put(&quot;OptionPane.messageFont&quot;, f2 );</span>
+<span class="nc" id="L106">    swing.edt {</span>
+<span class="nc" id="L107">      frame(id: 'trekFrame', title: 'Trek GUI', defaultCloseOperation: JFrame.EXIT_ON_CLOSE, pack: true, show: true) {</span>
+<span class="nc" id="L108">        vbox {</span>
+<span class="nc" id="L109">          panel( id: 'btnPanel' ) {</span>
+<span class="nc" id="L110">            gridLayout( cols: 2, rows: 0 )</span>
+
+<span class="nc" id="L112">            button( text: btnText('Short Ranger Sensors'), actionPerformed: { trek.shortRangeScan() } )</span>
+<span class="nc" id="L113">            button( text: btnText('Long Ranger Sensors'), actionPerformed: { trek.longRangeScan() } )</span>
+
+<span class="nc" id="L115">            button( text: btnText('Set Course'), actionPerformed: { trek.setCourse() } )</span>
+<span class="nc" id="L116">            button( text: btnText('Damage Control'), actionPerformed: { trek.reportDamage() } )</span>
+
+<span class="nc" id="L118">            button( text: btnText('Fire torpedo'), actionPerformed: { trek.fireTorpedo() } )</span>
+<span class="nc" id="L119">            button( text: btnText('Fire phasers'), actionPerformed: { trek.firePhasers() } )</span>
+
+<span class="nc" id="L121">            button( id:'condition', text: displayableCondition() )</span>
+          }
+
+<span class="nc" id="L124">          scrollPane( border:BorderFactory.createRaisedBevelBorder() ) {</span>
+<span class="nc" id="L125">            textArea( id: 'output' ) //, text: '\n' * 20 )</span>
+          }
+        }
+      }
+    }
+
+<span class="nc" id="L131">    trek.startGame()</span>
+    // log.info &quot;** Game Over **&quot;
+<span class="nc" id="L133">    return</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

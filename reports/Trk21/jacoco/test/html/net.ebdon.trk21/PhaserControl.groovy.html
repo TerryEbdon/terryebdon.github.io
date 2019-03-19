@@ -66,11 +66,11 @@ final class PhaserControl {
 <span class="pc" id="L66">    [fired, fired / distance * phaserVariance()].min()</span>
   }
 
-  private void fireAt( energyAmount, target ) {
+  private void fireAt( final int energyAmount, final Expando target ) {
 <span class="fc" id="L70">    log.debug 'in fireAt()'</span>
 <span class="pc bpc" id="L71" title="1 of 2 branches missed.">    assert ship.position.isValid()</span>
 <span class="pc bpc" id="L72" title="1 of 2 branches missed.">    assert target.sector.isValid()</span>
-<span class="pc bpc" id="L73" title="1 of 2 branches missed.">    assert energyAmount &gt; 0</span>
+<span class="pc bpc" id="L73" title="2 of 4 branches missed.">    assert energyAmount &gt; 0</span>
 
 <span class="fc" id="L75">    final float distance = rangeTo( target )</span>
 <span class="pc bpc" id="L76" title="1 of 2 branches missed.">    log.debug sprintf(</span>
@@ -86,12 +86,12 @@ final class PhaserControl {
 <span class="fc" id="L86">    battle.hitOnFleetShip target, energyHit</span>
   }
 
-  void fire( energyAmount ) {
+  void fire( final int energyAmount ) {
 <span class="pc bpc" id="L90" title="1 of 2 branches missed.">    log.info &quot;Firing phasers with $energyAmount units.&quot;</span>
 <span class="pc bpc" id="L91" title="3 of 6 branches missed.">    assert damageControl &amp;&amp; report</span>
-<span class="pc bpc" id="L92" title="1 of 2 branches missed.">    assert energyAmount &gt; 0</span>
+<span class="pc bpc" id="L92" title="1 of 4 branches missed.">    assert energyAmount &gt; 0</span>
 
-<span class="pc bpc" id="L94" title="6 of 10 branches missed.">    if ( damageControl.isDamaged( DeviceType.phasers ) ) {</span>
+<span class="pc bpc" id="L94" title="7 of 12 branches missed.">    if ( damageControl.isDamaged( DeviceType.phasers ) ) {</span>
 <span class="nc" id="L95">        phasersDisabled()</span>
     } else {
 <span class="pc" id="L97">      phasersOnTarget()</span>
@@ -99,7 +99,7 @@ final class PhaserControl {
 <span class="pc" id="L99">        commandRefused()</span>
       } else {
 <span class="pc" id="L101">        ship.energyReducedByPhaserUse energyAmount</span>
-<span class="pc" id="L102">        def target</span>
+<span class="pc" id="L102">        Expando target</span>
 <span class="pc bpc" id="L103" title="2 of 4 branches missed.">        while ( target = battle.getNextTarget() ) {</span>
 <span class="pc" id="L104">          fireAt energyAmount, target</span>
         }

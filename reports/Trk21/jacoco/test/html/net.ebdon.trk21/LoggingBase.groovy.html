@@ -69,7 +69,7 @@ abstract class LoggingBase {
   }
   void logException( closure ) {
     try {
-<span class="nc" id="L72">      closure.call()</span>
+<span class="pc" id="L72">      closure.call()</span>
     } catch ( Throwable ex ) {
 <span class="nc bnc" id="L74" title="All 2 branches missed.">      log.fatal ex.message</span>
 <span class="nc" id="L75">      ex.stackTrace.each {</span>
@@ -78,7 +78,7 @@ abstract class LoggingBase {
 <span class="nc" id="L78">              '\t' + it.fileName + ':' + it.lineNumber</span>
         }
       }
-<span class="nc" id="L81">      throw ex</span>
+<span class="pc" id="L81">      throw ex</span>
     }
   }
 }

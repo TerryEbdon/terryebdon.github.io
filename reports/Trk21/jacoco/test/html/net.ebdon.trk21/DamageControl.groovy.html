@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DamageControl.groovy</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Trk21</a> &gt; <a href="index.source.html" class="el_package">net.ebdon.trk21</a> &gt; <span class="el_source">DamageControl.groovy</span></div><h1>DamageControl.groovy</h1><pre class="source lang-java linenums">package net.ebdon.trk21;
 
+import groovy.transform.TypeChecked;
+
 import static ShipDevice.*;
 /**
  * @file
@@ -20,71 +22,79 @@ import static ShipDevice.*;
  */
 final class DamageControl {
 
-  def devices;
+  Map&lt;Integer, ShipDevice&gt; devices;
 
   DamageControl( damage ) {
-<span class="pc bpc" id="L26" title="1 of 2 branches missed.">    assert damage</span>
-<span class="fc" id="L27">    devices = damage</span>
+    // assert damage
+<span class="fc" id="L29">    devices = damage</span>
   }
 
   @Override final String toString() {
-<span class="fc" id="L31">    String str = &quot;&quot;</span>
-<span class="pc" id="L32">    devices.each { key, device -&gt;</span>
-<span class="pc" id="L33">        str &lt;&lt; &quot;$key: $device\n&quot;</span>
+<span class="nc" id="L33">    String str = &quot;&quot;</span>
+<span class="nc" id="L34">    devices.each { key, device -&gt;</span>
+<span class="nc" id="L35">        str &lt;&lt; &quot;$key: $device\n&quot;</span>
     }
   }
 
   ShipDevice device( final DeviceType deviceType ) {
-<span class="nc" id="L38">    devices.find { it.id == deviceType.id }</span>
+<span class="nc" id="L40">    devices.find { it.id == deviceType.id }</span>
   }
 
   ///@ todo: Localise repair() messages.
+  // @TypeChecked
   void repair( Closure msgBox ) {
-<span class="pc bpc" id="L43" title="1 of 2 branches missed.">    assert devices</span>
-<span class="fc" id="L44">    1.upto( devices.size() ) { deviceId -&gt;</span>
-<span class="fc bfc" id="L45" title="All 2 branches covered.">      if ( devices[deviceId].isDamaged() ) {</span>
-<span class="fc" id="L46">        ++devices[deviceId].state</span>
-<span class="fc" id="L47">        msgBox &quot;Repair systems are working on damage to &quot; +</span>
-<span class="fc" id="L48">          devices[deviceId].name +</span>
-<span class="pc" id="L49">          &quot;, state improved to ${devices[deviceId].state}&quot;</span>
+<span class="pc bpc" id="L46" title="1 of 2 branches missed.">    assert devices</span>
+<span class="fc" id="L47">    1.upto( devices.size() ) { int deviceId -&gt;</span>
+<span class="fc bfc" id="L48" title="All 2 branches covered.">      if ( devices[deviceId].isDamaged() ) {</span>
+<span class="fc" id="L49">        ++devices[deviceId].state</span>
+<span class="fc" id="L50">        msgBox &quot;Repair systems are working on damage to &quot; +</span>
+<span class="fc" id="L51">          devices[deviceId].name +</span>
+<span class="pc" id="L52">          &quot;, state improved to ${devices[deviceId].state}&quot;</span>
       }
     }
   }
 
-  final def findDamagedDeviceKey() {
-<span class="fc" id="L55">    def damagedDevice = devices.find { key, device -&gt;</span>
-<span class="pc" id="L56">      device.isDamaged()</span>
-    }
-<span class="pc bfc" id="L58" title="All 2 branches covered.">    damagedDevice ? damagedDevice.key : null</span>
+  @TypeChecked
+  final int findDamagedDeviceKey() {
+<span class="pc bfc" id="L59" title="All 2 branches covered.">    devices.find { int key, ShipDevice device -&gt;</span>
+<span class="pc" id="L60">      device.isDamaged()</span>
+    }?.key ?: 0
   }
 
-  final boolean isDamaged( keyWanted ) {
-<span class="pc" id="L62">    devices.find { key, device -&gt;</span>
-<span class="pc" id="L63">      key == keyWanted</span>
-    }
+  @TypeChecked
+  final boolean isDamaged( final int keyWanted ) {
+<span class="nc bnc" id="L66" title="All 2 branches missed.">    assert devices.keySet().contains( keyWanted )</span>
+<span class="nc" id="L67">    devices[keyWanted].state</span>
+  }
+
+  @TypeChecked
+  final boolean isDamaged( DeviceType deviceTypeWanted ) {
+<span class="pc" id="L72">    devices.find { int key, ShipDevice shipDevice -&gt;</span>
+<span class="pc" id="L73">      shipDevice.id == deviceTypeWanted.id</span>
+    }?.value.state
   }
 
   void randomlyRepair( final key ) {
-<span class="pc bpc" id="L68" title="1 of 2 branches missed.">    assert key</span>
-<span class="pc bpc" id="L69" title="1 of 2 branches missed.">    assert devices[key].isDamaged()</span>
-<span class="fc" id="L70">    final def oldState = devices[key].state</span>
-<span class="fc" id="L71">    devices[key].state += randomRepairAmount( key )</span>
+<span class="pc bpc" id="L78" title="1 of 2 branches missed.">    assert key</span>
+<span class="pc bpc" id="L79" title="1 of 2 branches missed.">    assert devices[key].isDamaged()</span>
+<span class="fc" id="L80">    final def oldState = devices[key].state</span>
+<span class="fc" id="L81">    devices[key].state += randomRepairAmount( key )</span>
         // inflict damage on device -- see line 1810
     //devices[key].state = [0,devices[key].state].min()
-<span class="pc bpc" id="L74" title="1 of 2 branches missed.">    assert devices[key].state &lt;= 0</span>
-<span class="pc bpc" id="L75" title="1 of 2 branches missed.">    assert devices[key].state &gt;= oldState</span>
+<span class="pc bpc" id="L84" title="1 of 2 branches missed.">    assert devices[key].state &lt;= 0</span>
+<span class="pc bpc" id="L85" title="1 of 2 branches missed.">    assert devices[key].state &gt;= oldState</span>
   }
 
   private def randomRepairAmount( final key ) {
-<span class="fc" id="L79">    def offset = new Random().nextInt(</span>
-<span class="fc" id="L80">        devices[key].state.abs() ) + 1</span>
-<span class="pc bpc" id="L81" title="1 of 2 branches missed.">    assert offset &gt; 0</span>
-<span class="pc bpc" id="L82" title="1 of 2 branches missed.">    assert offset &lt;= devices[key].state.abs()</span>
-<span class="pc" id="L83">    offset</span>
+<span class="fc" id="L89">    def offset = new Random().nextInt(</span>
+<span class="fc" id="L90">        devices[key].state.abs() ) + 1</span>
+<span class="pc bpc" id="L91" title="1 of 2 branches missed.">    assert offset &gt; 0</span>
+<span class="pc bpc" id="L92" title="1 of 2 branches missed.">    assert offset &lt;= devices[key].state.abs()</span>
+<span class="pc" id="L93">    offset</span>
   }
 
   void report( rb, Closure closure, formatter ) {
-<span class="nc" id="L87">    new DamageReporter( devices, rb, closure ).report( formatter )</span>
+<span class="nc" id="L97">    new DamageReporter( devices, rb, closure ).report( formatter )</span>
   }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

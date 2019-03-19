@@ -5,7 +5,7 @@ import groovy.transform.*;
  * @file
  * @author      Terry Ebdon
  * @date        January 2019
- * @copyright
+ * @copyright   Terry Ebdon, 2019
  * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -32,12 +32,12 @@ final class Battle {
 
   private int nextTargetIndex = 1;
 
-  def getNextTarget() {
+  Expando getNextTarget() {
 <span class="pc bpc" id="L36" title="1 of 2 branches missed.">    log.trace &quot;There are ${enemyFleet.numKlingonBatCrInQuad} enemy ships here.&quot;</span>
 <span class="pc bpc" id="L37" title="1 of 2 branches missed.">    log.trace &quot;Getting target $nextTargetIndex&quot;</span>
 <span class="pc bpc" id="L38" title="2 of 4 branches missed.">    assert nextTargetIndex &gt;= 0</span>
 <span class="pc bpc" id="L39" title="1 of 2 branches missed.">    assert nextTargetIndex &lt;= 1 + enemyFleet.maxKlingonBCinQuad</span>
-<span class="fc" id="L40">    def rv = null</span>
+<span class="fc" id="L40">    Expando rv = null</span>
 <span class="pc bpc" id="L41" title="1 of 2 branches missed.">    if ( enemyFleet.numKlingonBatCrInQuad &gt; 0 ) {</span>
 <span class="pc bpc" id="L42" title="1 of 2 branches missed.">      if ( nextTargetIndex &lt;= enemyFleet.maxKlingonBCinQuad ) {</span>
 <span class="fc" id="L43">        final def enemyShip = enemyFleet.klingons[ nextTargetIndex ]</span>
@@ -77,21 +77,31 @@ final class Battle {
     }
   }
 
-  def phaserAttackFleet( energy ) {
-<span class="nc bnc" id="L81" title="All 2 branches missed.">    assert energy &gt; 0</span>
+  void phaserAttackFleet( final int energy ) {
+<span class="nc bnc" id="L81" title="All 4 branches missed.">    assert energy &gt; 0</span>
 <span class="nc bnc" id="L82" title="All 18 branches missed.">    assert enemyFleet &amp;&amp; ship &amp;&amp; dc &amp;&amp; pcReporter &amp;&amp; fleetAttackReporter</span>
 <span class="nc" id="L83">    new PhaserControl( dc, pcReporter, ship, this ).fire( energy )</span>
-<span class="nc" id="L84">    enemyFleet.with {</span>
-<span class="nc" id="L85">      regroup()</span>
-<span class="nc bnc" id="L86" title="All 2 branches missed.">      if ( canAttack() ) {</span>
-<span class="nc" id="L87">        attack( ship.position.sector, fleetAttackReporter )</span>
+<span class="nc bnc" id="L84" title="All 4 branches missed.">    enemyRespondsToAttack()</span>
+  }
+
+  @TypeChecked
+  void enemyRespondsToAttack() {
+<span class="fc" id="L89">    enemyFleet.regroup()</span>
+<span class="fc bfc" id="L90" title="All 2 branches covered.">    if ( enemyFleet.canAttack() ) {</span>
+<span class="fc bfc" id="L91" title="All 2 branches covered.">      if ( ship.isProtectedByStarBase() ) {</span>
+        /// @todo localise this with 'starbase.shields'
+<span class="fc" id="L93">        fleetAttackReporter 'Star Base shields protect the Enterprise.'</span>
+      } else {
+<span class="fc" id="L95">        enemyFleet.attack( ship.position.sector, fleetAttackReporter )</span>
       }
     }
   }
 
   /// @todo implement battle.fireTorpedo()
-  def fireTorpedo( course ) {
-<span class="nc" id="L94">    pcReporter &quot;Battle#fireTorpedo is not yet implemented&quot;</span>
+  @TypeChecked
+  void fireTorpedo( course ) {
+<span class="nc" id="L103">    pcReporter &quot;Battle#fireTorpedo is not yet implemented&quot;</span>
+<span class="nc bnc" id="L104" title="All 4 branches missed.">    enemyRespondsToAttack()</span>
   }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -3,7 +3,7 @@
  * @file
  * @author      Terry Ebdon
  * @date        January 2019
- * @copyright
+ * @copyright   Terry Ebdon, 2019
  * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -22,44 +22,45 @@
 @author Terry Ebdon
 @date JAN-2019
 */
+@groovy.transform.TypeChecked
 @groovy.util.logging.Log4j2
 final class TrekCalendar { // line 1110
     final int missionLifeInSolarYears   = 40;
-<span class="fc" id="L28">    final int gameStartSolarYear        = ( new Random().nextInt(20) + 20 ) * 100; // T%, T0%</span>
+<span class="fc" id="L29">    final int gameStartSolarYear        = ( new Random().nextInt(20) + 20 ) * 100; // T%, T0%</span>
     int currentSolarYear                = gameStartSolarYear;
 
-<span class="pc bpc" id="L31" title="4 of 8 branches missed.">    boolean isValid() {</span>
-<span class="pc bpc" id="L32" title="6 of 8 branches missed.">        currentSolarYear &gt; 0 &amp;&amp;</span>
-<span class="pc bpc" id="L33" title="9 of 12 branches missed.">        currentSolarYear &gt;= gameStartSolarYear &amp;&amp;</span>
-<span class="pc bpc" id="L34" title="6 of 8 branches missed.">        currentSolarYear &lt;= gameStartSolarYear + missionLifeInSolarYears</span>
+<span class="pc bpc" id="L32" title="4 of 8 branches missed.">    boolean isValid() {</span>
+<span class="pc bpc" id="L33" title="6 of 8 branches missed.">        currentSolarYear &gt; 0 &amp;&amp;</span>
+<span class="pc bpc" id="L34" title="9 of 12 branches missed.">        currentSolarYear &gt;= gameStartSolarYear &amp;&amp;</span>
+<span class="pc bpc" id="L35" title="6 of 8 branches missed.">        currentSolarYear &lt;= gameStartSolarYear + missionLifeInSolarYears</span>
     }
 
   	/// Standard method for getting a string description of the class.
   	/// @return String representation of the class instance.
-<span class="pc bpc" id="L39" title="2 of 4 branches missed.">    String toString() {</span>
-<span class="pc" id="L40">        &quot;* DT: $currentSolarYear, &quot; +</span>
-<span class="pc" id="L41">        &quot;Start: $gameStartSolarYear, &quot; +</span>
-<span class="pc" id="L42">        &quot;Elapsed: ${elapsed()}, &quot; +</span>
+<span class="pc bpc" id="L40" title="2 of 4 branches missed.">    String toString() {</span>
+<span class="pc" id="L41">        &quot;* DT: $currentSolarYear, &quot; +</span>
+<span class="pc" id="L42">        &quot;Start: $gameStartSolarYear, &quot; +</span>
+<span class="pc" id="L43">        &quot;Elapsed: ${elapsed()}, &quot; +</span>
         &quot;Lifetime: $missionLifeInSolarYears sol yrs, &quot; +
-<span class="pc" id="L44">        &quot;Left: ${remaining()}, OK: ${isValid()}&quot;</span>
+<span class="pc" id="L45">        &quot;Left: ${remaining()}, OK: ${isValid()}&quot;</span>
     }
 
     /// Get the mission's elapsed time in \ref SolarYears.
     /// @post elapsed time &lt;= \ref missionLifeInSolarYears.
     /// @return The elapsed mission time in \ref SolarYears.
     int elapsed() {
-<span class="pc bpc" id="L51" title="3 of 6 branches missed.">        final int rv = currentSolarYear - gameStartSolarYear</span>
-<span class="pc bpc" id="L52" title="2 of 4 branches missed.">        assert rv &lt;= missionLifeInSolarYears</span>
-<span class="pc" id="L53">        rv</span>
+<span class="pc bpc" id="L52" title="3 of 6 branches missed.">        final int rv = currentSolarYear - gameStartSolarYear</span>
+<span class="pc bpc" id="L53" title="2 of 4 branches missed.">        assert rv &lt;= missionLifeInSolarYears</span>
+<span class="pc" id="L54">        rv</span>
     }
 
     /// Get the @ref StarDate by which the mission must end.
     /// @post end date &gt;= \ref currentSolarYear.
     /// @return The \ref StarDate by which the mission must end.
     int endDate() {
-<span class="pc bpc" id="L60" title="3 of 6 branches missed.">        final int rv = gameStartSolarYear + missionLifeInSolarYears</span>
-<span class="pc bpc" id="L61" title="2 of 4 branches missed.">        assert rv &gt;= currentSolarYear</span>
-<span class="pc" id="L62">        rv</span>
+<span class="pc bpc" id="L61" title="3 of 6 branches missed.">        final int rv = gameStartSolarYear + missionLifeInSolarYears</span>
+<span class="pc bpc" id="L62" title="2 of 4 branches missed.">        assert rv &gt;= currentSolarYear</span>
+<span class="pc" id="L63">        rv</span>
     }
 
     /// Get the number of \ref SolarYears remaining in the game.
@@ -67,22 +68,22 @@ final class TrekCalendar { // line 1110
     /// @post remaining &lt;= Mission Lifetime
     /// @return Number of \ref SolarYears remaining in the game.
     int remaining() {
-<span class="pc bpc" id="L70" title="3 of 6 branches missed.">        int syLeft  = endDate() - currentSolarYear</span>
-<span class="pc bpc" id="L71" title="2 of 4 branches missed.">        assert syLeft &lt;= missionLifeInSolarYears</span>
-<span class="pc" id="L72">        syLeft</span>
+<span class="pc bpc" id="L71" title="3 of 6 branches missed.">        int syLeft  = endDate() - currentSolarYear</span>
+<span class="pc bpc" id="L72" title="2 of 4 branches missed.">        assert syLeft &lt;= missionLifeInSolarYears</span>
+<span class="pc" id="L73">        syLeft</span>
     }
 
     boolean outOfTime() {
-<span class="pc bpc" id="L76" title="6 of 12 branches missed.">      final boolean oot = remaining() &lt;= 0</span>
-<span class="pc bpc" id="L77" title="1 of 4 branches missed.">      if ( oot ) log.info &quot;Game timer expired.\n$this&quot;</span>
-<span class="pc" id="L78">      oot</span>
+<span class="pc bpc" id="L77" title="6 of 12 branches missed.">      final boolean oot = remaining() &lt;= 0</span>
+<span class="pc bpc" id="L78" title="1 of 4 branches missed.">      if ( oot ) log.info &quot;Game timer expired.\n$this&quot;</span>
+<span class="pc" id="L79">      oot</span>
     }
     /// Force the game clock to tick. Adds one solar year to the current \ref StarDate.
     /// @return the new \ref StarDate.
     int tick() {
-<span class="pc bpc" id="L83" title="3 of 6 branches missed.">        ++currentSolarYear</span>
+<span class="pc bpc" id="L84" title="3 of 6 branches missed.">        ++currentSolarYear</span>
         // println &quot;tick:  ${this}&quot;
-<span class="pc" id="L85">        currentSolarYear</span>
+<span class="pc" id="L86">        currentSolarYear</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

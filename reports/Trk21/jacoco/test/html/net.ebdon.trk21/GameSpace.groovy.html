@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GameSpace.groovy</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Trk21</a> &gt; <a href="index.source.html" class="el_package">net.ebdon.trk21</a> &gt; <span class="el_source">GameSpace.groovy</span></div><h1>GameSpace.groovy</h1><pre class="source lang-java linenums">package net.ebdon.trk21;
+
+import groovy.transform.TypeChecked;
 /**
  * @file
  * @author      Terry Ebdon
  * @date        January 2019
- * @copyright
+ * @copyright   Terry Ebdon, 2019
  * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -21,44 +23,54 @@
 abstract class GameSpace {
   static final int minCoord      = 1;
   static final int maxCoord      = 8;
-<span class="fc" id="L24">  static final int boardSize     = (minCoord..maxCoord).size() ** 2;</span>
-<span class="fc" id="L25">  static final topLeftCoords     = [minCoord,minCoord];</span>
-<span class="fc" id="L26">  static final bottomRightCoords = [maxCoord,maxCoord];</span>
+<span class="fc" id="L26">  static final int boardSize     = (minCoord..maxCoord).size() ** 2;</span>
+<span class="fc" id="L27">  static final topLeftCoords     = [minCoord,minCoord];</span>
+<span class="fc" id="L28">  static final bottomRightCoords = [maxCoord,maxCoord];</span>
 
-  def board    = [:];
+  LinkedHashMap board = [:];
 
   static final float maxSectorDistance =
-<span class="fc" id="L31">    distanceBetween( topLeftCoords, bottomRightCoords ); /// Sector diagonal</span>
+<span class="fc" id="L33">    distanceBetween( topLeftCoords, bottomRightCoords ); /// Sector diagonal</span>
 
   def size() {
-<span class="nc bnc" id="L34" title="All 2 branches missed.">    assert board.size() == boardSize</span>
-<span class="nc" id="L35">    boardSize</span>
+<span class="nc bnc" id="L36" title="All 2 branches missed.">    assert validBoardSize</span>
+<span class="nc" id="L37">    boardSize</span>
   }
 
   final def getRandomCoords() {
-<span class="fc" id="L39">    def rnd = new Random()</span>
-<span class="fc" id="L40">    [</span>
-<span class="fc" id="L41">      rnd.nextInt(maxCoord) + 1,</span>
-<span class="pc" id="L42">      rnd.nextInt(maxCoord) + 1</span>
+<span class="fc" id="L41">    def rnd = new Random()</span>
+<span class="fc" id="L42">    [</span>
+<span class="fc" id="L43">      rnd.nextInt(maxCoord) + 1,</span>
+<span class="pc" id="L44">      rnd.nextInt(maxCoord) + 1</span>
     ]
   }
 
+  @TypeChecked
+  private boolean isValidBoardSize() {
+<span class="nc" id="L50">    board.size() == boardSize</span>
+  }
+
+  @TypeChecked
+  boolean isValidKey( final int row, final int col ) {
+<span class="pc" id="L55">    board.keySet().contains( [row, col] )</span>
+  }
+
   boolean isValid() {
-<span class="fc" id="L47">    def badQuadrant = board.keySet().find {</span>
-<span class="pc bfc" id="L48" title="All 2 branches covered.">      !insideGalaxy( it[0..1] )</span>
+<span class="fc" id="L59">    def badQuadrant = board.keySet().find {</span>
+<span class="pc bfc" id="L60" title="All 2 branches covered.">      !insideGalaxy( it[0..1] )</span>
     } // sparse = false
     // assert null == badQuadrant
-<span class="pc bpc" id="L51" title="1 of 2 branches missed.">    log.debug &quot;badQuadrant: $badQuadrant, $this&quot;</span>
-<span class="fc" id="L52">    String diag = &quot;&quot;</span>
-<span class="fc" id="L53">    minCoord.upto(maxCoord) {</span>
-<span class="pc" id="L54">      diag += &quot;[$it, $it]=${board[it,it]}, &quot;</span>
+<span class="pc bpc" id="L63" title="1 of 2 branches missed.">    log.debug &quot;badQuadrant: $badQuadrant, $this&quot;</span>
+<span class="fc" id="L64">    String diag = &quot;&quot;</span>
+<span class="fc" id="L65">    minCoord.upto(maxCoord) {</span>
+<span class="pc" id="L66">      diag += &quot;[$it, $it]=${board[it,it]}, &quot;</span>
     }
-<span class="fc" id="L56">    log.debug diag</span>
-<span class="pc bpc" id="L57" title="9 of 16 branches missed.">    badQuadrant == null &amp;&amp; board.size() == boardSize</span>
+<span class="fc" id="L68">    log.debug diag</span>
+<span class="pc bpc" id="L69" title="9 of 16 branches missed.">    badQuadrant == null &amp;&amp; board.size() == boardSize</span>
   }
 
   String toString() {
-<span class="pc" id="L61">    &quot;board size: ${board.size()}&quot;</span>
+<span class="pc" id="L73">    &quot;board size: ${board.size()}&quot;</span>
   }
   // final def putAt( key, int value ) {
   //   board[key] = Thing.find { it.ordinal() == value }
@@ -69,9 +81,9 @@ abstract class GameSpace {
   // }
 
   final def clear() {
-<span class="pc" id="L72">    minCoord.upto(maxCoord) { r1 -&gt;</span>
-<span class="pc" id="L73">      minCoord.upto(maxCoord) { r2 -&gt;</span>
-<span class="pc" id="L74">        clearSquare r1, r2</span>
+<span class="pc" id="L84">    minCoord.upto(maxCoord) { r1 -&gt;</span>
+<span class="pc" id="L85">      minCoord.upto(maxCoord) { r2 -&gt;</span>
+<span class="pc" id="L86">        clearSquare r1, r2</span>
       }
     }
   }
@@ -83,39 +95,39 @@ abstract class GameSpace {
   def dump() {
     // log.debug &quot;Dumping board:\n$board&quot;
     // println &quot;Dumping board:\n$board&quot;
-<span class="pc" id="L86">    minCoord.upto(maxCoord) { i -&gt;</span>
-<span class="fc" id="L87">      def boardRow = ''</span>
-<span class="fc" id="L88">      minCoord.upto(maxCoord) { j -&gt;</span>
+<span class="pc" id="L98">    minCoord.upto(maxCoord) { i -&gt;</span>
+<span class="fc" id="L99">      def boardRow = ''</span>
+<span class="fc" id="L100">      minCoord.upto(maxCoord) { j -&gt;</span>
         // println &quot;i,j: $i,$j&quot;
-<span class="pc" id="L90">        boardRow += &quot;${symbol([i,j]).padLeft(cellPadding,'0')} &quot;</span>
+<span class="pc" id="L102">        boardRow += &quot;${symbol([i,j]).padLeft(cellPadding,'0')} &quot;</span>
       }
-<span class="pc" id="L92">      log.info boardRow</span>
+<span class="pc" id="L104">      log.info boardRow</span>
     }
   }
 
   static boolean insideGalaxy( final coords ) {
-<span class="pc" id="L97">    insideGalaxy( coords.first(), coords.last() )</span>
+<span class="pc" id="L109">    insideGalaxy( coords.first(), coords.last() )</span>
   }
 
   static boolean insideGalaxy( final x, final y ) {
-<span class="pc" id="L101">    contains( x, y )</span>
+<span class="pc" id="L113">    contains( x, y )</span>
   }
 
   static boolean contains( final x, final y ) {
-<span class="pc" id="L105">    (minCoord..maxCoord).containsAll( x, y )</span>
+<span class="pc" id="L117">    (minCoord..maxCoord).containsAll( x, y )</span>
   }
 
   static def constrainCoords( coords ) {
-<span class="pc" id="L109">    coords.collect { constrainCoord it }</span>
+<span class="pc" id="L121">    coords.collect { constrainCoord it }</span>
   }
 
   static int constrainCoord( coord ) {
-<span class="fc" id="L113">    coord = [coord,minCoord].max() // Line 1930</span>
-<span class="pc" id="L114">    coord = [coord,maxCoord].min() // Line 1940</span>
+<span class="fc" id="L125">    coord = [coord,minCoord].max() // Line 1930</span>
+<span class="pc" id="L126">    coord = [coord,maxCoord].min() // Line 1940</span>
   }
 
   static def logFmtCoords( final x, final y ) {
-<span class="pc" id="L118">    &quot;${[x,y]} == $y - $x&quot;</span>
+<span class="pc" id="L130">    &quot;${[x,y]} == $y - $x&quot;</span>
   }
 
   /// Distance between two sectors, calculated via Pythagorous
@@ -123,24 +135,24 @@ abstract class GameSpace {
       final coordsFrom,
       final coordsTo ) {
 
-<span class="pc bpc" id="L126" title="3 of 6 branches missed.">    assert coordsFrom &amp;&amp; coordsTo</span>
-<span class="pc bpc" id="L127" title="1 of 2 branches missed.">    assert coordsFrom != coordsTo</span>
+<span class="pc bpc" id="L138" title="3 of 6 branches missed.">    assert coordsFrom &amp;&amp; coordsTo</span>
+<span class="pc bpc" id="L139" title="1 of 2 branches missed.">    assert coordsFrom != coordsTo</span>
 
-<span class="pc bpc" id="L129" title="1 of 2 branches missed.">    assert sectorIsInsideQuadrant( coordsFrom )</span>
-<span class="pc bpc" id="L130" title="1 of 2 branches missed.">    assert sectorIsInsideQuadrant( coordsTo )</span>
+<span class="pc bpc" id="L141" title="1 of 2 branches missed.">    assert sectorIsInsideQuadrant( coordsFrom )</span>
+<span class="pc bpc" id="L142" title="1 of 2 branches missed.">    assert sectorIsInsideQuadrant( coordsTo )</span>
 
     // println &quot;Calculating distance between $coordsFrom and $coordsTo&quot;
-<span class="fc" id="L133">    final distance = Math.sqrt(</span>
-<span class="fc" id="L134">      ( coordsFrom.first() - coordsTo.first() ) ** 2 +</span>
-<span class="fc" id="L135">      ( coordsFrom.last() - coordsTo.last() ) ** 2 )</span>
+<span class="fc" id="L145">    final distance = Math.sqrt(</span>
+<span class="fc" id="L146">      ( coordsFrom.first() - coordsTo.first() ) ** 2 +</span>
+<span class="fc" id="L147">      ( coordsFrom.last() - coordsTo.last() ) ** 2 )</span>
 
     // assert distance &lt;= maxSectorDistance
     // println &quot;Distance is $distance&quot;
-<span class="pc" id="L139">    distance</span>
+<span class="pc" id="L151">    distance</span>
   }
 
   static boolean sectorIsInsideQuadrant( final coords ) {
-<span class="pc" id="L143">    insideGalaxy( coords )</span>
+<span class="pc" id="L155">    insideGalaxy( coords )</span>
   }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

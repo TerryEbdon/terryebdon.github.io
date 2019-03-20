@@ -199,7 +199,7 @@ final class Trek extends LoggingBase {
 <span class="fc" id="L199">    enemyFleet.resetQuadrant()</span>
 <span class="pc bpc" id="L200" title="5 of 8 branches missed.">    log.info &quot;Positioning $enemyFleet.numKlingonBatCrInQuad Klingons in quadrant ${currentQuadrant()}.&quot;</span>
 <span class="pc bpc" id="L201" title="6 of 12 branches missed.">    for ( int klingonShipNo = 1; klingonShipNo &lt;= enemyFleet.numKlingonBatCrInQuad; ++klingonShipNo ) {</span>
-<span class="pc" id="L202">      def klingonPosition = getEmptySector()</span>
+<span class="pc" id="L202">      def klingonPosition = quadrant.emptySector</span>
 <span class="pc" id="L203">      quadrant[klingonPosition] = Thing.enemy</span>
 
 <span class="pc" id="L205">      enemyFleet.positionInSector klingonShipNo, klingonPosition</span>
@@ -215,7 +215,7 @@ final class Trek extends LoggingBase {
 <span class="pc bpc" id="L215" title="4 of 8 branches missed.">  void positionStars() {</span>
 <span class="pc bpc" id="L216" title="3 of 4 branches missed.">    log.info &quot;Positioning ${numStarsInQuad()} stars.&quot;</span>
 <span class="pc bpc" id="L217" title="4 of 8 branches missed.">    for ( int star = 1; star &lt;= numStarsInQuad(); ++star ) {</span>
-<span class="pc" id="L218">      def starPos = getEmptySector()</span>
+<span class="pc" id="L218">      def starPos = quadrant.emptySector</span>
 <span class="pc bpc" id="L219" title="3 of 4 branches missed.">      log.trace &quot;... star $star is at sector ${starPos}&quot;</span>
 <span class="pc" id="L220">      quadrant[starPos[0],starPos[1]] = Thing.star</span>
 <span class="pc bpc" id="L221" title="3 of 4 branches missed.">      log.trace &quot;V*: ${quadrant[starPos[0],starPos[1]]}&quot;</span>
@@ -225,83 +225,78 @@ final class Trek extends LoggingBase {
 <span class="pc bpc" id="L225" title="4 of 8 branches missed.">  void positionBases() {</span>
 <span class="pc bpc" id="L226" title="3 of 4 branches missed.">    log.info &quot;Positioning ${numBasesInQuad()} bases.&quot;</span>
 <span class="pc bpc" id="L227" title="4 of 8 branches missed.">    for ( int base = 1; base &lt;= numBasesInQuad(); ++base ) {</span>
-<span class="pc" id="L228">      def basePos = getEmptySector()</span>
+<span class="pc" id="L228">      def basePos = quadrant.emptySector</span>
 <span class="pc bpc" id="L229" title="3 of 4 branches missed.">      log.trace &quot;... base $base is at sector ${basePos}&quot;</span>
 <span class="pc" id="L230">      quadrant[basePos] = Thing.base</span>
     }
   }
 
-  /// @deprecated Acts as a facade for the Quadrant
-  def getEmptySector() {
-<span class="pc" id="L236">    quadrant.getEmptySector()</span>
-  }
-
   int rand1to9() { // fnr%() -- Used a lot, as there are most 9 bases / Klingons / stars in each quadrant.
-<span class="nc" id="L240">     new java.util.Random().nextFloat() * 8 + 1</span>
+<span class="nc" id="L235">     new java.util.Random().nextFloat() * 8 + 1</span>
   }
 
   void distributeKlingons() {
-<span class="nc" id="L244">    int totalStars = 0</span>
-<span class="nc" id="L245">    int starsInQuad = 0</span>
+<span class="nc" id="L239">    int totalStars = 0</span>
+<span class="nc" id="L240">    int starsInQuad = 0</span>
     // int numBasesInQuad = 0 //b3%
 
-<span class="nc" id="L248">    log.info &quot;Distributing Klingon battle cruisers.&quot;</span>
-<span class="nc" id="L249">    minCoord.upto(maxCoord) { i-&gt;</span>
-<span class="nc" id="L250">      minCoord.upto(maxCoord) { j-&gt;</span>
-<span class="nc" id="L251">        enemyFleet.numKlingonBatCrInQuad = 0 // k3%</span>
+<span class="nc" id="L243">    log.info &quot;Distributing Klingon battle cruisers.&quot;</span>
+<span class="nc" id="L244">    minCoord.upto(maxCoord) { i-&gt;</span>
+<span class="nc" id="L245">      minCoord.upto(maxCoord) { j-&gt;</span>
+<span class="nc" id="L246">        enemyFleet.numKlingonBatCrInQuad = 0 // k3%</span>
         // int b9 = 0 //b9%
-<span class="nc" id="L253">        def c1 = new java.util.Random().nextFloat()*64 //rnd * 64</span>
+<span class="nc" id="L248">        def c1 = new java.util.Random().nextFloat()*64 //rnd * 64</span>
 
-<span class="nc" id="L255">        1.upto( enemyFleet.maxKlingonBCinQuad ) {</span>
-<span class="nc bnc" id="L256" title="All 2 branches missed.">          if ( c1 &lt; enemyFleet.softProbs[ it ] ) {</span>
-<span class="nc" id="L257">            ++enemyFleet.numKlingonBatCrTotal   // line 1200</span>
-<span class="nc" id="L258">            ++enemyFleet.numKlingonBatCrRemain  // line 1180</span>
-<span class="nc bnc" id="L259" title="All 2 branches missed.">            ++enemyFleet.numKlingonBatCrInQuad  // line 1180</span>
-<span class="nc" id="L260">            log.trace &quot;Enemy craft added to quadrant ${i} - ${j}, &quot; +</span>
+<span class="nc" id="L250">        1.upto( enemyFleet.maxKlingonBCinQuad ) {</span>
+<span class="nc bnc" id="L251" title="All 2 branches missed.">          if ( c1 &lt; enemyFleet.softProbs[ it ] ) {</span>
+<span class="nc" id="L252">            ++enemyFleet.numKlingonBatCrTotal   // line 1200</span>
+<span class="nc" id="L253">            ++enemyFleet.numKlingonBatCrRemain  // line 1180</span>
+<span class="nc bnc" id="L254" title="All 2 branches missed.">            ++enemyFleet.numKlingonBatCrInQuad  // line 1180</span>
+<span class="nc" id="L255">            log.trace &quot;Enemy craft added to quadrant ${i} - ${j}, &quot; +</span>
                       &quot;there's now ${enemyFleet.numKlingonBatCrInQuad} in this quadrant.&quot;
           }
         }
 
-<span class="nc bnc" id="L265" title="All 2 branches missed.">        final int numBasesInQuad = new java.util.Random().nextFloat() &gt; 0.9 ? 1 : 0 // b3%</span>
-<span class="nc bnc" id="L266" title="All 6 branches missed.">        numStarBasesTotal += numBasesInQuad // 1210 B9%=B9%+B3%</span>
-<span class="nc" id="L267">        starsInQuad = rand1to9()</span>
-<span class="nc" id="L268">        totalStars += starsInQuad</span>
-<span class="nc bnc" id="L269" title="All 8 branches missed.">        galaxy[i,j] =</span>
-<span class="nc" id="L270">          enemyFleet.numKlingonBatCrInQuad * 100 +</span>
-<span class="nc" id="L271">          numBasesInQuad * 10 +</span>
+<span class="nc bnc" id="L260" title="All 2 branches missed.">        final int numBasesInQuad = new java.util.Random().nextFloat() &gt; 0.9 ? 1 : 0 // b3%</span>
+<span class="nc bnc" id="L261" title="All 6 branches missed.">        numStarBasesTotal += numBasesInQuad // 1210 B9%=B9%+B3%</span>
+<span class="nc" id="L262">        starsInQuad = rand1to9()</span>
+<span class="nc" id="L263">        totalStars += starsInQuad</span>
+<span class="nc bnc" id="L264" title="All 8 branches missed.">        galaxy[i,j] =</span>
+<span class="nc" id="L265">          enemyFleet.numKlingonBatCrInQuad * 100 +</span>
+<span class="nc" id="L266">          numBasesInQuad * 10 +</span>
           starsInQuad //G%(I%,J%)=K3%*100%+B3%*10%+FNR%
-<span class="nc" id="L273">        log.trace 'galaxy[{},{}] = {}', i, j, galaxy.scan(i,j)</span>
+<span class="nc" id="L268">        log.trace 'galaxy[{},{}] = {}', i, j, galaxy.scan(i,j)</span>
       }
     }
-<span class="nc bnc" id="L276" title="All 2 branches missed.">    log.info &quot;Total number of Klingon BC: ${enemyFleet.numKlingonBatCrRemain.toString().padLeft(3)}&quot;</span>
-<span class="nc bnc" id="L277" title="All 2 branches missed.">    log.info &quot;Total number of star bases: ${numStarBasesTotal.toString().padLeft(3)}&quot;</span>
-<span class="nc bnc" id="L278" title="All 2 branches missed.">    log.info &quot;Total number stars:         ${totalStars.toString().padLeft(3)}&quot;</span>
-<span class="nc bnc" id="L279" title="All 2 branches missed.">    log.info enemyFleet.toString()</span>
+<span class="nc bnc" id="L271" title="All 2 branches missed.">    log.info &quot;Total number of Klingon BC: ${enemyFleet.numKlingonBatCrRemain.toString().padLeft(3)}&quot;</span>
+<span class="nc bnc" id="L272" title="All 2 branches missed.">    log.info &quot;Total number of star bases: ${numStarBasesTotal.toString().padLeft(3)}&quot;</span>
+<span class="nc bnc" id="L273" title="All 2 branches missed.">    log.info &quot;Total number stars:         ${totalStars.toString().padLeft(3)}&quot;</span>
+<span class="nc bnc" id="L274" title="All 2 branches missed.">    log.info enemyFleet.toString()</span>
   }
 
   @TypeChecked
   void dumpGalaxy() {
-<span class="nc" id="L284">    galaxy.dump()</span>
-<span class="nc bnc" id="L285" title="All 4 branches missed.">    reportEntPosition()</span>
+<span class="nc" id="L279">    galaxy.dump()</span>
+<span class="nc bnc" id="L280" title="All 4 branches missed.">    reportEntPosition()</span>
   }
 
-<span class="nc bnc" id="L288" title="All 4 branches missed.">  void reportEntPosition() {</span>
-<span class="nc bnc" id="L289" title="All 4 branches missed.">    log.info &quot;Enterprise is in quadrant ${currentQuadrant()}&quot;</span>
+<span class="nc bnc" id="L283" title="All 4 branches missed.">  void reportEntPosition() {</span>
+<span class="nc bnc" id="L284" title="All 4 branches missed.">    log.info &quot;Enterprise is in quadrant ${currentQuadrant()}&quot;</span>
   }
 
   @TypeChecked
   String currentQuadrant() {
-<span class="pc" id="L294">    &quot;${entQuadY} - ${entQuadX}&quot;</span>
+<span class="pc" id="L289">    &quot;${entQuadY} - ${entQuadX}&quot;</span>
   }
 
   @TypeChecked
   void setupGame() {
-<span class="nc bnc" id="L299" title="All 2 branches missed.">    assert damage</span>
+<span class="nc bnc" id="L294" title="All 2 branches missed.">    assert damage</span>
 
     // try {
-<span class="nc" id="L302">    logException {</span>
-<span class="nc" id="L303">      ship = new FederationShip();</span>
-<span class="nc" id="L304">      setupGalaxy()</span>
+<span class="nc" id="L297">    logException {</span>
+<span class="nc" id="L298">      ship = new FederationShip();</span>
+<span class="nc" id="L299">      setupGalaxy()</span>
       // shortRangeScan()
     }
     // } catch ( Exception ex ) {
@@ -312,32 +307,32 @@ final class Trek extends LoggingBase {
   }
 
   @TypeChecked
-<span class="nc bnc" id="L315" title="All 4 branches missed.">  void startGame() {</span>
-<span class="nc" id="L316">    shortRangeScan()</span>
+<span class="nc bnc" id="L310" title="All 4 branches missed.">  void startGame() {</span>
+<span class="nc" id="L311">    shortRangeScan()</span>
   }
 
   /// @deprecated Not needed with new font config.
   @TypeChecked
   String btnText( final String text ) {
     // &quot;&lt;html&gt;&lt;font size=+3&gt;$text&lt;/font&gt;&lt;/html&gt;&quot;
-<span class="nc" id="L323">    text</span>
+<span class="nc" id="L318">    text</span>
   }
 
   @TypeChecked
   void localMsg( final String msgId ) {
-<span class="fc" id="L328">    msgBox rb.getString( msgId )</span>
+<span class="fc" id="L323">    msgBox rb.getString( msgId )</span>
   }
 
   @TypeChecked
   void localMsg( final String msgId, Object[] msgArgs ) {
-<span class="fc" id="L333">    formatter.applyPattern( rb.getString( msgId ) )</span>
-<span class="fc" id="L334">    msgBox formatter.format( msgArgs )</span>
+<span class="fc" id="L328">    formatter.applyPattern( rb.getString( msgId ) )</span>
+<span class="fc" id="L329">    msgBox formatter.format( msgArgs )</span>
   }
 
   void msgBox( msg, boolean logIt = true ) {
-<span class="fc" id="L338">    ui.outln &quot;$msg&quot;</span>
-<span class="fc bfc" id="L339" title="All 2 branches covered.">    if ( logIt ) {</span>
-<span class="fc" id="L340">      log.info msg</span>
+<span class="fc" id="L333">    ui.outln &quot;$msg&quot;</span>
+<span class="fc bfc" id="L334" title="All 2 branches covered.">    if ( logIt ) {</span>
+<span class="fc" id="L335">      log.info msg</span>
     }
   }
 
@@ -348,59 +343,59 @@ final class Trek extends LoggingBase {
 
   @TypeChecked
   void reportDamage() {
-<span class="nc" id="L351">    damageControl.report( rb, this.&amp;msgBox, formatter )</span>
+<span class="nc" id="L346">    damageControl.report( rb, this.&amp;msgBox, formatter )</span>
   }
 
   void damageRepair() {
-<span class="nc" id="L355">    log.info &quot;Repairing damage&quot;</span>
-<span class="nc" id="L356">    damageControl.repair( this.&amp;msgBox )</span>
+<span class="fc" id="L350">    log.info &quot;Repairing damage&quot;</span>
+<span class="fc" id="L351">    damageControl.repair( this.&amp;msgBox )</span>
   }
 
   void attackReporter( damageAmount, message ) {
-<span class="nc bnc" id="L360" title="All 2 branches missed.">    log.info &quot;Ship under attack, $damageAmount units of damage sustained.&quot;</span>
-<span class="nc" id="L361">    msgBox message</span>
+<span class="nc bnc" id="L355" title="All 2 branches missed.">    log.info &quot;Ship under attack, $damageAmount units of damage sustained.&quot;</span>
+<span class="nc" id="L356">    msgBox message</span>
     //:E% -= damageAmount // Line 2410
   }
 
   @TypeChecked
-<span class="pc bpc" id="L366" title="2 of 4 branches missed.">  void klingonAttack() {</span>
-<span class="pc bpc" id="L367" title="6 of 8 branches missed.">    if ( !ship.isProtectedByStarBase() ) {</span>
-<span class="nc" id="L368">      enemyFleet.attack( ship.position.sector, this.&amp;attackReporter )</span>
+<span class="pc bpc" id="L361" title="2 of 4 branches missed.">  void klingonAttack() {</span>
+<span class="pc bpc" id="L362" title="6 of 8 branches missed.">    if ( !ship.isProtectedByStarBase() ) {</span>
+<span class="nc" id="L363">      enemyFleet.attack( ship.position.sector, this.&amp;attackReporter )</span>
     } else {
-<span class="pc" id="L370">      localMsg 'starbase.shields'</span>
+<span class="pc" id="L365">      localMsg 'starbase.shields'</span>
     }
   }
 
   @TypeChecked
   void spaceStorm() {
-<span class="fc" id="L376">    final int systemToDamage      = new Random().nextInt( damage.size() ) + 1</span>
-<span class="fc" id="L377">    final int damageAmount        = new Random().nextInt(5) + 1</span>
-<span class="fc" id="L378">    damage[systemToDamage].state -= damageAmount</span>
-<span class="pc bpc" id="L379" title="1 of 2 branches missed.">    log.info &quot;Space storm has damaged device No. $systemToDamage&quot;</span>
-<span class="pc bpc" id="L380" title="1 of 2 branches missed.">    log.info &quot;   damage of $damageAmount units&quot;</span>
-<span class="pc bpc" id="L381" title="1 of 2 branches missed.">    log.info &quot;   new status: ${damage[systemToDamage].state} units&quot;</span>
-<span class="fc" id="L382">    localMsg 'deviceStatusLottery.spaceStorm', [ damage[systemToDamage].name ]</span>
+<span class="fc" id="L371">    final int systemToDamage      = new Random().nextInt( damage.size() ) + 1</span>
+<span class="fc" id="L372">    final int damageAmount        = new Random().nextInt(5) + 1</span>
+<span class="fc" id="L373">    damage[systemToDamage].state -= damageAmount</span>
+<span class="pc bpc" id="L374" title="1 of 2 branches missed.">    log.info &quot;Space storm has damaged device No. $systemToDamage&quot;</span>
+<span class="pc bpc" id="L375" title="1 of 2 branches missed.">    log.info &quot;   damage of $damageAmount units&quot;</span>
+<span class="pc bpc" id="L376" title="1 of 2 branches missed.">    log.info &quot;   new status: ${damage[systemToDamage].state} units&quot;</span>
+<span class="fc" id="L377">    localMsg 'deviceStatusLottery.spaceStorm', [ damage[systemToDamage].name ]</span>
   }
 
   @TypeChecked
   void deviceStatusLottery() {
-<span class="nc bnc" id="L387" title="All 2 branches missed.">    assert damage</span>
-<span class="nc" id="L388">    log.debug 'deviceStatusLottery()'</span>
-<span class="nc bnc" id="L389" title="All 10 branches missed.">    if ( new Random().nextFloat() &lt;= 0.5 ) { // 1760</span>
-<span class="nc" id="L390">      spaceStorm()</span>
+<span class="nc bnc" id="L382" title="All 2 branches missed.">    assert damage</span>
+<span class="nc" id="L383">    log.debug 'deviceStatusLottery()'</span>
+<span class="nc bnc" id="L384" title="All 10 branches missed.">    if ( new Random().nextFloat() &lt;= 0.5 ) { // 1760</span>
+<span class="nc" id="L385">      spaceStorm()</span>
     } else { // 1790 - Not a space storm
-<span class="nc" id="L392">      randomDeviceRepair()</span>
+<span class="nc" id="L387">      randomDeviceRepair()</span>
     }
   }
 
   @TypeChecked
   void randomDeviceRepair() {
-<span class="fc" id="L398">    final int firstDamagedDeviceKey = damageControl.findDamagedDeviceKey()</span>
-<span class="fc bfc" id="L399" title="All 4 branches covered.">    if ( firstDamagedDeviceKey ) {</span>
-<span class="fc" id="L400">      damageControl.randomlyRepair( firstDamagedDeviceKey )</span>
-<span class="fc" id="L401">      final String damagedDeviceId = damage[firstDamagedDeviceKey].id</span>
+<span class="fc" id="L393">    final int firstDamagedDeviceKey = damageControl.findDamagedDeviceKey()</span>
+<span class="fc bfc" id="L394" title="All 4 branches covered.">    if ( firstDamagedDeviceKey ) {</span>
+<span class="fc" id="L395">      damageControl.randomlyRepair( firstDamagedDeviceKey )</span>
+<span class="fc" id="L396">      final String damagedDeviceId = damage[firstDamagedDeviceKey].id</span>
 
-<span class="fc" id="L403">      localMsg 'truce', [ &quot;device.DAMAGE.$damagedDeviceId&quot; ]</span>
+<span class="fc" id="L398">      localMsg 'truce', [ &quot;device.DAMAGE.$damagedDeviceId&quot; ]</span>
 
       // Object[] msgArgs = [ &quot;device.DAMAGE.$damagedDeviceId&quot; ]
       // formatter.applyPattern( rb.getString( 'truce' ) );
@@ -410,136 +405,142 @@ final class Trek extends LoggingBase {
 
   @TypeChecked
   void enemyAttacksBeforeShipCanMove() {
-<span class="nc bnc" id="L413" title="All 2 branches missed.">    if ( enemyFleet.canAttack() ) {</span>
-<span class="nc" id="L414">      log.info 'Klingons attack before the ship can move away.'</span>
-<span class="nc bnc" id="L415" title="All 4 branches missed.">      klingonAttack()</span>
+<span class="pc bpc" id="L408" title="1 of 2 branches missed.">    if ( enemyFleet.canAttack() ) {</span>
+<span class="nc" id="L409">      log.info 'Klingons attack before the ship can move away.'</span>
+<span class="pc bnc" id="L410" title="All 4 branches missed.">      klingonAttack()</span>
     }
+  }
+
+  @TypeChecked
+  boolean tooFastForDamagedEngine( final ShipVector sv ) {
+<span class="pc bpc" id="L416" title="1 of 2 branches missed.">    log.trace &quot;tooFastForDamagedEngine called with $sv&quot;</span>
+<span class="pc bpc" id="L417" title="1 of 4 branches missed.">    sv.warpFactor &gt; 0.2F &amp;&amp; damageControl.isDamaged( ShipDevice.DeviceType.engine )</span>
   }
 
   /// @todo Localise setCourse()
   @TypeChecked
   void setCourse() {
-<span class="pc bpc" id="L422" title="2 of 4 branches missed.">    ShipVector vector = getShipCourse()</span>
-<span class="pc bpc" id="L423" title="3 of 6 branches missed.">    if ( vector &amp;&amp; vector.isValid() ) {</span>
-<span class="pc bpc" id="L424" title="1 of 2 branches missed.">      log.info &quot;Got a good vector: $vector&quot;</span>
+<span class="pc bpc" id="L423" title="2 of 4 branches missed.">    ShipVector vector = getShipCourse()</span>
+<span class="pc bpc" id="L424" title="3 of 6 branches missed.">    if ( vector &amp;&amp; vector.valid ) {</span>
+<span class="pc bpc" id="L425" title="1 of 2 branches missed.">      log.info &quot;Got a good vector: $vector&quot;</span>
 
-<span class="pc bpc" id="L426" title="3 of 6 branches missed.">      if ( vector.warpFactor &gt; 0.2 &amp;&amp; damage[1].isDamaged() ) {</span>
-<span class="fc" id="L427">        msgBox( 'Warp engines are damaged.\nMaximum speed is .2' )</span>
+<span class="pc bpc" id="L427" title="4 of 8 branches missed.">      if ( tooFastForDamagedEngine( vector ) ) {</span>
+<span class="pc" id="L428">        localMsg 'engine.damaged'</span>
+<span class="pc" id="L429">        localMsg 'engine.damaged.max'</span>
       } else {
-<span class="nc bnc" id="L429" title="All 4 branches missed.">        enemyAttacksBeforeShipCanMove()</span>
-<span class="nc bnc" id="L430" title="All 4 branches missed.">        damageRepair() /// @todo Is damageRepair() called at the correct point?</span>
+<span class="pc" id="L431">        enemyAttacksBeforeShipCanMove()</span>
+<span class="pc" id="L432">        damageRepair() /// @todo Is damageRepair() called at the correct point?</span>
 
-<span class="nc bnc" id="L432" title="All 10 branches missed.">        if ( new Random().nextFloat() &lt;= 0.20 ) { // 1750</span>
-<span class="nc" id="L433">          deviceStatusLottery()</span>
+<span class="pc bpc" id="L434" title="3 of 4 branches missed.">        if ( new Random().nextFloat() &lt;= 0.20 ) { // 1750</span>
+<span class="nc" id="L435">          deviceStatusLottery()</span>
         }
-<span class="nc" id="L435">        game.tick() // Line 1830</span>
-<span class="nc" id="L436">        final Coords2d oldQuadrant = ship.position.quadrant.clone()</span>
-<span class="nc" id="L437">        ship.move( vector ) // set course, start engines...</span>
+<span class="pc" id="L437">        game.tick() // Line 1830</span>
+<span class="pc" id="L438">        final Coords2d oldQuadrant = ship.position.quadrant.clone()</span>
+<span class="pc" id="L439">        ship.move( vector ) // set course, start engines...</span>
 
-<span class="nc bnc" id="L439" title="All 8 branches missed.">        if ( gameContinues() ) {</span>
-<span class="nc" id="L440">          log.trace &quot;Ship has moved, but where is it?&quot;</span>
+<span class="pc bpc" id="L441" title="3 of 4 branches missed.">        if ( gameContinues() ) {</span>
+<span class="nc" id="L442">          log.trace &quot;Ship has moved, but where is it?&quot;</span>
           // Continue from line 1840...
 
-<span class="nc" id="L443">          repositioner.repositionShip vector</span>
-<span class="nc" id="L444">          repopulateSector oldQuadrant</span>
-<span class="pc" id="L445">          shortRangeScan()</span>
+<span class="nc" id="L445">          repositioner.repositionShip vector</span>
+<span class="nc" id="L446">          repopulateSector oldQuadrant</span>
+<span class="pc" id="L447">          shortRangeScan()</span>
         }
       }
     } else {
-<span class="nc bnc" id="L449" title="All 2 branches missed.">      log.info &quot;vector is not so good: $vector&quot;</span>
-<span class="nc bnc" id="L450" title="All 2 branches missed.">      if (vector.course * vector.warpFactor != 0 ) { // User didn't hit cancel</span>
-<span class="pc" id="L451">        msgBox &quot;That's not a valid course / warp factor. Command refused.&quot;</span>
+<span class="nc bnc" id="L451" title="All 2 branches missed.">      log.info &quot;vector is not so good: $vector&quot;</span>
+<span class="nc bnc" id="L452" title="All 2 branches missed.">      if (vector.course * vector.warpFactor != 0 ) { // User didn't hit cancel</span>
+<span class="pc" id="L453">        msgBox &quot;That's not a valid course / warp factor. Command refused.&quot;</span>
       }
     }
   }
 
   final private void repopulateSector( final oldQuadrant ) {
-<span class="nc bnc" id="L457" title="All 2 branches missed.">    log.info &quot;Quadrant was $oldQuadrant&quot;</span>
-<span class="nc bnc" id="L458" title="All 2 branches missed.">    log.info &quot;Quadrant now $ship.position.quadrant&quot;</span>
-<span class="nc bnc" id="L459" title="All 2 branches missed.">    if ( ship.position.quadrant != oldQuadrant ) {</span>
-<span class="nc bnc" id="L460" title="All 2 branches missed.">      log.info &quot;Ship jumped to new quadrant $ship.position.quadrant&quot;</span>
-<span class="nc bnc" id="L461" title="All 2 branches missed.">      log.info &quot;Setup in new quadrant at $ship.position&quot;</span>
-<span class="nc bnc" id="L462" title="All 4 branches missed.">      setupQuadrant()</span>
+<span class="nc bnc" id="L459" title="All 2 branches missed.">    log.info &quot;Quadrant was $oldQuadrant&quot;</span>
+<span class="nc bnc" id="L460" title="All 2 branches missed.">    log.info &quot;Quadrant now $ship.position.quadrant&quot;</span>
+<span class="nc bnc" id="L461" title="All 2 branches missed.">    if ( ship.position.quadrant != oldQuadrant ) {</span>
+<span class="nc bnc" id="L462" title="All 2 branches missed.">      log.info &quot;Ship jumped to new quadrant $ship.position.quadrant&quot;</span>
+<span class="nc bnc" id="L463" title="All 2 branches missed.">      log.info &quot;Setup in new quadrant at $ship.position&quot;</span>
+<span class="nc bnc" id="L464" title="All 4 branches missed.">      setupQuadrant()</span>
     } else {
-<span class="nc" id="L464">      log.info &quot;Ship didn't jump quadrants.&quot;</span>
+<span class="nc" id="L466">      log.info &quot;Ship didn't jump quadrants.&quot;</span>
     }
   }
 
   /// @todo localise blockedAtSector( row, column )
   void blockedAtSector( row, column ) {
-<span class="nc" id="L470">    msgBox &quot;Ship blocked by ${quadrant[row,column]} at sector ${logFmtCoords( row, column )}&quot;</span>
+<span class="nc" id="L472">    msgBox &quot;Ship blocked by ${quadrant[row,column]} at sector ${logFmtCoords( row, column )}&quot;</span>
   }
 
   String logFmtCoords( x, y ) {
-<span class="nc" id="L474">    &quot;${[x,y]} == $y - $x&quot;</span>
+<span class="nc" id="L476">    &quot;${[x,y]} == $y - $x&quot;</span>
   }
   /// @todo Reverse the coordinates? i.e. i,j or j,i?
   /// @deprecated
   @TypeChecked
   boolean sectorIsOccupied( final int i, final int j ) {
-<span class="nc" id="L480">    quadrant.isOccupied(i,j)</span>
+<span class="nc" id="L482">    quadrant.isOccupied(i,j)</span>
   }
 
   float getCourse() {
-<span class="pc" id="L484">    ui.getFloatInput( rb.getString( 'input.course' ) ) // C1</span>
+<span class="pc" id="L486">    ui.getFloatInput( rb.getString( 'input.course' ) ) // C1</span>
   }
 
   /// @todo Test needed for getShipCourse()
   ShipVector getShipCourse() {
-<span class="fc" id="L489">    float course        = 0</span>
-<span class="fc" id="L490">    float warpFactor    = 0</span>
-<span class="fc" id="L491">    ShipVector sv = new ShipVector()</span>
+<span class="fc" id="L491">    float course        = 0</span>
+<span class="fc" id="L492">    float warpFactor    = 0</span>
+<span class="fc" id="L493">    ShipVector sv = new ShipVector()</span>
 
-<span class="fc" id="L493">    log.trace '''Getting ship's course'''</span>
+<span class="fc" id="L495">    log.trace '''Getting ship's course'''</span>
 
-<span class="pc bpc" id="L495" title="2 of 4 branches missed.">    course = getCourse()</span>
-<span class="pc bpc" id="L496" title="1 of 2 branches missed.">    if ( ShipVector.isValidCourse( course ) ) {</span>
-<span class="fc" id="L497">      sv.course = course</span>
-<span class="fc" id="L498">      warpFactor = ui.getFloatInput( rb.getString( 'input.speed' ) ) // W1</span>
-<span class="pc bpc" id="L499" title="1 of 2 branches missed.">      if ( ShipVector.isValidWarpFactor( warpFactor ) ) {</span>
-<span class="fc" id="L500">        sv.warpFactor = warpFactor</span>
+<span class="pc bpc" id="L497" title="2 of 4 branches missed.">    course = getCourse()</span>
+<span class="pc bpc" id="L498" title="1 of 2 branches missed.">    if ( ShipVector.isValidCourse( course ) ) {</span>
+<span class="fc" id="L499">      sv.course = course</span>
+<span class="fc" id="L500">      warpFactor = ui.getFloatInput( rb.getString( 'input.speed' ) ) // W1</span>
+<span class="pc bpc" id="L501" title="1 of 2 branches missed.">      if ( ShipVector.isValidWarpFactor( warpFactor ) ) {</span>
+<span class="fc" id="L502">        sv.warpFactor = warpFactor</span>
       } else {
-<span class="pc bnc" id="L502" title="All 2 branches missed.">        log.info &quot;Warp factor $warpFactor is outside of expected range.&quot;</span>
+<span class="pc bnc" id="L504" title="All 2 branches missed.">        log.info &quot;Warp factor $warpFactor is outside of expected range.&quot;</span>
       }
     } else {
-<span class="nc bnc" id="L505" title="All 2 branches missed.">      log.info &quot;Course value $course is outside of expected range.&quot;</span>
+<span class="nc bnc" id="L507" title="All 2 branches missed.">      log.info &quot;Course value $course is outside of expected range.&quot;</span>
     }
-<span class="pc" id="L507">    sv</span>
+<span class="pc" id="L509">    sv</span>
   }
 
   /// Perform a @ref TrekLongRangeSensors &quot;long-range sensor scan&quot;
   // @groovy.transform.TypeChecked
   void longRangeScan() {
-    // if ( damage[3].isDamaged() ) { /// @todo replace with ~ damageControl.isDamaged( DeviceType.lrSensor )
-<span class="fc bfc" id="L514" title="All 2 branches covered.">    if ( damageControl.isDamaged( DeviceType.lrSensor ) ) {</span>
-<span class="fc" id="L515">      msgBox rb.getString( 'sensors.longRange.offline' )</span>
+<span class="fc bfc" id="L515" title="All 2 branches covered.">    if ( damageControl.isDamaged( DeviceType.lrSensor ) ) {</span>
+<span class="fc" id="L516">      msgBox rb.getString( 'sensors.longRange.offline' )</span>
     } else {
-<span class="pc bpc" id="L517" title="2 of 4 branches missed.">      Object[] msgArgs = [ currentQuadrant() ]</span>
-<span class="fc" id="L518">      formatter.applyPattern( rb.getString( 'sensors.longRange.scanQuadrant') );</span>
-<span class="fc" id="L519">      msgBox formatter.format( msgArgs );</span>
+<span class="pc bpc" id="L518" title="2 of 4 branches missed.">      Object[] msgArgs = [ currentQuadrant() ]</span>
+<span class="fc" id="L519">      formatter.applyPattern( rb.getString( 'sensors.longRange.scanQuadrant') );</span>
+<span class="fc" id="L520">      msgBox formatter.format( msgArgs );</span>
 
-<span class="fc" id="L521">      ( entQuadX - 1 ).upto( entQuadX + 1 ) { int i -&gt;    // q1% -1 to q1% + 1</span>
+<span class="fc" id="L522">      ( entQuadX - 1 ).upto( entQuadX + 1 ) { int i -&gt;    // q1% -1 to q1% + 1</span>
         // String lrStatusLine = ''
         // ( entQuadY - 1 ).upto( entQuadY + 1 ) { int j -&gt;  // q2% -1 to q2% + 1
         //   lrStatusLine += ( '  ' + galaxy.scan( i, j ) )
         // }
         // msgBox lrStatusLine
-<span class="pc" id="L527">        msgBox longRangeScanRow( i )</span>
+<span class="pc" id="L528">        msgBox longRangeScanRow( i )</span>
       }
     }
   }
 
   // @groovy.transform.TypeChecked
   private String longRangeScanRow( final int row ) {
-<span class="fc" id="L534">    String rowStatus = ''</span>
-<span class="fc" id="L535">    ( entQuadY - 1 ).upto( entQuadY + 1 ) { int col -&gt;  // q2% -1 to q2% + 1</span>
-<span class="pc" id="L536">      rowStatus += ( '  ' + galaxy.scan( row, col ) )</span>
+<span class="fc" id="L535">    String rowStatus = ''</span>
+<span class="fc" id="L536">    ( entQuadY - 1 ).upto( entQuadY + 1 ) { int col -&gt;  // q2% -1 to q2% + 1</span>
+<span class="pc" id="L537">      rowStatus += ( '  ' + galaxy.scan( row, col ) )</span>
     }
-<span class="pc" id="L538">    rowStatus</span>
+<span class="pc" id="L539">    rowStatus</span>
   }
 
-<span class="pc bpc" id="L541" title="2 of 4 branches missed.">  void showCondition() {</span>
-<span class="pc" id="L542">    ui.conditionText = displayableCondition()</span>
+<span class="pc bpc" id="L542" title="2 of 4 branches missed.">  void showCondition() {</span>
+<span class="pc" id="L543">    ui.conditionText = displayableCondition()</span>
   }
 
   /// @return A localised display string for the ship's condition
@@ -554,121 +555,121 @@ final class Trek extends LoggingBase {
   String displayableCondition() {
     /// @bug Should use config insteaf of HTML fonts.
     /// @todo This is incompatible with a CLI based UI.
-<span class="pc bpc" id="L557" title="1 of 2 branches missed.">    def colour = ship.condition != 'DOCKED' ? ship.condition : 'GREEN'</span>
-<span class="pc" id="L558">    &quot;&lt;html&gt;&lt;font size=+2 color=$colour&gt;${ship.condition}&lt;/font&gt;&lt;/html&gt;&quot;</span>
+<span class="pc bpc" id="L558" title="1 of 2 branches missed.">    def colour = ship.condition != 'DOCKED' ? ship.condition : 'GREEN'</span>
+<span class="pc" id="L559">    &quot;&lt;html&gt;&lt;font size=+2 color=$colour&gt;${ship.condition}&lt;/font&gt;&lt;/html&gt;&quot;</span>
   }
 
   /// Perform a @ref TrekShortRangeSensors &quot;short-range sensor scan&quot;
   void shortRangeScan() {
-<span class="fc" id="L563">    logException {</span>
-<span class="fc" id="L564">      ship.shortRangeScan( galaxy )</span>
-<span class="fc" id="L565">      ship.attemptDocking( quadrant )</span>
+<span class="fc" id="L564">    logException {</span>
+<span class="fc" id="L565">      ship.shortRangeScan( galaxy )</span>
+<span class="fc" id="L566">      ship.attemptDocking( quadrant )</span>
       // @todo Is this methode code-complete?
       // GOSUB 2370 UNLESS A%
       // 1570 IF D%(2%) THEN &amp;&quot;SHORT RANGE SENSORS ARE INOPERABLE&quot;:GOTO1650
 
-<span class="fc" id="L570">      msgBox( '---------------', false )</span>
-<span class="pc" id="L571">      quadrant.displayOn( {msgBox it} )</span>
+<span class="fc" id="L571">      msgBox( '---------------', false )</span>
+<span class="pc" id="L572">      quadrant.displayOn( {msgBox it} )</span>
 
-<span class="fc" id="L573">      msgBox( '---------------', false )</span>
-<span class="fc" id="L574">      showCondition()</span>
-<span class="fc" id="L575">      msgBox( sprintf(&quot;%8s: %5d  %15s: %s&quot;, rb.getString('starDate'), game.currentSolarYear, rb.getString('condition'),ship.condition ) )</span>
-<span class="fc" id="L576">      msgBox( sprintf('%8s: %5s  %15s: %d - %d', rb.getString('quadrant'),currentQuadrant(), rb.getString('sector'),entSectY, entSectX ) )</span>
-<span class="fc" id="L577">      msgBox( sprintf('%8s: %5d  %15s: %2d', rb.getString('energy'),ship.energyNow, rb.getString('missiles'),ship.numTorpedoes ) )</span>
-<span class="pc bpc" id="L578" title="1 of 2 branches missed.">      msgBox( sprintf('%8s: %5d', rb.getString('enemy'), enemyFleet.numKlingonBatCrRemain ) )</span>
+<span class="fc" id="L574">      msgBox( '---------------', false )</span>
+<span class="fc" id="L575">      showCondition()</span>
+<span class="fc" id="L576">      msgBox( sprintf(&quot;%8s: %5d  %15s: %s&quot;, rb.getString('starDate'), game.currentSolarYear, rb.getString('condition'),ship.condition ) )</span>
+<span class="fc" id="L577">      msgBox( sprintf('%8s: %5s  %15s: %d - %d', rb.getString('quadrant'),currentQuadrant(), rb.getString('sector'),entSectY, entSectX ) )</span>
+<span class="fc" id="L578">      msgBox( sprintf('%8s: %5d  %15s: %2d', rb.getString('energy'),ship.energyNow, rb.getString('missiles'),ship.numTorpedoes ) )</span>
+<span class="pc bpc" id="L579" title="1 of 2 branches missed.">      msgBox( sprintf('%8s: %5d', rb.getString('enemy'), enemyFleet.numKlingonBatCrRemain ) )</span>
 
-<span class="pc" id="L580">      log.info game.toString()</span>
+<span class="pc" id="L581">      log.info game.toString()</span>
     }
   }
 
   @TypeChecked
   private void attackFleetWithPhasers( final int energy ) {
-<span class="nc" id="L586">    new Battle(</span>
+<span class="nc" id="L587">    new Battle(</span>
       enemyFleet, ship, damageControl,
       this.&amp;msgBox, this.&amp;attackReporter, rb
     ).phaserAttackFleet( energy )
   }
 
   void updateQuadrantAfterSkirmish() {
-<span class="nc bnc" id="L593" title="All 4 branches missed.">    updateNumEnemyShipsInQuad()</span>
-<span class="nc" id="L594">    def enemiesAtStart = quadrant.findEnemies()</span>
-<span class="nc bnc" id="L595" title="All 4 branches missed.">    log.info &quot;Found ${enemiesAtStart ? enemiesAtStart.size() : 'no'} possibly dead enemies.&quot;</span>
-<span class="nc" id="L596">    enemiesAtStart.each {</span>
-<span class="nc bnc" id="L597" title="All 4 branches missed.">      if ( !enemyFleet.isShipAt( it.key ) ) {</span>
-<span class="nc bnc" id="L598" title="All 2 branches missed.">        log.info &quot;Removing vanquished ${it.value} from sector ${it.key}&quot;</span>
-<span class="nc" id="L599">        quadrant.removeEnemy( it.key )</span>
+<span class="nc bnc" id="L594" title="All 4 branches missed.">    updateNumEnemyShipsInQuad()</span>
+<span class="nc" id="L595">    def enemiesAtStart = quadrant.findEnemies()</span>
+<span class="nc bnc" id="L596" title="All 4 branches missed.">    log.info &quot;Found ${enemiesAtStart ? enemiesAtStart.size() : 'no'} possibly dead enemies.&quot;</span>
+<span class="nc" id="L597">    enemiesAtStart.each {</span>
+<span class="nc bnc" id="L598" title="All 4 branches missed.">      if ( !enemyFleet.isShipAt( it.key ) ) {</span>
+<span class="nc bnc" id="L599" title="All 2 branches missed.">        log.info &quot;Removing vanquished ${it.value} from sector ${it.key}&quot;</span>
+<span class="nc" id="L600">        quadrant.removeEnemy( it.key )</span>
       }
     }
   }
 
   final void fireTorpedo() {
-<span class="nc bnc" id="L605" title="All 2 branches missed.">    log.info &quot;Fire torpedo - available: ${ship.numTorpedoes}&quot;</span>
+<span class="nc bnc" id="L606" title="All 2 branches missed.">    log.info &quot;Fire torpedo - available: ${ship.numTorpedoes}&quot;</span>
 
-<span class="nc bnc" id="L607" title="All 6 branches missed.">    float course = getCourse()</span>
-<span class="nc bnc" id="L608" title="All 6 branches missed.">    if ( course ) {</span>
-<span class="nc" id="L609">      new Battle(</span>
+<span class="nc bnc" id="L608" title="All 6 branches missed.">    float course = getCourse()</span>
+<span class="nc bnc" id="L609" title="All 6 branches missed.">    if ( course ) {</span>
+<span class="nc" id="L610">      new Battle(</span>
         enemyFleet, ship, damageControl,
         this.&amp;msgBox, this.&amp;attackReporter, rb
       ).fireTorpedo( course )
     }
-<span class="nc bnc" id="L614" title="All 2 branches missed.">    log.info &quot;Fire torpedo completed - available: ${ship.numTorpedoes}&quot;</span>
+<span class="nc bnc" id="L615" title="All 2 branches missed.">    log.info &quot;Fire torpedo completed - available: ${ship.numTorpedoes}&quot;</span>
   }
 
   // @TypeChecked
   final void firePhasers() {
-<span class="nc bnc" id="L619" title="All 2 branches missed.">    log.info &quot;Fire phasers - available energy: ${ship.energyNow}&quot;</span>
+<span class="nc bnc" id="L620" title="All 2 branches missed.">    log.info &quot;Fire phasers - available energy: ${ship.energyNow}&quot;</span>
 
-<span class="nc" id="L621">    final int energy = ui.getFloatInput( rb.getString( 'input.phaserEnergy' ) ).toInteger()</span>
-<span class="nc bnc" id="L622" title="All 16 branches missed.">    if ( energy &gt; 0 ) {</span>
-<span class="nc bnc" id="L623" title="All 4 branches missed.">      if ( energy &lt;= ship.energyNow ) {</span>
-<span class="nc" id="L624">        attackFleetWithPhasers energy</span>
-<span class="nc" id="L625">        updateQuadrantAfterSkirmish()</span>
+<span class="nc" id="L622">    final int energy = ui.getFloatInput( rb.getString( 'input.phaserEnergy' ) ).toInteger()</span>
+<span class="nc bnc" id="L623" title="All 16 branches missed.">    if ( energy &gt; 0 ) {</span>
+<span class="nc bnc" id="L624" title="All 4 branches missed.">      if ( energy &lt;= ship.energyNow ) {</span>
+<span class="nc" id="L625">        attackFleetWithPhasers energy</span>
+<span class="nc" id="L626">        updateQuadrantAfterSkirmish()</span>
       } else {
-<span class="nc" id="L627">        log.info 'Phaser command refused; user tried to fire too many units.'</span>
-<span class="nc" id="L628">        localMsg 'phaser.refused.badEnergy'</span>
+<span class="nc" id="L628">        log.info 'Phaser command refused; user tried to fire too many units.'</span>
+<span class="nc" id="L629">        localMsg 'phaser.refused.badEnergy'</span>
       }
     } else {
-<span class="nc" id="L631">      log.info 'Command cancelled by user.'</span>
+<span class="nc" id="L632">      log.info 'Command cancelled by user.'</span>
     }
-<span class="nc bnc" id="L633" title="All 2 branches missed.">    log.info &quot;Fire phasers completed - available energy: ${ship.energyNow}&quot;</span>
+<span class="nc bnc" id="L634" title="All 2 branches missed.">    log.info &quot;Fire phasers completed - available energy: ${ship.energyNow}&quot;</span>
   }
 
   void victoryDance() {
 
-<span class="nc bnc" id="L638" title="All 4 branches missed.">    Object[] msgArgs = [</span>
+<span class="nc bnc" id="L639" title="All 4 branches missed.">    Object[] msgArgs = [</span>
       game.currentSolarYear,
       enemyFleet.numKlingonBatCrTotal,
-<span class="nc" id="L641">      game.elapsed(),</span>
-<span class="nc" id="L642">      rating()</span>
+<span class="nc" id="L642">      game.elapsed(),</span>
+<span class="nc" id="L643">      rating()</span>
     ]
-<span class="nc" id="L644">    formatter.applyPattern( rb.getString( 'trek.victoryDance' ) );</span>
-<span class="nc" id="L645">    msgBox formatter.format( msgArgs );</span>
+<span class="nc" id="L645">    formatter.applyPattern( rb.getString( 'trek.victoryDance' ) );</span>
+<span class="nc" id="L646">    msgBox formatter.format( msgArgs );</span>
   }
 
   private int rating() {
-<span class="nc" id="L649">    enemyFleet.numKlingonBatCrTotal / game.elapsed() * 1000</span>
+<span class="nc" id="L650">    enemyFleet.numKlingonBatCrTotal / game.elapsed() * 1000</span>
   }
 
   void shipDestroyed() {
-<span class="nc" id="L653">    Object[] msgArgs = [</span>
+<span class="nc" id="L654">    Object[] msgArgs = [</span>
       game.currentSolarYear,
       enemyFleet.numKlingonBatCrRemain,
-<span class="nc" id="L656">      game.elapsed()</span>
+<span class="nc" id="L657">      game.elapsed()</span>
     ]
-<span class="nc" id="L658">    formatter.applyPattern( rb.getString( 'trek.funeral' ) );</span>
-<span class="nc" id="L659">    msgBox formatter.format( msgArgs );</span>
+<span class="nc" id="L659">    formatter.applyPattern( rb.getString( 'trek.funeral' ) );</span>
+<span class="nc" id="L660">    msgBox formatter.format( msgArgs );</span>
   }
 
-<span class="nc bnc" id="L662" title="All 6 branches missed.">  boolean gameContinues() {</span>
-<span class="nc bnc" id="L663" title="All 16 branches missed.">    !gameWon() &amp;&amp; !gameLost()</span>
+<span class="pc bpc" id="L663" title="3 of 6 branches missed.">  boolean gameContinues() {</span>
+<span class="pc bpc" id="L664" title="14 of 16 branches missed.">    !gameWon() &amp;&amp; !gameLost()</span>
   }
 
   boolean gameWon() {
-<span class="nc" id="L667">    enemyFleet.defeated</span>
+<span class="pc" id="L668">    enemyFleet.defeated</span>
   }
 
   boolean gameLost() {
-<span class="nc bnc" id="L671" title="All 4 branches missed.">    ship.deadInSpace() || game.outOfTime()</span>
+<span class="nc bnc" id="L672" title="All 4 branches missed.">    ship.deadInSpace() || game.outOfTime()</span>
   }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

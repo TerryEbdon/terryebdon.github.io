@@ -20,81 +20,86 @@ import static ShipDevice.*;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+@groovy.util.logging.Log4j2
 final class DamageControl {
 
   Map&lt;Integer, ShipDevice&gt; devices;
 
   DamageControl( damage ) {
     // assert damage
-<span class="fc" id="L29">    devices = damage</span>
+<span class="fc" id="L30">    devices = damage</span>
   }
 
   @Override final String toString() {
-<span class="nc" id="L33">    String str = &quot;&quot;</span>
-<span class="nc" id="L34">    devices.each { key, device -&gt;</span>
-<span class="nc" id="L35">        str &lt;&lt; &quot;$key: $device\n&quot;</span>
+<span class="nc" id="L34">    String str = &quot;&quot;</span>
+<span class="nc" id="L35">    devices.each { key, device -&gt;</span>
+<span class="nc" id="L36">        str &lt;&lt; &quot;$key: $device\n&quot;</span>
     }
   }
 
   ShipDevice device( final DeviceType deviceType ) {
-<span class="nc" id="L40">    devices.find { it.id == deviceType.id }</span>
+<span class="nc" id="L41">    devices.find { it.id == deviceType.id }</span>
   }
 
   ///@ todo: Localise repair() messages.
   // @TypeChecked
   void repair( Closure msgBox ) {
-<span class="pc bpc" id="L46" title="1 of 2 branches missed.">    assert devices</span>
-<span class="fc" id="L47">    1.upto( devices.size() ) { int deviceId -&gt;</span>
-<span class="fc bfc" id="L48" title="All 2 branches covered.">      if ( devices[deviceId].isDamaged() ) {</span>
-<span class="fc" id="L49">        ++devices[deviceId].state</span>
-<span class="fc" id="L50">        msgBox &quot;Repair systems are working on damage to &quot; +</span>
-<span class="fc" id="L51">          devices[deviceId].name +</span>
-<span class="pc" id="L52">          &quot;, state improved to ${devices[deviceId].state}&quot;</span>
+<span class="fc" id="L47">    log.trace 'repair()'</span>
+<span class="pc bpc" id="L48" title="1 of 2 branches missed.">    assert devices</span>
+<span class="fc" id="L49">    1.upto( devices.size() ) { int deviceId -&gt;</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">      if ( devices[deviceId].isDamaged() ) {</span>
+<span class="fc" id="L51">        ++devices[deviceId].state</span>
+<span class="fc" id="L52">        msgBox &quot;Repair systems are working on damage to &quot; +</span>
+<span class="fc" id="L53">          devices[deviceId].name +</span>
+<span class="pc" id="L54">          &quot;, state improved to ${devices[deviceId].state}&quot;</span>
       }
     }
+<span class="fc" id="L57">    log.trace 'repair() -- OK'</span>
   }
 
   @TypeChecked
   final int findDamagedDeviceKey() {
-<span class="pc bfc" id="L59" title="All 2 branches covered.">    devices.find { int key, ShipDevice device -&gt;</span>
-<span class="pc" id="L60">      device.isDamaged()</span>
+<span class="pc bfc" id="L62" title="All 2 branches covered.">    devices.find { int key, ShipDevice device -&gt;</span>
+<span class="pc" id="L63">      device.isDamaged()</span>
     }?.key ?: 0
   }
 
   @TypeChecked
   final boolean isDamaged( final int keyWanted ) {
-<span class="nc bnc" id="L66" title="All 2 branches missed.">    assert devices.keySet().contains( keyWanted )</span>
-<span class="nc" id="L67">    devices[keyWanted].state</span>
+<span class="nc bnc" id="L69" title="All 2 branches missed.">    log.trace &quot;Checking for damage to DeviceType key: $keyWanted&quot;</span>
+<span class="nc bnc" id="L70" title="All 2 branches missed.">    assert devices.keySet().contains( keyWanted )</span>
+<span class="nc" id="L71">    devices[keyWanted].state</span>
   }
 
   @TypeChecked
   final boolean isDamaged( DeviceType deviceTypeWanted ) {
-<span class="pc" id="L72">    devices.find { int key, ShipDevice shipDevice -&gt;</span>
-<span class="pc" id="L73">      shipDevice.id == deviceTypeWanted.id</span>
+<span class="pc bpc" id="L76" title="1 of 2 branches missed.">    log.trace &quot;Checking for damage to DeviceType $deviceTypeWanted&quot;</span>
+<span class="pc" id="L77">    devices.find { int key, ShipDevice shipDevice -&gt;</span>
+<span class="pc" id="L78">      shipDevice.id == deviceTypeWanted.id</span>
     }?.value.state
   }
 
   void randomlyRepair( final key ) {
-<span class="pc bpc" id="L78" title="1 of 2 branches missed.">    assert key</span>
-<span class="pc bpc" id="L79" title="1 of 2 branches missed.">    assert devices[key].isDamaged()</span>
-<span class="fc" id="L80">    final def oldState = devices[key].state</span>
-<span class="fc" id="L81">    devices[key].state += randomRepairAmount( key )</span>
+<span class="pc bpc" id="L83" title="1 of 2 branches missed.">    assert key</span>
+<span class="pc bpc" id="L84" title="1 of 2 branches missed.">    assert devices[key].isDamaged()</span>
+<span class="fc" id="L85">    final def oldState = devices[key].state</span>
+<span class="fc" id="L86">    devices[key].state += randomRepairAmount( key )</span>
         // inflict damage on device -- see line 1810
     //devices[key].state = [0,devices[key].state].min()
-<span class="pc bpc" id="L84" title="1 of 2 branches missed.">    assert devices[key].state &lt;= 0</span>
-<span class="pc bpc" id="L85" title="1 of 2 branches missed.">    assert devices[key].state &gt;= oldState</span>
+<span class="pc bpc" id="L89" title="1 of 2 branches missed.">    assert devices[key].state &lt;= 0</span>
+<span class="pc bpc" id="L90" title="1 of 2 branches missed.">    assert devices[key].state &gt;= oldState</span>
   }
 
   private def randomRepairAmount( final key ) {
-<span class="fc" id="L89">    def offset = new Random().nextInt(</span>
-<span class="fc" id="L90">        devices[key].state.abs() ) + 1</span>
-<span class="pc bpc" id="L91" title="1 of 2 branches missed.">    assert offset &gt; 0</span>
-<span class="pc bpc" id="L92" title="1 of 2 branches missed.">    assert offset &lt;= devices[key].state.abs()</span>
-<span class="pc" id="L93">    offset</span>
+<span class="fc" id="L94">    def offset = new Random().nextInt(</span>
+<span class="fc" id="L95">        devices[key].state.abs() ) + 1</span>
+<span class="pc bpc" id="L96" title="1 of 2 branches missed.">    assert offset &gt; 0</span>
+<span class="pc bpc" id="L97" title="1 of 2 branches missed.">    assert offset &lt;= devices[key].state.abs()</span>
+<span class="pc" id="L98">    offset</span>
   }
 
   void report( rb, Closure closure, formatter ) {
-<span class="nc" id="L97">    new DamageReporter( devices, rb, closure ).report( formatter )</span>
+<span class="nc" id="L102">    new DamageReporter( devices, rb, closure ).report( formatter )</span>
   }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

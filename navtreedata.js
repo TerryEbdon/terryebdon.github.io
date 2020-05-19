@@ -48,14 +48,14 @@ var NAVTREE =
     [ "2020-02", "wip202002.html", "wip202002" ],
     [ "2020-03", "wip202003.html", "wip202003" ],
     [ "Archives", "archive.html", "archive" ],
-    [ "Photography", "_photography.html", "_photography" ],
-    [ "About Me", "_about_me.html", null ]
+    [ "Photography", "Photography.html", "Photography" ],
+    [ "About Me", "AboutMe.html", null ]
   ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"_about_me.html",
+"AboutMe.html",
 "wip20190314.html#autotoc_md194"
 ];
 

@@ -1,7 +1,7 @@
 var NAVTREEINDEX0 =
 {
-"_about_me.html":[15],
-"_photography.html":[14],
+"AboutMe.html":[15],
+"Photography.html":[14],
 "archive.html":[13],
 "index.html":[],
 "index.html":[0],

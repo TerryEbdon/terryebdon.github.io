@@ -1,4 +1,4 @@
-var _photography =
+var Photography =
 [
     [ "Photo Gear", "photo-gear.html", [
       [ "Wildlife Kit", "photo-gear.html#zooKit", [

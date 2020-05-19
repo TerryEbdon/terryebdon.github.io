@@ -11,7 +11,7 @@ var index =
       [ "Atom spell checking", "wip20200513.html#autotoc_md261", null ],
       [ "Changing editors", "wip20200513.html#autotoc_md262", null ]
     ] ],
-    [ "14-May-2020 Commit Signing, Log-EQF", "wip20200514.html", [
+    [ "14-May-2020 VS Code - Commit Signing & Issues", "wip20200514.html", [
       [ "VS Code", "wip20200514.html#autotoc_md263", [
         [ "Commit signing", "wip20200514.html#autotoc_md264", null ],
         [ "GitHub issue integration", "wip20200514.html#autotoc_md265", [

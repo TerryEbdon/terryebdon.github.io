@@ -1,19 +1,19 @@
 var wip201706 =
 [
     [ "BitBucket tabs, Dates, Eclipse & licences", "wip20170630.html", [
-      [ "Date bug", "wip20170630.html#autotoc_md73", null ],
-      [ "Internationalisation (i18n)", "wip20170630.html#autotoc_md74", null ],
-      [ "Licensing", "wip20170630.html#autotoc_md75", null ],
-      [ "BitBucket", "wip20170630.html#autotoc_md76", null ],
-      [ "Interesting web pages", "wip20170630.html#autotoc_md77", [
-        [ "Installers", "wip20170630.html#autotoc_md78", null ],
-        [ "Licensing", "wip20170630.html#autotoc_md79", [
-          [ "Open Source Licences", "wip20170630.html#autotoc_md80", null ]
+      [ "Date bug", "wip20170630.html#autotoc_md74", null ],
+      [ "Internationalisation (i18n)", "wip20170630.html#autotoc_md75", null ],
+      [ "Licensing", "wip20170630.html#autotoc_md76", null ],
+      [ "BitBucket", "wip20170630.html#autotoc_md77", null ],
+      [ "Interesting web pages", "wip20170630.html#autotoc_md78", [
+        [ "Installers", "wip20170630.html#autotoc_md79", null ],
+        [ "Licensing", "wip20170630.html#autotoc_md80", [
+          [ "Open Source Licences", "wip20170630.html#autotoc_md81", null ]
         ] ],
-        [ "Eclipse", "wip20170630.html#autotoc_md81", null ],
-        [ "i18n", "wip20170630.html#autotoc_md82", null ],
-        [ "Java Resource Bundles", "wip20170630.html#autotoc_md83", null ],
-        [ "Maven", "wip20170630.html#autotoc_md84", null ]
+        [ "Eclipse", "wip20170630.html#autotoc_md82", null ],
+        [ "i18n", "wip20170630.html#autotoc_md83", null ],
+        [ "Java Resource Bundles", "wip20170630.html#autotoc_md84", null ],
+        [ "Maven", "wip20170630.html#autotoc_md85", null ]
       ] ]
     ] ],
     [ "A mixed bag", "wip20170629.html", [
@@ -25,10 +25,10 @@ var wip201706 =
       [ "Interesting web pages", "wip20170629.html#autotoc_md66", [
         [ "Ant", "wip20170629.html#autotoc_md67", null ],
         [ "Syntax Highlighting", "wip20170629.html#autotoc_md68", null ],
-        [ "Groovy", "wip20170629.html#autotoc_md69", null ],
-        [ "Mercurial", "wip20170629.html#autotoc_md70", null ],
-        [ "Microsoft Windows", "wip20170629.html#autotoc_md71", null ],
-        [ "Retro Computing", "wip20170629.html#autotoc_md72", null ]
+        [ "Groovy", "wip20170629.html#autotoc_md70", null ],
+        [ "Mercurial", "wip20170629.html#autotoc_md71", null ],
+        [ "Microsoft Windows", "wip20170629.html#autotoc_md72", null ],
+        [ "Retro Computing", "wip20170629.html#autotoc_md73", null ]
       ] ]
     ] ],
     [ "WebDoxy, Eclipse & Engineering", "wip20170628.html", [
@@ -37,7 +37,7 @@ var wip201706 =
         [ "PDF Output is reversed", "wip20170628.html#autotoc_md51", null ],
         [ "A choice: Contents List or nice dates?", "wip20170628.html#autotoc_md52", null ]
       ] ],
-      [ "Eclipse -- Upgrading to Oxygen", "wip20170628.html#autotoc_md53", null ],
+      [ "Eclipse – Upgrading to Oxygen", "wip20170628.html#autotoc_md53", null ],
       [ "Dependency Management & Inversion of Control", "wip20170628.html#autotoc_md54", [
         [ "Spring Boot", "wip20170628.html#autotoc_md55", [
           [ "Spring Initializr", "wip20170628.html#autotoc_md56", null ],
@@ -54,7 +54,7 @@ var wip201706 =
       [ "Escaping in Doxygen Code Blocks", "wip20170627.html#autotoc_md35", null ],
       [ "Hosting", "wip20170627.html#autotoc_md36", null ],
       [ "Source Code documentation", "wip20170627.html#autotoc_md37", null ],
-      [ "WebDoxy -- Creating Daily Summaries", "wip20170627.html#autotoc_md38", null ],
+      [ "WebDoxy – Creating Daily Summaries", "wip20170627.html#autotoc_md38", null ],
       [ "Improved Doxygen Look and Feel", "wip20170627.html#autotoc_md39", [
         [ "Increasing the Font Size", "wip20170627.html#autotoc_md40", null ],
         [ "Converting \"Go to Top\" links to buttons", "wip20170627.html#autotoc_md41", null ]
@@ -83,7 +83,7 @@ var wip201706 =
       [ "Dot and PlantUML diagram alignment in Doxygen", "wip20170625.html#autotoc_md19", null ],
       [ "Spelling", "wip20170625.html#autotoc_md20", null ],
       [ "BibTeX", "wip20170625.html#autotoc_md21", null ],
-      [ "Doxygen -- Latex Indexing -- Collaboration", "wip20170625.html#autotoc_md22", null ],
+      [ "Doxygen – Latex Indexing – Collaboration", "wip20170625.html#autotoc_md22", null ],
       [ "Interesting web pages", "wip20170625.html#autotoc_md23", [
         [ "Colour choice", "wip20170625.html#autotoc_md24", null ],
         [ "Boating", "wip20170625.html#autotoc_md25", [
@@ -114,9 +114,8 @@ var wip201706 =
     [ "Doxygen and Atom", "wip20170621.html", [
       [ "Doxygen superscript", "wip20170621.html#autotoc_md3", null ],
       [ "Doxygen sub-pages", "wip20170621.html#autotoc_md4", null ],
-      [ "Project tagging", "wip20170621.html#autotoc_md5", [
-        [ "Project Interaction", "wip20170621.html#autotoc_md6", null ]
-      ] ],
+      [ "Project tagging", "wip20170621.html#autotoc_md5", null ],
+      [ "Project Interaction", "wip20170621.html#autotoc_md6", null ],
       [ "Atom date & time stamps", "wip20170621.html#autotoc_md7", null ]
     ] ],
     [ "Doygen page order & Groovy ranges", "wip20170620.html", [

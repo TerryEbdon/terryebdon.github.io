@@ -1,7 +1,6 @@
 var NAVTREEINDEX0 =
 {
 "AboutMe.html":[15],
-"Photography.html":[14],
 "archive.html":[13],
 "index.html":[],
 "index.html":[0],
@@ -16,6 +15,7 @@ var NAVTREEINDEX0 =
 "photo-gear.html#primeLenses":[14,0,2],
 "photo-gear.html#zooKit":[14,0,0],
 "photo-gear.html#zoomLenses":[14,0,3],
+"photography.html":[14],
 "todo.html":[16],
 "wip2017.html":[13,2],
 "wip201706.html":[1],

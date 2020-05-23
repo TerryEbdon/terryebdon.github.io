@@ -48,7 +48,7 @@ var NAVTREE =
     [ "2020-02", "wip202002.html", "wip202002" ],
     [ "2020-03", "wip202003.html", "wip202003" ],
     [ "Archives", "archive.html", "archive" ],
-    [ "photography", "photography.html", "photography" ],
+    [ "Photography", "photography.html", "photography" ],
     [ "About Me", "AboutMe.html", null ]
   ] ]
 ];

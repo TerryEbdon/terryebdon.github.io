@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer&#39;s Diary: 26-Feb-2020 Dark Mode, Clone War</title>
+<title>Developer&#39;s Diary: 20-May-2020 GitHub Pages</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -47,56 +47,35 @@
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('wip20200226.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('wip20200520.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">26-Feb-2020 Dark Mode, Clone War </div>  </div>
+<div class="title">20-May-2020 GitHub Pages </div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="toc"><h3>Table of Contents</h3>
-<ul><li class="level1"><a href="#autotoc_md248">Dark Mode</a><ul><li class="level2"><a href="#autotoc_md249">Free Commander XE colours</a><ul><li class="level3"><a href="#autotoc_md250">File / Folder list</a></li>
-<li class="level3"><a href="#autotoc_md251">Tree</a></li>
+<ul><li class="level1"><a href="#h20200520">Slow GitHub Pages deployment</a><ul><li class="level2"><a href="#autotoc_md270">Bad UTF-8 breaks deployment</a></li>
+<li class="level2"><a href="#autotoc_md271">Missing pages</a></li>
 </ul>
 </li>
 </ul>
-</li>
-<li class="level1"><a href="#autotoc_md252">GitHub Desktop can&#39;t clone</a></li>
-<li class="level1"><a href="#autotoc_md253">Test WebDoxy GitHub version</a></li>
-</ul>
 </div>
-<div class="textblock"><p><a class="anchor" id="h20200226"></a> </p>
-<h1><a class="anchor" id="autotoc_md248"></a>
-Dark Mode</h1>
-<p>I run everything in <em>Dark Mode</em>, where possible. But some apps don't support it, or misbehave with it. e.g. Microsoft Outlook can mess up the calendar view when Dark Mode is enabled. Today Windows prompted me to enable the OS Dark Mode configuration. I did, and it works well. This prompted me to check a few other applications. Atom was already working great with the "One Dark" syntax and UI themes. I switched SourceTree and GitHub Desktop over, without problem. But what about FreeCommander? This is my most heavily used app, and it has no built-in dark theme. I've tried creating one before, it didn't work out. Today I succeeded, with FreeCommander XE 2016.</p>
-<h2><a class="anchor" id="autotoc_md249"></a>
-Free Commander XE colours</h2>
-<p>To get this working I needed a font colour that works with three background colour. This needs to be configured in several places. It's easy to do, as long as you remember every place that needs configuring. I've still got a couple of things to change, but the following settings will be good enough for the time being.</p>
-<h3><a class="anchor" id="autotoc_md250"></a>
-File / Folder list</h3>
-<div class="image">
-<img src="2020-02-26_Dark_FreeCommander_FileFolder.png" alt=""/>
-</div>
- <h3><a class="anchor" id="autotoc_md251"></a>
-Tree</h3>
-<div class="image">
-<img src="2020-02-26_Dark_FreeCommander_Tree.png" alt=""/>
-</div>
- <h1><a class="anchor" id="autotoc_md252"></a>
-GitHub Desktop can't clone</h1>
-<p>GitHub's Desktop app is refusing to clone repositories. It claims the revocation server is offline. From a quick web search it seems likely that my ISP, or someone else, is blocking the request.</p>
-<div class="image">
-<img src="2020-02-26_GitHub_Desktop_Clone_Fail.png" alt=""/>
-</div>
- <h1><a class="anchor" id="autotoc_md253"></a>
-Test WebDoxy GitHub version</h1>
-<p>I cloned the new GitHub version of WebDoxy's repo onto my HP Desktop and ran some quick tests. The app works OK, the history's intact and everything looks good.</p>
+<div class="textblock"><h1><a class="anchor" id="h20200520"></a>
+Slow GitHub Pages deployment</h1>
+<p>This blog is hosted on GitHub Pages, which can be a problem. I generate a static site, using my WebDoxy tool (a wrapper around Doxygen). I commit the generated files and, hopefully, GH Pages will deploy the site. It doesn't always work, and the reasons are rarely obvious. The site is marked as pending, following the commit, then there's a random delay before the site deploys. The "experts" on Stack Exchange claim deployment occurs within 10 minutes and you have to have a Jekyll theme, even if you don't use Jekyll. In my experience, none of that is true. Yesterday it was sometimes taking over an hour for GitHub to deploy the site.</p>
+<h2><a class="anchor" id="autotoc_md270"></a>
+Bad UTF-8 breaks deployment</h2>
+<p>When I first committed a GH Pages site, three years ago, the site never deployed. After it had sat in pending for 24 hours I deleted the repository and started from scratch. It failed again. I eventually tracked the issue down to an invalid Unicode character in a markdown file.</p>
+<h2><a class="anchor" id="autotoc_md271"></a>
+Missing pages</h2>
+<p>Yesterday's deployment looked good,until I noticed the <a class="el" href="AboutMe.html">About Me</a> and <a class="el" href="photography.html">Photography</a> pages were missing. Clicking a link to them resulted in a 404 error. Yet the files were present in the repo and I'm pretty sure they used to work. Everything was fine on my local machine, this was a GH Pages issue. I realised these were the only two page with a leading underscore in the name. But why would that make a difference? The '_' was due to Doxygen's <code>CASE_SENSE_NAMES</code> setting. On Windows and Mac this defaults to <code>NO</code>, causing Doxygen to change <code>Photography</code> to <code>_photography</code> and <code>AboutMe</code> to <code>_About_Me</code> Adding <code>CASE_SENSE_NAMES = YES</code> to the project's Doxygen configuration allows GH Pages to recognise the files. That's a pretty odd requirement. But it still wasn't quite right. I've enabled the tree navigation bar, which works fine &hellip; unless you're viewing a sub-page of <a class="el" href="photography.html">Photography</a>. That's a minor GitHub bug, I'll put up with it. Again this works fine locally, it's only an issue on GitHub Pages.</p>
 <p> 
-<a class='btn' href='wip20200225.html'>25-Feb-2020 👈</a>
-<a class='btn' href='#h20200226'>Top of page</a>
-<a class='btn' href='wip20200228.html'>👉 28-Feb-2020</a>
+<a class='btn' href='wip20200514.html'>14-MAY-2020 👈</a>
+<a class='btn' href='#h20200520'>Top of page</a>
+<!-- <a class='btn' href='wip20200501.html'>👉 01-MAY-2020</a> -->
 </p>
 <p><span class="copyright">&copy; 2020 <a href="AboutMe.html" title="Terry Ebdon">Terry Ebdon.</a></span><br  />
 <p>Find me coding on <a title="terry_ebdon on BitBucket"

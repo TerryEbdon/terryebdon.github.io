@@ -1,6 +1,6 @@
 var index =
 [
-    [ "May, 2020", "index.html#autotoc_md270", null ],
+    [ "May, 2020", "index.html#autotoc_md272", null ],
     [ "06-May-2020 Sad news", "wip20200506.html", [
       [ "Death of a music legend", "wip20200506.html#autotoc_md259", null ]
     ] ],
@@ -18,6 +18,12 @@ var index =
           [ "Create issues from comments", "wip20200514.html#autotoc_md266", null ],
           [ "Issues bar", "wip20200514.html#autotoc_md267", null ]
         ] ]
+      ] ]
+    ] ],
+    [ "20-May-2020 GitHub Pages", "wip20200520.html", [
+      [ "Slow GitHub Pages deployment", "wip20200520.html#h20200520", [
+        [ "Bad UTF-8 breaks deployment", "wip20200520.html#autotoc_md270", null ],
+        [ "Missing pages", "wip20200520.html#autotoc_md271", null ]
       ] ]
     ] ]
 ];

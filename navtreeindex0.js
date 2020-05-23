@@ -4,7 +4,7 @@ var NAVTREEINDEX0 =
 "archive.html":[13],
 "index.html":[],
 "index.html":[0],
-"index.html#autotoc_md270":[0,0],
+"index.html#autotoc_md272":[0,0],
 "pages.html":[],
 "photo-gear.html":[14,0],
 "photo-gear.html#ef100_400":[14,0,0,0],

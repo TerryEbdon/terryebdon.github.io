@@ -25,5 +25,8 @@ var index =
         [ "Bad UTF-8 breaks deployment", "wip20200520.html#autotoc_md270", null ],
         [ "Missing pages", "wip20200520.html#autotoc_md271", null ]
       ] ]
+    ] ],
+    [ "24-May-2020 Card performance", "wip20200524.html", [
+      [ "Card performance", "wip20200524.html#h20200524", null ]
     ] ]
 ];

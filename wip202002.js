@@ -1,6 +1,6 @@
 var wip202002 =
 [
-    [ "February, 2020", "wip202002.html#autotoc_md255", null ],
+    [ "February, 2020", "wip202002.html#h202002", null ],
     [ "08-Feb-2020 HSQLDB text tables", "wip20200208.html", [
       [ "HSQLDB", "wip20200208.html#autotoc_md218", null ],
       [ "Text tables", "wip20200208.html#autotoc_md219", null ]
@@ -53,7 +53,7 @@ var wip202002 =
       [ "OSDN", "wip20200225.html#autotoc_md243", null ],
       [ "GitHub Desktop", "wip20200225.html#autotoc_md244", null ],
       [ "Imports", "wip20200225.html#autotoc_md245", null ],
-      [ "GutHub Problems", "wip20200225.html#autotoc_md246", null ],
+      [ "GitHub Problems", "wip20200225.html#autotoc_md246", null ],
       [ "Repo Migration Complete", "wip20200225.html#autotoc_md247", null ]
     ] ],
     [ "26-Feb-2020 Dark Mode, Clone War", "wip20200226.html", [

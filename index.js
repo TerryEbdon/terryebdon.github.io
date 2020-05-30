@@ -31,5 +31,8 @@ var index =
     ] ],
     [ "26-May-2020 Creating weekly pages", "wip20200526.html", [
       [ "Weekly changes", "wip20200526.html#h20200526", null ]
+    ] ],
+    [ "30-May-2020 Smelly design", "wip20200530.html", [
+      [ "WebDoxy design changes", "wip20200530.html#h20200530", null ]
     ] ]
 ];

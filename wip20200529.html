@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer&#39;s Diary: 27-Feb-2019 Trk21 Phaser Enhancement</title>
+<title>Developer&#39;s Diary: 29-May-2020</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -47,64 +47,35 @@
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('wip20190227.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('wip20200529.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">27-Feb-2019 Trk21 Phaser Enhancement </div>  </div>
+<div class="title">29-May-2020 </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="toc"><h3>Table of Contents</h3>
-<ul><li class="level1"><a href="#h20190227">Fire Phasers</a><ul><li class="level2"><a href="#autotoc_md163">Attack and counter-attack</a></li>
-</ul>
-</li>
-</ul>
+<div class="textblock"><h1><a class="anchor" id="h20200529"></a>
+UML &amp; WebDoxy #12 changes</h1>
+<p>The existing, V1.0.0, functionality is based on two project type, JournalProject and TocProject:</p>
+<div class="plantumlgraph">
+<img src="inline_umlgraph_9.png" />
 </div>
-<div class="textblock"><h1><a class="anchor" id="h20190227"></a>
-Fire Phasers</h1>
-<p>This is <a href="https://github.com/TerryEbdon/Trk21/issues/3#issue-413536911">issue #3</a> in the <a href="https://github.com/TerryEbdon/Trk21">Trk21 repository.</a></p>
-<p>Phaser Fire</p>
-<p>Firing a phaser should:</p>
-<ol type="1">
-<li>Reduce the target's available energy by the hit amount.</li>
-<li>Remove the target from the game if it's energy &lt;= 0.</li>
-<li>Inform the user of the weapon's effectiveness.</li>
-<li>Tell the user they've won the game when the last target is destroyed.</li>
-</ol>
-<dl class="section note"><dt>Note</dt><dd>Some of these items may be deferred until torpedo firing is implemented, or moved into their own enhancement.</dd></dl>
-<h2><a class="anchor" id="autotoc_md163"></a>
-Attack and counter-attack</h2>
-<p>The enemy fleet will immediately launch a counter-attack</p>
-<h3>Phaser attack on the enemy fleet</h3>
-<p><div class="plantumlgraph">
-<img src="Trk21PhaserAttack.png" />
+<p>My prototype code adds weekly functionality to JournalProject, but this seems a bit smelly.</p>
+<div class="plantumlgraph">
+<img src="inline_umlgraph_10.png" />
 </div>
- </p>
-<h3>The enemy fleet retaliates.</h3>
-<p><div class="plantumlgraph">
-<img src="FleetCounterAttack.png" />
-</div>
- </p>
 <p> 
-<a class='btn' href='wip20190225.html'>25-FEB-2019 👈</a>
-<a class='btn' href='#h20190227'>Top of page</a>
-<a class='btn' href='wip20190301.html'>👉 01-MAR-2019</a>
-</p>
-<p><span class="copyright">&copy; 2020 <a href="AboutMe.html" title="Terry Ebdon">Terry Ebdon.</a></span><br  />
-<p>Find me coding on <a title="terry_ebdon on BitBucket"
-href="https://github.com/TerryEbdon">GitHub,</a> networking on <a
-title="Terry Ebdon on LinkedIn"
-href="https://www.linkedin.com/in/talent/">LinkedIn</a> and hanging out on <a
-title="@terry_ebdon" href="https://twitter.com/@terry_ebdon">twitter.</a> </p>
- </div></div><!-- contents -->
+<a class='btn' href='#h20200529'>Top of page</a>
+ </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat May 30 2020 23:45:45 for Developer&#39;s Diary by
+    <li class="footer">Generated on Sat May 30 2020 14:34:42 for Developer&#39;s Diary by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.18 </li>
   </ul>

@@ -34,5 +34,9 @@ var index =
     ] ],
     [ "30-May-2020 Smelly design", "wip20200530.html", [
       [ "WebDoxy design changes", "wip20200530.html#h20200530", null ]
+    ] ],
+    [ "31-May-2020 WebDoxy Weekly pages", "wip20200531.html", [
+      [ "Page Hierarchy", "wip20200531.html#h20200531", null ],
+      [ "Page creation", "wip20200531.html#autotoc_md270", null ]
     ] ]
 ];

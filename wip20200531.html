@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer&#39;s Diary: 08-Feb-2020 HSQLDB text tables</title>
+<title>Developer&#39;s Diary: 31-May-2020 WebDoxy Weekly pages</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -47,32 +47,54 @@
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('wip20200208.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('wip20200531.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">08-Feb-2020 HSQLDB text tables </div>  </div>
+<div class="title">31-May-2020 WebDoxy Weekly pages </div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="toc"><h3>Table of Contents</h3>
-<ul><li class="level1"><a href="#autotoc_md218">HSQLDB</a></li>
-<li class="level1"><a href="#autotoc_md219">Text tables</a></li>
+<ul><li class="level1"><a href="#h20200531">Page Hierarchy</a></li>
+<li class="level1"><a href="#autotoc_md270">Page creation</a></li>
 </ul>
 </div>
-<div class="textblock"><p><a class="anchor" id="h20200208"></a> </p>
-<h1><a class="anchor" id="autotoc_md218"></a>
-HSQLDB</h1>
-<p>I haven't looked at HSQLDB since Monday. My immediate goal is to create a simple activity tracking database. The long term goal is to replace my Microsoft Access based apps. I have some "live" activity tracking data in CSV files, created with Libre Office Calc. I can use <a href="http://squirrel-sql.sourceforge.net/">SQuirreL SQL Client</a> to export CSVs but not to import them. I need to look at HSQLDB's SqlTool CLI for CSV imports.</p>
-<h1><a class="anchor" id="autotoc_md219"></a>
-Text tables</h1>
-<p>HSQLDB supports <a href="http://hsqldb.org/doc/2.0/guide/texttables-chapt.html">Text Tables</a>, i.e. data that uses text files as backing store. I knew this was possible as a read-only table source in Libre Office Base. I hadn't realised that HSQLDB supported it natively, with read / write access. This is excellent; I should be able to use SQL select, insert and update statements on CSV files. This is a really nice feature.</p>
-<p>HSQLDB text tables can be created using SQuirreL. The table files seems to have to be in the database's parent folder. I need to experiment with path names to confirm that. If I insert data, with SQL, it is written to the file. But data that's put in the file <em>externally</em> is not seen. Oddly if I close the session, replace the file, and reopen the session it sees the <em>old</em> data, not the new. It does seem to be using the correct file, so this is confusing.</p>
+<div class="textblock"><h1><a class="anchor" id="h20200531"></a>
+Page Hierarchy</h1>
+<p>The folder tree for journal entries is pretty simple: Day files within month folders that are grouped into annual folders.</p>
+<p><div class="plantumlgraph">
+<img src="2020-05-31_journal_tree.png" />
+</div>
+ </p>
+<p>For weekly projects the folder tree is more complex. Week files are grouped into quarters, within years. But there are also monthly summary files.</p>
+<p><div class="plantumlgraph">
+<img src="2020-05-31_weekly_tree.png" />
+</div>
+ </p>
+<h1><a class="anchor" id="autotoc_md270"></a>
+Page creation</h1>
+<p>A journal day page is added like this:</p>
+<p><div class="plantumlgraph">
+<img src="2020-05-31_journal_page_sequence.png" />
+</div>
+ </p>
+<p>Note that daily pages are sub-pages of the monthly pages. That logic doesn't work for the weekly hierarchy, as week pages can span two months. A week page will instead be a sub-page of the relevant quarter. For weekly page creation the sequence might change to something like this:</p>
+<p><div class="plantumlgraph">
+<img src="2020-05-31_weekly_page_sequence.png" />
+</div>
+ </p>
+<p>This is a rough conceptual sequence, the real implementation would be cleaner. A couple of points are highlighted by the above sequence:</p>
+<ul>
+<li>WebDoxy would have specific methods for each page type, <code>addDiaryPage()</code> and <code>addWeeklyPage()</code>.</li>
+<li>JournalProject is used in both daily and weekly sequences.</li>
+</ul>
+<p>It might be better to add a WeeklyProject which could eliminate the need for <code>addWeeklyPage()</code>. This is the approach I modelled <a class="el" href="wip20200530.html">yesterday</a></p>
 <p> 
-<a class='btn' href='wip20191213.html'>13-DEC-2019 👈</a>
-<a class='btn' href='#h20200208'>Top of page</a>
-<a class='btn' href='wip20200209.html'>👉 09-FEB-2020</a>
+<a class='btn' href='wip20200530.html'>30-MAY-2020 👈</a>
+<a class='btn' href='#h20200531'>Top of page</a>
+<!-- <a class='btn' href='wip20200601.html'>👉 01-JUN-2020</a> -->
 </p>
 <p><span class="copyright">&copy; 2020 <a href="AboutMe.html" title="Terry Ebdon">Terry Ebdon.</a></span><br  />
 <p>Find me coding on <a title="terry_ebdon on BitBucket"
@@ -86,7 +108,7 @@ title="@terry_ebdon" href="https://twitter.com/@terry_ebdon">twitter.</a> </p>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun May 31 2020 23:28:50 for Developer&#39;s Diary by
+    <li class="footer">Generated on Sun May 31 2020 23:28:52 for Developer&#39;s Diary by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.18 </li>
   </ul>

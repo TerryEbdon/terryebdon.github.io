@@ -59,8 +59,18 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <div class="textblock"><p><a class="anchor" id="mainpage"></a></p>
 <h1><a class="anchor" id="h202006"></a>
 June, 2020</h1>
+<p> 
+<script>
+jQuery(document).ready( function() {
+  jQuery('li').each(function() {
+    jQuery(this).parent().prepend(this);
+  });
+});
+</script
+</p>
 <ul>
 <li><a class="el" href="wip20200601.html">01-Jun-2020 Weekly page classes</a></li>
+<li><a class="el" href="wip20200602.html">02-Jun-2020 WebDoxy configuration</a></li>
 </ul>
 <p> 
 <hr/><br/>
@@ -80,7 +90,7 @@ title="@terry_ebdon" href="https://twitter.com/@terry_ebdon">twitter.</a> </p>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Jun 1 2020 16:02:01 for Developer&#39;s Diary by
+    <li class="footer">Generated on Tue Jun 2 2020 22:28:05 for Developer&#39;s Diary by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.18 </li>
   </ul>

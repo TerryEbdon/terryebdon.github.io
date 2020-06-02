@@ -81,20 +81,15 @@ Page creation</h1>
 </div>
  </p>
 <p>Note that daily pages are sub-pages of the monthly pages. That logic doesn't work for the weekly hierarchy, as week pages can span two months. A week page will instead be a sub-page of the relevant quarter. For weekly page creation the sequence might change to something like this:</p>
-<p><div class="plantumlgraph">
+<p><a class="anchor" id="a2020-05-31_weekly_page_sequence"></a><div class="plantumlgraph">
 <img src="2020-05-31_weekly_page_sequence.png" />
 </div>
  </p>
-<p>This is a rough conceptual sequence, the real implementation would be cleaner. A couple of points are highlighted by the above sequence:</p>
-<ul>
-<li>WebDoxy would have specific methods for each page type, <code>addDiaryPage()</code> and <code>addWeeklyPage()</code>.</li>
-<li>JournalProject is used in both daily and weekly sequences.</li>
-</ul>
-<p>It might be better to add a WeeklyProject which could eliminate the need for <code>addWeeklyPage()</code>. This is the approach I modelled <a class="el" href="wip20200530.html">yesterday</a></p>
+<p>This is a rough conceptual sequence, the real implementation would be cleaner.</p>
 <p> 
 <a class='btn' href='wip20200530.html'>30-MAY-2020 👈</a>
 <a class='btn' href='#h20200531'>Top of page</a>
-<!-- <a class='btn' href='wip20200601.html'>👉 01-JUN-2020</a> -->
+<a class='btn' href='wip20200601.html'>👉 01-JUN-2020</a>
 </p>
 <p><span class="copyright">&copy; 2020 <a href="AboutMe.html" title="Terry Ebdon">Terry Ebdon.</a></span><br  />
 <p>Find me coding on <a title="terry_ebdon on BitBucket"
@@ -108,7 +103,7 @@ title="@terry_ebdon" href="https://twitter.com/@terry_ebdon">twitter.</a> </p>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun May 31 2020 23:28:52 for Developer&#39;s Diary by
+    <li class="footer">Generated on Mon Jun 1 2020 16:02:00 for Developer&#39;s Diary by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.18 </li>
   </ul>

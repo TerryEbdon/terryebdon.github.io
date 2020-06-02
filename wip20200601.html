@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer&#39;s Diary: 2019 Archive</title>
+<title>Developer&#39;s Diary: 01-Jun-2020 Weekly page classes</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -47,28 +47,32 @@
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('wip2019.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('wip20200601.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">2019 Archive </div>  </div>
+<div class="title">01-Jun-2020 Weekly page classes </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><ul>
-<li><a class="el" href="wip201903.html">2019-03</a></li>
-<li><a class="el" href="wip201905.html">2019-05</a></li>
-<li><a class="el" href="wip201909.html">2019-09</a></li>
-<li><a class="el" href="wip201911.html">2019-11</a></li>
-<li><a class="el" href="wip201912.html">2019-12</a></li>
+<div class="toc"><h3>Table of Contents</h3>
+<ul><li class="level1"><a href="#h20200601">Class collaboration</a></li>
 </ul>
+</div>
+<div class="textblock"><h1><a class="anchor" id="h20200601"></a>
+Class collaboration</h1>
+<p>Combining <a class="el" href="wip20200531.html#a2020-05-31_weekly_page_sequence">yesterday's sequence diagram</a> with <a class="el" href="wip20200530.html#a2020-05-30_final_class_diagram">Saturday's class diagram</a>, and adding some detail, gives the following class collaboration. New classes are highlighted.</p>
+<p><div class="plantumlgraph">
+<img src="2020-06-01_web_doxy_v1_1_design.png" />
+</div>
+ </p>
+<p>This still needs some work. Ideally <code>createPage()</code> would only exist in JournalProject, or possibly Project,and not in the derived classes. The sub-classes should just override some lower level methods. i.e. WebDoxy would instantiate the appropriate sub-class of Project, via an object factory, then always call the same sequence of methods. The object factory would implement <a href="https://refactoring.com/catalog/replaceConstructorWithFactoryFunction.html">factory methods</a>.</p>
+<dl class="section note"><dt>Note</dt><dd>Factory methods are covered in the Gang of Four's classic <em>Design Patterns</em> book. There's a great discussion of object factories in <em>Modern C++ Design</em>, by Andrei Alexandrescu</dd></dl>
 <p> 
-<hr/><br/>
-<a class='btn' href='wip2017.html'>2017 👈</a>
-<a class='btn' href='archive.html'>The Archives</a>
-<a class='btn' href='wip2020.html'>👉 2020</a>
-<div>&nbsp;</div>
+<a class='btn' href='wip20200531.html'>31-MAY-2020 👈</a>
+<a class='btn' href='#h20200601'>Top of page</a>
+<!-- <a class='btn' href='wip20200602.html'>👉 02-JUN-2020</a> -->
 </p>
 <p><span class="copyright">&copy; 2020 <a href="AboutMe.html" title="Terry Ebdon">Terry Ebdon.</a></span><br  />
 <p>Find me coding on <a title="terry_ebdon on BitBucket"

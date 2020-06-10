@@ -126,5 +126,14 @@ var NAVTREEINDEX1 =
 "wip20200601.html":[0,1],
 "wip20200601.html#h20200601":[0,1,0],
 "wip20200602.html":[0,2],
-"wip20200602.html#h20200602":[0,2,0]
+"wip20200602.html#h20200602":[0,2,0],
+"wip20200603.html":[0,3],
+"wip20200603.html#autotoc_md271":[0,3,0,0],
+"wip20200603.html#autotoc_md272":[0,3,1],
+"wip20200603.html#h20200603":[0,3,0],
+"wip20200610.html":[0,4],
+"wip20200610.html#autotoc_md273":[0,4,1],
+"wip20200610.html#autotoc_md274":[0,4,1,0],
+"wip20200610.html#autotoc_md275":[0,4,1,1],
+"wip20200610.html#h20200610":[0,4,0]
 };

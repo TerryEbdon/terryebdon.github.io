@@ -75,7 +75,7 @@ Config file</h1>
 <div class="line">    }</div>
 <div class="line">  }</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>e.g. in the above snippet folder structure is configured for all projects. But <a href="https://github.com/TerryEbdon/WebDoxy/issues/12">enhancement #12</a> introduces a new folder structure for weekly projects. This creates a conflict when managing both weekly and daily projects. I could implement a more sophisticated configuration scheme, but it doesn't seem justified. I think I can get away with looking for a project-specific <code>config.groovy</code>, then falling back to the default file if the project file doesn't exist. This will preserve the interface at the cost of some duplicated configuration.</p>
+</div><!-- fragment --><p>e.g. in the above snippet the folder structure is configured for all projects. But <a href="https://github.com/TerryEbdon/WebDoxy/issues/12">enhancement #12</a> introduces a new folder structure for weekly projects. This creates a conflict when managing both weekly and daily projects. I could implement a more sophisticated configuration scheme, but it doesn't seem justified. I think I can get away with looking for a project-specific <code>config.groovy</code>, then falling back to the default file if the project file doesn't exist. This will preserve the interface at the cost of some duplicated configuration.</p>
 <p>The code will need to be reordered to accommodate this change. In version 1.0.0 <code>config.groovy</code> is loaded before the command is parsed. Also several projects can be referenced in one command. Currently <code>--create</code>, <code>--generate</code>, <code>journal</code> and <code>--stub</code> can process multiple projects. The new <code>--week</code> option should do the same, for consistency.</p>
 <p><div class="plantumlgraph">
 <img src="2020-06-02_web_doxy_config_activity.png" />
@@ -85,7 +85,7 @@ Config file</h1>
 <p> 
 <a class='btn' href='wip20200601.html'>01-JUN-2020 👈</a>
 <a class='btn' href='#h20200602'>Top of page</a>
-<!-- <a class='btn' href='wip20200603.html'>👉 03-JUN-2020</a> -->
+<a class='btn' href='wip20200603.html'>👉 03-JUN-2020</a>
 </p>
 <p><span class="copyright">&copy; 2020 <a href="AboutMe.html" title="Terry Ebdon">Terry Ebdon.</a></span><br  />
 <p>Find me coding on <a title="terry_ebdon on BitBucket"
@@ -99,7 +99,7 @@ title="@terry_ebdon" href="https://twitter.com/@terry_ebdon">twitter.</a> </p>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Jun 2 2020 22:28:03 for Developer&#39;s Diary by
+    <li class="footer">Generated on Wed Jun 10 2020 15:09:04 for Developer&#39;s Diary by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.18 </li>
   </ul>

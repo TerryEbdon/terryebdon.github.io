@@ -19,5 +19,10 @@ var index =
         [ "Generate email address", "wip20200610.html#autotoc_md274", null ],
         [ "Infer date of birth", "wip20200610.html#autotoc_md275", null ]
       ] ]
+    ] ],
+    [ "11-Jun-2020 Grails reliability", "wip20200611.html", [
+      [ "Fighting demons", "wip20200611.html#autotoc_md276", [
+        [ "Hunting the demon", "wip20200611.html#autotoc_md277", null ]
+      ] ]
     ] ]
 ];

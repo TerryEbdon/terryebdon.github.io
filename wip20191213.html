@@ -58,8 +58,8 @@ $(document).ready(function(){initNavTree('wip20191213.html',''); initResizable()
 <div class="contents">
 <div class="toc"><h3>Table of Contents</h3>
 <ul><li class="level1"><a href="#h20191213">Cable Tracing</a></li>
-<li class="level1"><a href="#autotoc_md215">Transmission Tests</a></li>
-<li class="level1"><a href="#autotoc_md216">The 736 and 23 cm</a></li>
+<li class="level1"><a href="#autotoc_md217">Transmission Tests</a></li>
+<li class="level1"><a href="#autotoc_md218">The 736 and 23 cm</a></li>
 </ul>
 </div>
 <div class="textblock"><h1><a class="anchor" id="h20191213"></a>
@@ -72,10 +72,10 @@ Cable Tracing</h1>
 <li>1 x RG58</li>
 </ul>
 <p>One of the WF103 feeds terminates next to the rig’s 6m port and is labelled 6m. The other “thick” feeds were harder to identify. The black RG213 end up near the duplexer and is labelled “colinear”. I had to pull the connector end back toward where it escapes the wall to see this. That was quite fiddly. A second WF103 is hanging loose and unlabelled. It’s terminated in an N connector so I’m assuming this is for the 9 element 2m beam. The white RG213 feed has no label, same for the RG58. I know there’s an RG58 feed running to the HF mast, so it’s possible that the thin cable has no antenna attached. That just leaves the white feed line. It’s long enough to reach both main rigs (FT-736R and FT-1000 MP). I’m pretty sure there’s no white feeder outside, so it’s either unconnected or attached to an antenna in the loft. Once I work out what it is I’ll draw a station diagram and pin it to the wall. Unfortunately I don’t own an antenna analyser. I do have a very nice triple head VSWR bridge though, a Welz “Station Monitor”, so might try running a couple of watts into the cable at 2m, to see what happens. There’s also the matter of the unterminated black feed line that’s hanging from the eaves by the VHF mast. Where does that end up in the shack?</p>
-<h1><a class="anchor" id="autotoc_md215"></a>
+<h1><a class="anchor" id="autotoc_md217"></a>
 Transmission Tests</h1>
 <p>I connected the colinear and, once I’d worked out how to use the radio again, sent a tone burst to the local repeater. Immediate response, end stop signal. Excellent. The rig seemed to be on low power though. Not terribly surprising as it’s a 25W rig and the 2m output is routed into a 5W in, 100W out, linear. The linear amp isn’t connected to a PSU. So I upped the rig’s drive level and the ALC crept up with it. Not good. That rig doesn’t have a VSWR meter so time to dig out the Welz Station Monitor. Replacing the duplexer with the Welz, in the 2m feed, confirmed what the ALC was telling me. The VSWR is 2:1, much higher than it should be. At full drive the FT-736R was only delivery 20 watts. It’s rated at 25W, but that’s the factory spec. The rigs internals are far from the way the factory made it. It’s possible the heavily modified electronics only deliver 20W, but I doubt that. The ALC level is a big klaxon that can’t be ignored. Sounds like either the antenna’s bad or the feeder is. Fortunately I have a 2m mobile antenna in the study, mag-mounted to an ISO standard biscuit tin. Well M&amp;S, close enough. Running the rig into that gave a 1:1 VSWR. The VHF mast definitely needs to be dropped. I also need to stick my head into the loft, to see what’s up there. With the mobile whip in place I can still get into the repeater, but the noise floor is way up. Moving the antenna to the other side of the room made little difference. Turning the LED room light off dropped the noise noticeably but it’s still far to high. I guess it’s hash from one or more of the many switched mode PSUs in the study. So the FT-736R looks fine, but the FT-817 may have a problem. Pretty sure it recently failed to open the local repeater with the biscuit tin antenna. Another couple of jobs for a wet weekend.</p>
-<h1><a class="anchor" id="autotoc_md216"></a>
+<h1><a class="anchor" id="autotoc_md218"></a>
 The 736 and 23 cm</h1>
 <p>I dug out the FT-736R manual. I’m surprised to find it’s not a tri-band rig, it’s quad band. There’s a 23cm module available, which I don’t have. I assumed it was either 6M or 23cm as an option, apparently not. I must have known this when I bought the rig but it had faded from my memory. I used to think about adding all the options but never got around to it. Wish I had. The 2M and 6M modules have significant re-work. I added the 6M module later (I think, it was a long time ago) so that’s probably factory standard. Ideally I’d like the upgraded 6M and 23 cm modules, but I’m guessing they’re impossible to buy. The manual mentions a lithium backup battery. I’ve never replaced that. I’ve owned the rig for well over 22 years so a battery replacement is long overdue. The transceiver is retaining memory, so the battery isn’t dead yet. I have the CAT adapter, which I think is an expensive level converter for the rigs serial interface. I need to dust off one of my old tower-cased computers, with a serial interface, to try that out. The manual doesn’t list any CAT instructions for accessing the memories. I’ll have to back them up the old fashioned way.</p>
 <p> 
@@ -95,7 +95,7 @@ title="@terry_ebdon" href="https://twitter.com/@terry_ebdon">twitter.</a> </p>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Jun 11 2020 23:15:40 for Developer&#39;s Diary by
+    <li class="footer">Generated on Fri Jun 12 2020 15:30:30 for Developer&#39;s Diary by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.18 </li>
   </ul>

@@ -57,19 +57,19 @@ $(document).ready(function(){initNavTree('wip20190317.html',''); initResizable()
 </div><!--header-->
 <div class="contents">
 <div class="toc"><h3>Table of Contents</h3>
-<ul><li class="level1"><a href="#autotoc_md200">Can&#39;t enter a warp factor of 0.2 when the engines are damaged</a></li>
-<li class="level1"><a href="#autotoc_md201">Enemy fleet should not counter-attack when the ship is docked</a></li>
+<ul><li class="level1"><a href="#autotoc_md202">Can&#39;t enter a warp factor of 0.2 when the engines are damaged</a></li>
+<li class="level1"><a href="#autotoc_md203">Enemy fleet should not counter-attack when the ship is docked</a></li>
 </ul>
 </div>
 <div class="textblock"><p><a class="anchor" id="h20190317"></a></p>
-<h1><a class="anchor" id="autotoc_md200"></a>
+<h1><a class="anchor" id="autotoc_md202"></a>
 Can't enter a warp factor of 0.2 when the engines are damaged</h1>
 <p>This is odd as the code looks OK, from a quick glance. (Ignore the hard-coded messages and keys, they're logged as separate issues.)</p>
 <p><img src="https://user-images.githubusercontent.com/47636739/54483824-69241000-4852-11e9-98da-829bc207a5ee.png" alt="image" class="inline"/></p>
 <p>Despite the above test a warp factor of .2 is rejected:</p>
 <p><img src="https://user-images.githubusercontent.com/47636739/54483810-0cc0f080-4852-11e9-9272-66106a5f61a2.png" alt="image" class="inline"/></p>
 <p>This may be related to issue <a href="https://github.com/TerryEbdon/Trk21/issues/6">#6</a> - Minimum warp factor should be 0.125, not 0.25, though that issue is closed.</p>
-<h1><a class="anchor" id="autotoc_md201"></a>
+<h1><a class="anchor" id="autotoc_md203"></a>
 Enemy fleet should not counter-attack when the ship is docked</h1>
 <p>While docked the ship should be protected from all enemy attacks, but this is not always the case. The enemy fleet will attack under two conditions:</p>
 <ol type="1">
@@ -97,7 +97,7 @@ title="@terry_ebdon" href="https://twitter.com/@terry_ebdon">twitter.</a> </p>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Jun 11 2020 23:15:39 for Developer&#39;s Diary by
+    <li class="footer">Generated on Fri Jun 12 2020 15:30:29 for Developer&#39;s Diary by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.18 </li>
   </ul>

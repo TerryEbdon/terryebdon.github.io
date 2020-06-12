@@ -57,15 +57,15 @@ $(document).ready(function(){initNavTree('wip20200211.html',''); initResizable()
 </div><!--header-->
 <div class="contents">
 <div class="toc"><h3>Table of Contents</h3>
-<ul><li class="level1"><a href="#autotoc_md224">Please</a></li>
-<li class="level1"><a href="#autotoc_md225">HSQLDB, BASIC-PLUS &amp; Activity Tracking</a></li>
+<ul><li class="level1"><a href="#autotoc_md226">Please</a></li>
+<li class="level1"><a href="#autotoc_md227">HSQLDB, BASIC-PLUS &amp; Activity Tracking</a></li>
 </ul>
 </div>
 <div class="textblock"><p><a class="anchor" id="h20200211"></a> </p>
-<h1><a class="anchor" id="autotoc_md224"></a>
+<h1><a class="anchor" id="autotoc_md226"></a>
 Please</h1>
 <p>I was playing around with PLEASE to send operator messages to the RSTS/E spooler utilities, in the small hours. I've been thinking about writing a Groovy app to capture these messages. The app could convert them to Log4J2 messages, to be displayed and filtered by standard tools. e.g. <a href="https://logging.apache.org/chainsaw">Apache Chainsaw</a> or an Atom plugin. The app could also display messages directly. Returning to this now I see that there's an Operator Services Console (OSC), which defaults to KB0:, i.e. a serial line. More operators can be added, as KB/PPN combinations, but that only works if those accounts are logged in. Obviously I don't want to have KB0: locked out by an app. I'd have to add another KB: to telnet, if I haven't done so already, and change the OSC to that. If I want the app to also send commands then it might then it might need a separate telnet KB: to avoid issues with asynchronous message delivery from OPSER. I'll need to experiment with this. DZ11 lines can be connected to a TCP/IP port using the attach command. The simulator can also log traffic on DZ11 lines.</p>
-<h1><a class="anchor" id="autotoc_md225"></a>
+<h1><a class="anchor" id="autotoc_md227"></a>
 HSQLDB, BASIC-PLUS &amp; Activity Tracking</h1>
 <p>I've been messing around with an <code>activities.csv</code> file using HSQLDB's <a href="http://hsqldb.org/doc/2.0/guide/texttables-chapt.html">Text Tables</a> and, most recently, in BASIC-PLUS. I need to spend more time on fun coding stuff. HSQLDB Text Tables look like a very interesting way to access CSV data.</p>
 <p>For activity tracking all I really need is a couple of simple tables and some reports. I had that working in Libre Office Base, but that app is unusable due to reliability issues. It would be really easy to get that working again in Microsoft Access, and it would be rock solid. But I'd like a solution that's not dependent on an annual "rental" fee. (Though I regard Office 365 as essentially "free". I pay for OneDrive, Office is a very nice bonus.) The real goal is to move my two photography databases over to apps that don't depend on Office 365. The Activity Tracking project is, effectively, a proof of concept. Mirroring the Activity Tracking app on RSTS/E is a bit of a distraction; might be best to drop that for the moment.</p>
@@ -88,7 +88,7 @@ title="@terry_ebdon" href="https://twitter.com/@terry_ebdon">twitter.</a> </p>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Jun 11 2020 23:15:40 for Developer&#39;s Diary by
+    <li class="footer">Generated on Fri Jun 12 2020 15:30:30 for Developer&#39;s Diary by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.18 </li>
   </ul>

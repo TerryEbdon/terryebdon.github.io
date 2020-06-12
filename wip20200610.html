@@ -58,8 +58,8 @@ $(document).ready(function(){initNavTree('wip20200610.html',''); initResizable()
 <div class="contents">
 <div class="toc"><h3>Table of Contents</h3>
 <ul><li class="level1"><a href="#h20200610">Random</a></li>
-<li class="level1"><a href="#autotoc_md273">Loading the users</a><ul><li class="level2"><a href="#autotoc_md274">Generate email address</a></li>
-<li class="level2"><a href="#autotoc_md275">Infer date of birth</a></li>
+<li class="level1"><a href="#autotoc_md275">Loading the users</a><ul><li class="level2"><a href="#autotoc_md276">Generate email address</a></li>
+<li class="level2"><a href="#autotoc_md277">Infer date of birth</a></li>
 </ul>
 </li>
 </ul>
@@ -85,7 +85,7 @@ Random</h1>
 <div class="line">Kimberly,Harris,18,k.harris@example.com</div>
 <div class="line">...</div>
 </div><!-- fragment --><p>The file has a fatal flaw, RANDAT has allocated the same email address to several users. The final Boostrap code has to infer the date of birth and generate a new email address. In retrospect I should have used RANDAT for just the name fields and added everything else myself, it would have been faster and simpler.</p>
-<h1><a class="anchor" id="autotoc_md273"></a>
+<h1><a class="anchor" id="autotoc_md275"></a>
 Loading the users</h1>
 <div class="fragment"><div class="line"><span class="keyword">private</span> loadRandomUsers() {</div>
 <div class="line">  println <span class="stringliteral">&quot;Begin loading random users.&quot;</span></div>
@@ -108,12 +108,12 @@ Loading the users</h1>
 <div class="line">  }</div>
 <div class="line">  println <span class="stringliteral">&quot;End loading random users.&quot;</span></div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md274"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md276"></a>
 Generate email address</h2>
 <div class="fragment"><div class="line"><span class="keyword">private</span> String emailAddress( String first, String last ) {</div>
 <div class="line">  <span class="stringliteral">&quot;${first}.${last}@example.com&quot;</span></div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md275"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md277"></a>
 Infer date of birth</h2>
 <p>The user table has to include children to test the app. Four years is subtracted from the age to force some kids into the dataset. The final ages will be in the range 14 to 26.</p>
 <div class="fragment"><div class="line"><span class="keyword">private</span> birthDateFromAge( def age ) {</div>
@@ -136,7 +136,7 @@ title="@terry_ebdon" href="https://twitter.com/@terry_ebdon">twitter.</a> </p>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Jun 11 2020 23:15:42 for Developer&#39;s Diary by
+    <li class="footer">Generated on Fri Jun 12 2020 15:30:31 for Developer&#39;s Diary by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.18 </li>
   </ul>

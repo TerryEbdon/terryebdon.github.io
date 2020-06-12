@@ -57,19 +57,19 @@ $(document).ready(function(){initNavTree('wip20200213.html',''); initResizable()
 </div><!--header-->
 <div class="contents">
 <div class="toc"><h3>Table of Contents</h3>
-<ul><li class="level1"><a href="#autotoc_md229">Conversion</a></li>
-<li class="level1"><a href="#autotoc_md230">PlantUML debugging</a></li>
+<ul><li class="level1"><a href="#autotoc_md231">Conversion</a></li>
+<li class="level1"><a href="#autotoc_md232">PlantUML debugging</a></li>
 </ul>
 </div>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>Terry Ebdon</dd></dl>
 <p><a class="anchor" id="h20200213"></a> </p>
-<h1><a class="anchor" id="autotoc_md229"></a>
+<h1><a class="anchor" id="autotoc_md231"></a>
 Conversion</h1>
 <p>I started migrating the PostProd project from WebDoxy to native Doxygen. I'm creating a new <code>Doxyfile.</code> but haven't tested it yet. It's slightly complicated by having the project's markdown in the 'WebDoxy Projects' Git repo. I'll leave everything in place … actually that shouldn't be a problem, I just need to use a relative path; up then down into the various common folders &ndash; should be fairly simple. I want to get the PostProd project working before I start developing Groovy + HSQLDB versions of <code>Zoo.zccdb</code> and <code>Project Tasks.accdb</code>, as my workflow and some technical documentation is in that project. It's effectively a combined tech spec and user guide.</p>
 <p>I downloaded PlantUML 1.2020.0 and regenerated PostProd with WebDoxy. PlantUML diagrams still appear as place holders. A build of PostProd <em>without</em> WebDoxy has the same problem of missing images. This might indicate a path issue, as I've previously fixed this problem, for journal project, by dropping WebDoxy and moving to a new folder.</p>
 <p>If I move the HTML output to a subfolder of the current project then images <b>are</b> generated, providing it's not more than one level down. e.g. <code>output = HTML</code> works but <code>output = HTML/PostProd</code> does <em>not</em> work.</p>
 <p>The Doxygen / PlantUML issue is very weird. The earlier fix allows diagrams that do <em>not</em> use <code>!include</code> to work. Doxygen copies the PlantUML code, e.g. diagram.pu, into the output folder and runs PlantUML in that folder. This causes the current path to change. But I expect that and have previously used a chain of <code>../..</code> etc. in the include commands. I had to change the relative paths to account for moving the output folder. But the includes have become unreliable.</p>
-<h1><a class="anchor" id="autotoc_md230"></a>
+<h1><a class="anchor" id="autotoc_md232"></a>
 PlantUML debugging</h1>
 <p>PlantUML now supports <code>!log</code> commands and has a built in functions to access the current directory and check if a file exists. I used these to confirm the current folder and file and to check that the include target exists. Everything looked good, but the <code>!include</code> command can't always load the file. I fixed that by using <code>%dirpath()/../..</code>. This works but should be no different to omitting the function call. Also Doxygen sometimes doesn't try to call PlantUML at all. That's due to a cache file being present.</p>
 <div class="fragment"><div class="line">DevDiary\output&gt; dir</div>
@@ -102,7 +102,7 @@ title="@terry_ebdon" href="https://twitter.com/@terry_ebdon">twitter.</a> </p>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Jun 11 2020 23:15:40 for Developer&#39;s Diary by
+    <li class="footer">Generated on Fri Jun 12 2020 15:30:30 for Developer&#39;s Diary by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.18 </li>
   </ul>

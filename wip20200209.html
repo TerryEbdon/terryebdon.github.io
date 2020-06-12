@@ -57,12 +57,12 @@ $(document).ready(function(){initNavTree('wip20200209.html',''); initResizable()
 </div><!--header-->
 <div class="contents">
 <div class="toc"><h3>Table of Contents</h3>
-<ul><li class="level1"><a href="#autotoc_md220">HSQLDB text tables working</a></li>
-<li class="level1"><a href="#autotoc_md221">Book scanner</a></li>
+<ul><li class="level1"><a href="#autotoc_md222">HSQLDB text tables working</a></li>
+<li class="level1"><a href="#autotoc_md223">Book scanner</a></li>
 </ul>
 </div>
 <div class="textblock"><p><a class="anchor" id="h20200209"></a> </p>
-<h1><a class="anchor" id="autotoc_md220"></a>
+<h1><a class="anchor" id="autotoc_md222"></a>
 HSQLDB text tables working</h1>
 <p>I can now connect to an existing CSV file, that has been edited by SCITE, and pick up the data correctly. There were several issues:</p>
 <ol type="1">
@@ -72,7 +72,7 @@ HSQLDB text tables working</h1>
 </ol>
 <p>This is good progress. Issue 1 is annoying. I'm assuming it's due to HSQLDB rather than the <a href="http://squirrel-sql.sourceforge.net/">SQuirreL SQL Client</a>, but that implies significant error in the HSQLDB documentation. Maybe there's a version mismatch between the HSQLDB version and the documentation version.</p>
 <p>The HSQLDB app folder contains HTML and PDF documentation for V2.5, i.e. more recent than the V2 online document that I'd been using. But it also claims the header is ignored by default. Could it be that HSQLDB is not viewing the files as CSV? Seems unlikely as the text file handling is very generic. I'll have to look for some examples and see how they behave in SQuirreL and the supplied HSQLDB utilities.</p>
-<h1><a class="anchor" id="autotoc_md221"></a>
+<h1><a class="anchor" id="autotoc_md223"></a>
 Book scanner</h1>
 <p>It occurred to me that my book scanner should work with Windows 7. It doesn't work with Windows 10. I have two Windows 7 machines that I can try it with. Slight problem: I couldn't find power supply unit when I last looked. Pretty sure it's a 12 V PSU, but I'd prefer to use the original one if possible.</p>
 <p>I remembered there was a plug-top PSU in the hall. It's a 12 volt supply with a coaxial connector that fits the book scanner. But why would the PSU have been in the hall, and why does it have a two pin, German, plug? It was too good to be true &ndash; the scanner needs <em>15 volts</em>, not 12 volts! I accidently gave the scanner a bit of "slam" when propping it up in its crate. The scanning head is locked, so hopefully it will be OK.</p>
@@ -93,7 +93,7 @@ title="@terry_ebdon" href="https://twitter.com/@terry_ebdon">twitter.</a> </p>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Jun 11 2020 23:15:40 for Developer&#39;s Diary by
+    <li class="footer">Generated on Fri Jun 12 2020 15:30:30 for Developer&#39;s Diary by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.18 </li>
   </ul>

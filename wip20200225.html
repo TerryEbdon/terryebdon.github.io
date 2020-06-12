@@ -57,33 +57,33 @@ $(document).ready(function(){initNavTree('wip20200225.html',''); initResizable()
 </div><!--header-->
 <div class="contents">
 <div class="toc"><h3>Table of Contents</h3>
-<ul><li class="level1"><a href="#autotoc_md241">GitHub import tool</a></li>
-<li class="level1"><a href="#autotoc_md242">BitBucket / GitHub issue migration</a></li>
-<li class="level1"><a href="#autotoc_md243">OSDN</a></li>
-<li class="level1"><a href="#autotoc_md244">GitHub Desktop</a></li>
-<li class="level1"><a href="#autotoc_md245">Imports</a></li>
-<li class="level1"><a href="#autotoc_md246">GitHub Problems</a></li>
-<li class="level1"><a href="#autotoc_md247">Repo Migration Complete</a></li>
+<ul><li class="level1"><a href="#autotoc_md243">GitHub import tool</a></li>
+<li class="level1"><a href="#autotoc_md244">BitBucket / GitHub issue migration</a></li>
+<li class="level1"><a href="#autotoc_md245">OSDN</a></li>
+<li class="level1"><a href="#autotoc_md246">GitHub Desktop</a></li>
+<li class="level1"><a href="#autotoc_md247">Imports</a></li>
+<li class="level1"><a href="#autotoc_md248">GitHub Problems</a></li>
+<li class="level1"><a href="#autotoc_md249">Repo Migration Complete</a></li>
 </ul>
 </div>
 <div class="textblock"><p><a class="anchor" id="h20200225"></a> </p>
-<h1><a class="anchor" id="autotoc_md241"></a>
+<h1><a class="anchor" id="autotoc_md243"></a>
 GitHub import tool</h1>
 <p>I discovered that GitHub has a tool to import repositories from other services. This includes BitBucket Mercurial repos! There's also a script to migrate BitBucket issues to GitHub issues.</p>
-<h1><a class="anchor" id="autotoc_md242"></a>
+<h1><a class="anchor" id="autotoc_md244"></a>
 BitBucket / GitHub issue migration</h1>
 <p>Installed Python 3 on my HP Desktop, as it's required by the <a href="https://github.com/jeffwidman/bitbucket-issue-migration">Bitbucket Issues Migration script</a>. I had some problems using this tool, but got there in the end. Due to my GitHub authentication setup I can't enter my passphrase at the tool's prompt. Instead I have to generate a GitHub Personal Access Token and use that. This failed; the migration script couldn't login. It needed more permissions, though this wasn't obvious from the 404 error it reported. Regenerating the P.A.T got it working. This <em>is</em> mentioned in the migration script's <a href="https://github.com/jeffwidman/bitbucket-issue-migration#bitbucket-issues-migration">README.md</a>, but could be more prominent. (Hard to blame them though!) I used the tool to migrate issues for WebDoxy and MindTools. It's not perfect, e.g. the auto-close messages don't tie the commit to the issue with a URL, as they did on BitBucket.</p>
-<h1><a class="anchor" id="autotoc_md243"></a>
+<h1><a class="anchor" id="autotoc_md245"></a>
 OSDN</h1>
 <p>I wasted a lot of time trying to get OSDN working with Hg before discovering GitHub's import facility. <a href="https://osdn.net/">OSDN</a> does look very interesting, but it's also very confusing. OSDN requires an SSH key to use Mercurial. It does not have a web interface for committing changes to repos, though it may have that feature on its "chambers". I haven't played with chambers yet.</p>
 <p>I followed the GitHub instructions to generate an SSH key pair and add the public key to GitHub, i.e. <em>not</em> to OSDN. I then used OSDN's Key Import feature to import the key from GitHub. A roundabout way to do it, but far less confusing than following OSDN's instructions. In retrospect I'm sure I could have just pasted the key into OSDN. I still haven't got OSDN configured as a remote repo. With GitHub and BitBucket I can copy the repository URL and clone the repo. OSDN does show a URL but it doesn't let me copy it. I tried using the "F12" , developer screen, to copy the link but it didn't work for me. I suspect this is because I was trying to add it to an existing local repo as a second remote, instead of cloning the repo. But the second remote, with a commit hook to commit to both, should have worked. At least according to the Stack Exchange posting I "stole" the idea from. Also why is the URL greyed out and copy protected on the OSDN web interface? Very odd.</p>
-<h1><a class="anchor" id="autotoc_md244"></a>
+<h1><a class="anchor" id="autotoc_md246"></a>
 GitHub Desktop</h1>
 <p>I downloaded and installed GitHub Desktop. This is a 64-bit only tool, so will not work on my old MSI Wind U200. It's nice to have all the options available though.</p>
-<h1><a class="anchor" id="autotoc_md245"></a>
+<h1><a class="anchor" id="autotoc_md247"></a>
 Imports</h1>
 <p>I imported my "Dev Diary" blog repository into GitHub, from BitBucket. The source was a private repo, so GitHub prompted me for credentials. Nice! I then migrated the issues for that repo, there was only one. The commit that closed the issue does link to the issue. Interesting.</p>
-<h1><a class="anchor" id="autotoc_md246"></a>
+<h1><a class="anchor" id="autotoc_md248"></a>
 GitHub Problems</h1>
 <p>GitHub gave me an error when I tried to import OwToMarkDown from BitBucket. But the new repo <em>has</em> been created, with files and history. It's a small repository so I manually compared the history, for all five commits, and it looks perfect. I then tried importing the WebAdmin project, and things went downhill. I got an HTTP 500 error during import. The new repo exists but clicking on its name causes GitHub to prompt for my BitBucket credentials. Enter them and a 500 error appears. Checking the <a href="https://www.githubstatus.com/">GitHub status page</a> I see they're "experiencing an increased error rate".</p>
 <div class="image">
@@ -93,7 +93,7 @@ GitHub Problems</h1>
 <div class="image">
 <img src="2020-02-25_GitHub_fixed.png" alt=""/>
 </div>
- <h1><a class="anchor" id="autotoc_md247"></a>
+ <h1><a class="anchor" id="autotoc_md249"></a>
 Repo Migration Complete</h1>
 <p>Migration of all remaining repositories went smoothly. There's one repo that doesn't, yet, have it's single issue migrated. Once that's done I'll clone the repos to my HP Desktop and try building the ones I care about.</p>
 <p> 
@@ -113,7 +113,7 @@ title="@terry_ebdon" href="https://twitter.com/@terry_ebdon">twitter.</a> </p>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Jun 11 2020 23:15:40 for Developer&#39;s Diary by
+    <li class="footer">Generated on Fri Jun 12 2020 15:30:30 for Developer&#39;s Diary by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.18 </li>
   </ul>

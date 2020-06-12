@@ -57,15 +57,15 @@ $(document).ready(function(){initNavTree('wip20200603.html',''); initResizable()
 </div><!--header-->
 <div class="contents">
 <div class="toc"><h3>Table of Contents</h3>
-<ul><li class="level1"><a href="#h20200603">Simplification</a><ul><li class="level2"><a href="#autotoc_md271">Weekly vs daily configuration</a></li>
+<ul><li class="level1"><a href="#h20200603">Simplification</a><ul><li class="level2"><a href="#autotoc_md273">Weekly vs daily configuration</a></li>
 </ul>
 </li>
-<li class="level1"><a href="#autotoc_md272">Config sequencing</a></li>
+<li class="level1"><a href="#autotoc_md274">Config sequencing</a></li>
 </ul>
 </div>
 <div class="textblock"><h1><a class="anchor" id="h20200603"></a>
 Simplification</h1>
-<h2><a class="anchor" id="autotoc_md271"></a>
+<h2><a class="anchor" id="autotoc_md273"></a>
 Weekly vs daily configuration</h2>
 <p>A project will be either be page-per-day or week-per-day. In WebDoxy version 1.0.0 the <code>--journal</code> option adds new pages to the project. I've been assuming that weekly pages would be added via a new <code>--week</code> option. That seems redundant. If it's a weekly project then it has to have weekly pages, there should be no need for a specific option.</p>
 <p>e.g. The following command should be sufficient to add today's page to the MyDaily project and this week's page to the MyWeekly project: </p><pre class="fragment">groovy WebDoxy.groovy --journal MyDaily MyWeekly
@@ -80,7 +80,7 @@ Weekly vs daily configuration</h2>
 <div class="line">    }</div>
 <div class="line">  }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md272"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md274"></a>
 Config sequencing</h1>
 <p>WebDoxy executes actions against one or more projects mentioned in the command arguments. If no projects are specified then the actions are performed on the default project list.</p>
 <div class="fragment"><div class="line"><span class="keywordflow">if</span> ( options.project ) {</div>
@@ -107,7 +107,7 @@ title="@terry_ebdon" href="https://twitter.com/@terry_ebdon">twitter.</a> </p>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Jun 11 2020 23:15:42 for Developer&#39;s Diary by
+    <li class="footer">Generated on Fri Jun 12 2020 15:30:31 for Developer&#39;s Diary by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.18 </li>
   </ul>

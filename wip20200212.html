@@ -57,22 +57,22 @@ $(document).ready(function(){initNavTree('wip20200212.html',''); initResizable()
 </div><!--header-->
 <div class="contents">
 <div class="toc"><h3>Table of Contents</h3>
-<ul><li class="level1"><a href="#autotoc_md226">Good enough</a></li>
-<li class="level1"><a href="#autotoc_md227">Zoo project</a></li>
-<li class="level1"><a href="#autotoc_md228">PostProd project</a></li>
+<ul><li class="level1"><a href="#autotoc_md228">Good enough</a></li>
+<li class="level1"><a href="#autotoc_md229">Zoo project</a></li>
+<li class="level1"><a href="#autotoc_md230">PostProd project</a></li>
 </ul>
 </div>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>Terry Ebdon</dd></dl>
 <p><a class="anchor" id="h20200212"></a> </p>
-<h1><a class="anchor" id="autotoc_md226"></a>
+<h1><a class="anchor" id="autotoc_md228"></a>
 Good enough</h1>
 <p>My very simple HSQLDB with Groovy code is good enough as a "reporting
 proof-of-concept". The next step is to back up my Microsoft Access databases then split one of them so that it uses a HSQLDB database for data. If that works OK, with an MS Access front-end and HSQLDB back-end, then I can start writing some Groovy code to replace the forms and reports The Zoo database, that's used to generate Auto Hot-Key scripts, is probably the simplest front-end to replicate.</p>
-<h1><a class="anchor" id="autotoc_md227"></a>
+<h1><a class="anchor" id="autotoc_md229"></a>
 Zoo project</h1>
 <p>I ran up the <code>zoo.accdb</code> Access project. It's surprisingly nice, I'd forgotten how much effort I'd put into this. It fails when I enter the <em>Create Photo Shoot</em> screen due to a missing COM component. That's because I haven't used the Zoo app on the HP Desktop before, I've always used my Surface Pro 2. It just needs a reference added for the MS Date control.</p>
 <p>Microsoft Access can export tables to an ODBC database. HSQLDB can work with the <a href="https://odbc.postgresql.org/">PostgreSQL ODBC Driver</a>. I still prefer using CSV files to transfer data, as it gives me a backup file that be put under version control and provide useful diffs.</p>
-<h1><a class="anchor" id="autotoc_md228"></a>
+<h1><a class="anchor" id="autotoc_md230"></a>
 PostProd project</h1>
 <p>Took a look at my PostProd project, which includes documentation for the above MS Access projects. The HTML was generated on 15-JAN-2020 but all image files are missing. Is this due to the Doxygen / WebDoxy conflict? I'll regenerate it and check for Doxygen updates.</p>
 <p>Rebuilding PostProd gives the same results. I'm using Doxygen version 1.8.16. A later version, 1.8.17, was released on 27-DEC-2019. I'll give that a try.</p>
@@ -94,7 +94,7 @@ title="@terry_ebdon" href="https://twitter.com/@terry_ebdon">twitter.</a> </p>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Jun 11 2020 23:15:40 for Developer&#39;s Diary by
+    <li class="footer">Generated on Fri Jun 12 2020 15:30:30 for Developer&#39;s Diary by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.18 </li>
   </ul>

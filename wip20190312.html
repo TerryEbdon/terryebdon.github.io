@@ -57,32 +57,32 @@ $(document).ready(function(){initNavTree('wip20190312.html',''); initResizable()
 </div><!--header-->
 <div class="contents">
 <div class="toc"><h3>Table of Contents</h3>
-<ul><li class="level1"><a href="#autotoc_md189">Reducing JaCoCo impact on build times</a><ul><li class="level2"><a href="#autotoc_md190">Without JaCoCo</a></li>
-<li class="level2"><a href="#autotoc_md191">With JaCoCo</a></li>
+<ul><li class="level1"><a href="#autotoc_md191">Reducing JaCoCo impact on build times</a><ul><li class="level2"><a href="#autotoc_md192">Without JaCoCo</a></li>
+<li class="level2"><a href="#autotoc_md193">With JaCoCo</a></li>
 </ul>
 </li>
-<li class="level1"><a href="#autotoc_md192">Today&#39;s progress</a></li>
+<li class="level1"><a href="#autotoc_md194">Today&#39;s progress</a></li>
 </ul>
 </div>
 <div class="textblock"><p><a class="anchor" id="h20190312"></a></p>
-<h1><a class="anchor" id="autotoc_md189"></a>
+<h1><a class="anchor" id="autotoc_md191"></a>
 Reducing JaCoCo impact on build times</h1>
 <p>I added the <a href="https://docs.gradle.org/current/userguide/jacoco_plugin.html">JaCoCo plugin</a> to the build to address <a href="https://github.com/TerryEbdon/Trk21/issues/19">issue #19</a>, "report test coverage". While this works well it is extremely slow. This is apparently due to the instrumentation and analysis (particularly the latter), even when a HTML report is <b>not</b> generated.</p>
-<h2><a class="anchor" id="autotoc_md190"></a>
+<h2><a class="anchor" id="autotoc_md192"></a>
 Without JaCoCo</h2>
 <div class="fragment"><div class="line">C:\projects\Trk21&gt;gradlew test --rerun-tasks</div>
 <div class="line"> </div>
 <div class="line">&gt; Task :test</div>
 <div class="line">BUILD SUCCESSFUL in 55s</div>
 <div class="line">5 actionable tasks: 5 executed</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md191"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md193"></a>
 With JaCoCo</h2>
 <div class="fragment"><div class="line">C:\projects\Trk21&gt;gradlew test --rerun-tasks</div>
 <div class="line"> </div>
 <div class="line">&gt; Task :test</div>
 <div class="line">BUILD SUCCESSFUL in 2m 7s</div>
 <div class="line">5 actionable tasks: 5 executed</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md192"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md194"></a>
 Today's progress</h1>
 <ul>
 <li>Initial commit for enhancement #4 Torpedo fire <a href="https://github.com/TerryEbdon/Trk21/commit/0e471b4">0e471b4</a></li>
@@ -107,7 +107,7 @@ title="@terry_ebdon" href="https://twitter.com/@terry_ebdon">twitter.</a> </p>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Jun 11 2020 23:15:39 for Developer&#39;s Diary by
+    <li class="footer">Generated on Fri Jun 12 2020 15:30:29 for Developer&#39;s Diary by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.18 </li>
   </ul>

@@ -57,18 +57,18 @@ $(document).ready(function(){initNavTree('wip20200210.html',''); initResizable()
 </div><!--header-->
 <div class="contents">
 <div class="toc"><h3>Table of Contents</h3>
-<ul><li class="level1"><a href="#autotoc_md222">Scriptom</a></li>
-<li class="level1"><a href="#autotoc_md223">RSTS/E</a></li>
+<ul><li class="level1"><a href="#autotoc_md224">Scriptom</a></li>
+<li class="level1"><a href="#autotoc_md225">RSTS/E</a></li>
 </ul>
 </div>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>Terry Ebdon</dd></dl>
 <p><a class="anchor" id="h20200210"></a> </p>
-<h1><a class="anchor" id="autotoc_md222"></a>
+<h1><a class="anchor" id="autotoc_md224"></a>
 Scriptom</h1>
 <p>Three and a half years ago I was experimenting with using PowerPoint to create screencast videos. I found one of them, last night, that used Scriptom. This is clearly a test video, and kind of interesting. It did remind me that I never got Scriptom working. Scriptom is a Groovy wrapper around JACOB, the Java COM Bridge. I had another try, using an updated @Grab statement. It still fails to find JACOB's jar on the path. I'm tempted to try with Gradle.</p>
 <p>JACOB is a bridge to COM, thus it has a DLL component. The error is due to the DLL not being on the path. Having enabled Grapes logging, at level 4, I can see the DLL is being pulled down. But its name doesn't include "X64". Looks like Grapes is grabbing the 32-bit version despite running on 64-bit Windows 10. Java looks for a JACOB DLL that includes the version No. and bit size. JACOBV19.DLL doesn't work, as it's not found. I dug out the "correct", 12 years old, version from SourceForge. This tries to run, but fails with a Windows access violation (error 5).</p>
 <p>Apparently SCRIPTOM is an optional component in the Groovy Windows installer. I'm using a portable version of Groovy 2.5.8, so no installer was involved. The most recent commit to SCRIPTOM's GitHub repository is from July 2015. The <code>build.gradle</code> file mentions JACOB 1.14.3, which is the same version my @Grab of SCRIPTOM uses. My SCRIPTOM is 1.6; looks like the latest version is 1.61. Will that point release fix the problem? The latest SCRIPTOM targets Groovy 1.8.</p>
-<h1><a class="anchor" id="autotoc_md223"></a>
+<h1><a class="anchor" id="autotoc_md225"></a>
 RSTS/E</h1>
 <p>I tried firing up my emulated PDP-11 with <code>run.cmd</code>. It gets errors due to PuTTY not being installed. Not surprising, as all my development for the <a href="https://github.com/TerryEbdon/RSTS">RSTS</a> project was on my Surface Pro 2, while away from home. I am running the latest version of <a href="https://github.com/simh/simh">simh</a>, which to be stable. i.e. new releases are infrequent.</p>
 <p>I downloaded <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/">PuTTY</a> 32-bit, 64-bit and the documentation. I downloaded the zipped versions, not the MSIs, as PuTTY can run as a standalone app. It's quite small so I copied it to the RSTS project folder, then spent some time playing with RSTS/E via a PuTTY console. The lack of command line editing is irritating.</p>
@@ -94,7 +94,7 @@ title="@terry_ebdon" href="https://twitter.com/@terry_ebdon">twitter.</a> </p>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Jun 11 2020 23:15:40 for Developer&#39;s Diary by
+    <li class="footer">Generated on Fri Jun 12 2020 15:30:30 for Developer&#39;s Diary by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.18 </li>
   </ul>

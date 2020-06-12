@@ -57,16 +57,16 @@ $(document).ready(function(){initNavTree('wip20190309.html',''); initResizable()
 </div><!--header-->
 <div class="contents">
 <div class="toc"><h3>Table of Contents</h3>
-<ul><li class="level1"><a href="#autotoc_md176">Separate log configurations for test and main.</a></li>
-<li class="level1"><a href="#autotoc_md178">Slow test</a></li>
+<ul><li class="level1"><a href="#autotoc_md178">Separate log configurations for test and main.</a></li>
+<li class="level1"><a href="#autotoc_md180">Slow test</a></li>
 </ul>
 </div>
 <div class="textblock"><p><a class="anchor" id="h20190309"></a> </p>
-<h1><a class="anchor" id="autotoc_md176"></a>
+<h1><a class="anchor" id="autotoc_md178"></a>
 Separate log configurations for test and main.</h1>
 <p>Changing log levels has a dramatic effect on the run time of a <code>gradle check</code> command. e.g. on an old &amp; slow laptop it can vary between 28 seconds, at ERROR level, and over 4 minutes, at TRACE level. Separating the test and main log configuration will resolve this.</p>
 <p>Log performance and noisiness should also need to be reviewed. It'd be better to use common logging configuration between test and main where possible.</p>
-<h1><a class="anchor" id="autotoc_md178"></a>
+<h1><a class="anchor" id="autotoc_md180"></a>
 Slow test</h1>
 <p>The test for <code>TrekCalendarTest.testTick()</code> is very slow. It just adds one to an integer and checks the result against <code>TrekCalendar.tick()</code>. Why does a simple test, involving only integer addition and comparison, take nearly 3.5 seconds to run?</p>
 <p><img src="https://user-images.githubusercontent.com/47636739/54072636-5a979080-4275-11e9-9588-3f1606f719eb.png" alt="image" class="inline"/></p>
@@ -89,7 +89,7 @@ title="@terry_ebdon" href="https://twitter.com/@terry_ebdon">twitter.</a> </p>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Jun 11 2020 23:15:39 for Developer&#39;s Diary by
+    <li class="footer">Generated on Fri Jun 12 2020 15:30:28 for Developer&#39;s Diary by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.18 </li>
   </ul>

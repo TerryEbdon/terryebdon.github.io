@@ -57,23 +57,23 @@ $(document).ready(function(){initNavTree('wip20200216.html',''); initResizable()
 </div><!--header-->
 <div class="contents">
 <div class="toc"><h3>Table of Contents</h3>
-<ul><li class="level1"><a href="#autotoc_md231">RSTS/E Batch jobs</a></li>
-<li class="level1"><a href="#autotoc_md232">Doxygen working</a></li>
-<li class="level1"><a href="#autotoc_md233">SALT fixed</a></li>
-<li class="level1"><a href="#autotoc_md234">PostProd repo</a></li>
+<ul><li class="level1"><a href="#autotoc_md233">RSTS/E Batch jobs</a></li>
+<li class="level1"><a href="#autotoc_md234">Doxygen working</a></li>
+<li class="level1"><a href="#autotoc_md235">SALT fixed</a></li>
+<li class="level1"><a href="#autotoc_md236">PostProd repo</a></li>
 </ul>
 </div>
 <div class="textblock"><p><a class="anchor" id="h20200216"></a> </p>
-<h1><a class="anchor" id="autotoc_md231"></a>
+<h1><a class="anchor" id="autotoc_md233"></a>
 RSTS/E Batch jobs</h1>
 <p>Spent some time last night reading the RSTS/E V7.0 System User's Guide, to remind myself how batch queues work. I'm thinking about how RSTS/E jobs can cooperate with an app on the host system. Batch jobs aren't the best way to use a RSTS/E system, but it will do as a proof of concept. My idea boils down to a host app that acts as a remote job entry system for a RSTS/E batch queue. The fly in the ointment is communication between the emulated RSTS/E job and the app running on the host. I can't use message send / receive SYS calls on the host. File based messaging is better, but the PDP-11 emulator locks attached files. I need the host app to talk to the RSTS/E job and <em>and</em> the PDP-11 emulator. I also want to avoid using Auto Hot Key or other host-specific tools. My current idea is for the RSTS/E job to trigger an emulator script to attach / detach files and tell the job when they're available. The host app then becomes very simple, it just reads and writes files. I need to diagram this, maybe using state machines.</p>
-<h1><a class="anchor" id="autotoc_md232"></a>
+<h1><a class="anchor" id="autotoc_md234"></a>
 Doxygen working</h1>
 <p>After a lot of experimentation I have Doxygen working correctly with PlantUML again, without having to use paths in PlantUML's <code>!include</code> statements. Part of the problem is that PlantUML's <code>%file-exists()</code> function lied to me. This was very confusing when trying to debug the issue. I have everything working in a simple test project that does not use WebDoxy. I'll try to reuse this configuration in my PostProd documentation project, which currently bypasses WebDoxy. PostProd works fine with some minor changes. The important change is to add a PlantUML include folder, relative to the project root, into <code>Doxyfile</code>. I configured the existing include folder as the PlantUML include directory. There are two missing diagrams remaining, both using SALT.</p>
-<h1><a class="anchor" id="autotoc_md233"></a>
+<h1><a class="anchor" id="autotoc_md235"></a>
 SALT fixed</h1>
 <p>The SALT issues were due to an error on my part. I had <code>@startuml</code> followed by a <code>@startsalt</code> command. That's wrong, the <code>@startsalt</code> / <code>@endsalt</code> pair is an alternative to <code>@startuml</code> / <code>@enduml</code>, not in addition to it. The embedded SALT description is then started with <code>salt</code>.</p>
-<h1><a class="anchor" id="autotoc_md234"></a>
+<h1><a class="anchor" id="autotoc_md236"></a>
 PostProd repo</h1>
 <p>PostProd is excluded from version control by the <code>.gitignore</code> file. This seems like a good time to move it into a stand-alone folder and create a Git project for it.</p>
 <p> 
@@ -93,7 +93,7 @@ title="@terry_ebdon" href="https://twitter.com/@terry_ebdon">twitter.</a> </p>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Jun 11 2020 23:15:40 for Developer&#39;s Diary by
+    <li class="footer">Generated on Fri Jun 12 2020 15:30:30 for Developer&#39;s Diary by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.18 </li>
   </ul>

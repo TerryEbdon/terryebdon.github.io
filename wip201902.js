@@ -1,6 +1,6 @@
 var wip201902 =
 [
-    [ "February, 2019", "wip201902.html#autotoc_md164", null ],
+    [ "February, 2019", "wip201902.html#autotoc_md166", null ],
     [ "11-FEB-2019 Resurrection", "wip20190211.html", [
       [ "Monday Web site resurrection", "wip20190211.html#autotoc_md140", null ],
       [ "Trek to do:", "wip20190211.html#autotoc_md141", null ],
@@ -48,7 +48,10 @@ var wip201902 =
     ] ],
     [ "27-Feb-2019 Trk21 Phaser Enhancement", "wip20190227.html", [
       [ "Fire Phasers", "wip20190227.html#h20190227", [
-        [ "Attack and counter-attack", "wip20190227.html#autotoc_md163", null ]
+        [ "Attack and counter-attack", "wip20190227.html#autotoc_md163", [
+          [ "Phaser attack on the enemy fleet", "wip20190227.html#autotoc_md164", null ],
+          [ "The enemy fleet retaliates.", "wip20190227.html#autotoc_md165", null ]
+        ] ]
       ] ]
     ] ]
 ];

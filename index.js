@@ -35,5 +35,11 @@ var index =
           [ "Don't save", "wip20200612.html#h2020-06-12_save_not_required", null ]
         ] ]
       ] ]
+    ] ],
+    [ "13-JUN-2020 Grails Secured", "wip20200613.html", [
+      [ "Spring works", "wip20200613.html#h20200613", null ],
+      [ "Log off", "wip20200613.html#autotoc_md285", null ],
+      [ "The GSP has it", "wip20200613.html#autotoc_md286", null ],
+      [ "Page protection", "wip20200613.html#autotoc_md287", null ]
     ] ]
 ];

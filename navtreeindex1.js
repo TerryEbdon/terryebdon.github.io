@@ -148,5 +148,10 @@ var NAVTREEINDEX1 =
 "wip20200612.html#autotoc_md283":[0,6,0,1,1],
 "wip20200612.html#autotoc_md284":[0,6,0,1,2],
 "wip20200612.html#h2020-06-12_save_not_required":[0,6,0,1,3],
-"wip20200612.html#h20200612":[0,6,0]
+"wip20200612.html#h20200612":[0,6,0],
+"wip20200613.html":[0,7],
+"wip20200613.html#autotoc_md285":[0,7,1],
+"wip20200613.html#autotoc_md286":[0,7,2],
+"wip20200613.html#autotoc_md287":[0,7,3],
+"wip20200613.html#h20200613":[0,7,0]
 };

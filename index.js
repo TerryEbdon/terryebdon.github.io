@@ -25,7 +25,7 @@ var index =
         [ "Hunting the demon", "wip20200611.html#autotoc_md279", null ]
       ] ]
     ] ],
-    [ "12-JUN-2020 Grails Security", "wip20200612.html", [
+    [ "12-Jun-2020 Grails Security", "wip20200612.html", [
       [ "Spring", "wip20200612.html#h20200612", [
         [ "Logout", "wip20200612.html#autotoc_md280", null ],
         [ "User Roles", "wip20200612.html#autotoc_md281", [
@@ -36,10 +36,13 @@ var index =
         ] ]
       ] ]
     ] ],
-    [ "13-JUN-2020 Grails Secured", "wip20200613.html", [
+    [ "13-Jun-2020 Grails Secured", "wip20200613.html", [
       [ "Spring works", "wip20200613.html#h20200613", null ],
       [ "Log off", "wip20200613.html#autotoc_md285", null ],
       [ "The GSP has it", "wip20200613.html#autotoc_md286", null ],
       [ "Page protection", "wip20200613.html#autotoc_md287", null ]
+    ] ],
+    [ "15-Jun-2020 PSU weirdness", "wip20200615.html", [
+      [ "Loss of power", "wip20200615.html#h20200615", null ]
     ] ]
 ];

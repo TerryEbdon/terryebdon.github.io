@@ -44,5 +44,8 @@ var index =
     ] ],
     [ "15-Jun-2020 PSU weirdness", "wip20200615.html", [
       [ "Loss of power", "wip20200615.html#h20200615", null ]
+    ] ],
+    [ "25-Jun-2020 PSU revisited", "wip20200625.html", [
+      [ "The way forward", "wip20200625.html#h20200625", null ]
     ] ]
 ];

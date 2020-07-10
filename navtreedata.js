@@ -25,7 +25,7 @@
 var NAVTREE =
 [
   [ "Developer's Diary", "index.html", [
-    [ "2020-06", "index.html", "index" ],
+    [ "2020-07", "index.html", "index" ],
     [ "2017-06", "wip201706.html", "wip201706" ],
     [ "Splitting the windows path", "wip20170710.html", [
       [ "Splitting the windows path", "wip20170710.html#autotoc_md132", null ],
@@ -48,6 +48,7 @@ var NAVTREE =
     [ "2020-02", "wip202002.html", "wip202002" ],
     [ "2020-03", "wip202003.html", "wip202003" ],
     [ "2020-05", "wip202005.html", "wip202005" ],
+    [ "2020-06", "wip202006.html", "wip202006" ],
     [ "Archives", "archive.html", "archive" ],
     [ "Photography", "photography.html", "photography" ],
     [ "About Me", "AboutMe.html", null ]

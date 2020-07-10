@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer&#39;s Diary: 01-Jun-2020 Weekly page classes</title>
+<title>Developer&#39;s Diary: 09-Jul-2020 Gradle broken</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -47,32 +47,34 @@
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('wip20200601.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('wip20200709.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">01-Jun-2020 Weekly page classes </div>  </div>
+<div class="title">09-Jul-2020 Gradle broken </div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="toc"><h3>Table of Contents</h3>
-<ul><li class="level1"><a href="#h20200601">Class collaboration</a></li>
+<ul><li class="level1"><a href="#h20200709">Mixed compilation</a></li>
+<li class="level1"><a href="#autotoc_md288">New Groovy projects fail</a></li>
+<li class="level1"><a href="#autotoc_md289">Old vs New</a></li>
 </ul>
 </div>
-<div class="textblock"><h1><a class="anchor" id="h20200601"></a>
-Class collaboration</h1>
-<p>Combining <a class="el" href="wip20200531.html#a2020-05-31_weekly_page_sequence">yesterday's sequence diagram</a> with <a class="el" href="wip20200530.html#a2020-05-30_final_class_diagram">Saturday's class diagram</a>, and adding some detail, gives the following class collaboration. New classes are highlighted.</p>
-<p><div class="plantumlgraph">
-<img src="2020-06-01_web_doxy_v1_1_design.png" />
-</div>
- </p>
-<p>This still needs some work. Ideally <code>createPage()</code> would only exist in JournalProject, or possibly Project,and not in the derived classes. The sub-classes should just override some lower level methods. i.e. WebDoxy would instantiate the appropriate sub-class of Project, via an object factory, then always call the same sequence of methods. The object factory would implement <a href="https://refactoring.com/catalog/replaceConstructorWithFactoryFunction.html">factory methods</a>.</p>
-<dl class="section note"><dt>Note</dt><dd>Factory methods are covered in the Gang of Four's classic <em>Design Patterns</em> book. There's a great discussion of object factories in <em>Modern C++ Design</em>, by Andrei Alexandrescu</dd></dl>
+<div class="textblock"><h1><a class="anchor" id="h20200709"></a>
+Mixed compilation</h1>
+<p>I recently tried a mixed language project, using Java and Groovy, and Gradle seemed to get very confused when source code for both languages was present. I assumed this was due to joint compilation not being correctly configured. i.e. it was using both the Java compiler <b>and</b> the Groovy compiler, instead of using <code>groovyc</code> for both. It might not be that simple; I may be a fundamental Gradle problem.</p>
+<h1><a class="anchor" id="autotoc_md288"></a>
+New Groovy projects fail</h1>
+<p>This morning I created a template Groovy app, using <code>gradle init</code>. It builds and the tests run. The <code>gradle run</code> then fails with a class not found error. This is the same issue I had with the Java + Groovy project. The main <code>*.class</code> files are being deleted after the build task runs. (<em>So how does the test succeed?</em>) They do exist in the distribution zip though, and unzipping that into a temp folder giver a running app. This is exactly the same issue I had with my mixed language project. I dropped back to Java 8 and saw the same problem.</p>
+<h1><a class="anchor" id="autotoc_md289"></a>
+Old vs New</h1>
+<p>I then switched to my previously working Trk21 project. The <code>gradle run</code> works fine, and I could see the <code>*.class</code> files had been recreated. Switching between <code>gradlew</code> and <code>gradle</code> commands, which use different versions of Gradle, made no difference. Also the Trk21 distribution zip is fine. Well that's all a bit odd.</p>
 <p> 
-<a class='btn' href='wip20200531.html'>31-MAY-2020 👈</a>
-<a class='btn' href='#h20200601'>Top of page</a>
-<a class='btn' href='wip20200602.html'>👉 02-JUN-2020</a>
+<a class='btn' href='wip20200625.html'>25-JUN-2020 👈</a>
+<a class='btn' href='#h20200709'>Top of page</a>
+<a class='btn' href='wip20200710.html'>👉 10-JUL-2020</a>
 </p>
 <p><span class="copyright">&copy; 2020 <a href="AboutMe.html" title="Terry Ebdon">Terry Ebdon.</a></span><br  />
 <p>Find me coding on <a title="terry_ebdon on BitBucket"

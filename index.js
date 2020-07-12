@@ -19,5 +19,10 @@ var index =
     [ "11-Jul-2020 Gradle rolled forward", "wip20200711.html", [
       [ "Gradle version", "wip20200711.html#h20200711", null ],
       [ "Change of plans", "wip20200711.html#autotoc_md295", null ]
+    ] ],
+    [ "12-Jul-2020 Groovy, Gradle & Eclipse", "wip20200712.html", [
+      [ "Eclipse issues", "wip20200712.html#h20200712", null ],
+      [ "Add GUI classes to Groovy", "wip20200712.html#autotoc_md296", null ],
+      [ "Version conflicts", "wip20200712.html#autotoc_md297", null ]
     ] ]
 ];

@@ -15,5 +15,9 @@ var index =
       [ "Problem solved", "wip20200710.html#autotoc_md293", [
         [ "Working configuration", "wip20200710.html#autotoc_md294", null ]
       ] ]
+    ] ],
+    [ "11-Jul-2020 Gradle rolled forward", "wip20200711.html", [
+      [ "Gradle version", "wip20200711.html#h20200711", null ],
+      [ "Change of plans", "wip20200711.html#autotoc_md295", null ]
     ] ]
 ];

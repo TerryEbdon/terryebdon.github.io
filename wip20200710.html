@@ -98,7 +98,7 @@ Clean Gradle</h1>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md290"></a>
 Up-to-date</h1>
 <p>Running <code>gradle --console=plain clean build</code> adds some information.</p>
-<div class="fragment"><div class="line">C:\@drives\SD-CARD\z&gt;gradle --console=plain clean build</div>
+<div class="fragment"><div class="line">C:\z&gt;gradle --console=plain clean build</div>
 <div class="line">&gt; Task :clean UP-TO-DATE</div>
 <div class="line">&gt; Task :compileJava NO-SOURCE</div>
 <div class="line">&gt; Task :compileGroovy UP-TO-DATE</div>
@@ -130,7 +130,7 @@ Up-to-date</h1>
 <div class="line">C:\z&gt;</div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md291"></a>
 Missing classes</h2>
-<p>Where are the compiled classes? I tried deleting the build folder and re-running the test, but Gradle claims the compile tasks are up-to-date. Gradle is caching the build output. If I force it to re-run the tasks then everything starts working again:</p>
+<p>Where are the compiled classes? I tried deleting the build folder and re-running the test, but Gradle claims the compile tasks are up-to-date. Gradle is caching the build results. If I force it to re-run the tasks then everything starts working again:</p>
 <div class="fragment"><div class="line">C:\z&gt;gradle --console=plain --rerun-tasks run</div>
 <div class="line">&gt; Task :compileJava NO-SOURCE</div>
 <div class="line">&gt; Task :compileGroovy</div>
@@ -166,7 +166,7 @@ Failing configuration</h2>
 </div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>I'm deliberately using an older JVM, this is a work-around for a previous Grails failure.</dd></dl>
 <h1><a class="anchor" id="autotoc_md293"></a>
 Problem solved</h1>
-<p>A new Gradle version was released 10 days ago, on June 30th. This does <em>not</em> fix the issue. Versions 6.5 and 6.5.1 both exhibit the flawed behaviour. Rolling back to Gradle version 5.2.1 fixes it. I'm now wondering if my previous Grails build issues had the same course. V5.2.1 dates from February 2019. Gradle is a very active product, this roll-back puts me nearly two dozen versions behind. It was picked purely as I've previously used it, and had it unzipped and ready to go. When I get a chance I'll try rolling it forward until it stops working, then check the change logs and bug list.</p>
+<p>A new Gradle version was released 10 days ago, on June 30th. This does <em>not</em> fix the issue. Versions 6.5 and 6.5.1 both exhibit the flawed behaviour. Rolling back to Gradle version 5.2.1 fixes it. I'm now wondering if my previous Grails build issues had the same cause. V5.2.1 dates from February 2019. Gradle is a very active product, this roll-back puts me nearly two dozen versions behind. It was picked purely as I've previously used it, and had it unzipped and ready to go. When I get a chance I'll try rolling it forward until it stops working, then check the change logs and bug list.</p>
 <h2><a class="anchor" id="autotoc_md294"></a>
 Working configuration</h2>
 <div class="fragment"><div class="line">C:\z2&gt;gradle --version</div>
@@ -189,7 +189,7 @@ Working configuration</h2>
 </div><!-- fragment --><p> 
 <a class='btn' href='wip20200709.html'>09-JUL-2020 👈</a>
 <a class='btn' href='#h20200710'>Top of page</a>
-<!-- <a class='btn' href='wip20200711.html'>👉 11-JUL-2020</a> -->
+<a class='btn' href='wip20200711.html'>👉 11-JUL-2020</a>
 </p>
 <p><span class="copyright">&copy; 2020 <a href="AboutMe.html" title="Terry Ebdon">Terry Ebdon.</a></span><br  />
 <p>Find me coding on <a title="terry_ebdon on BitBucket"
@@ -203,7 +203,7 @@ title="@terry_ebdon" href="https://twitter.com/@terry_ebdon">twitter.</a> </p>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Jul 10 2020 16:53:34 for Developer&#39;s Diary by
+    <li class="footer">Generated on Sun Jul 12 2020 11:01:11 for Developer&#39;s Diary by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.18 </li>
   </ul>

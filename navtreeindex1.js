@@ -170,5 +170,8 @@ var NAVTREEINDEX1 =
 "wip20200710.html#autotoc_md292":[0,2,1,1],
 "wip20200710.html#autotoc_md293":[0,2,2],
 "wip20200710.html#autotoc_md294":[0,2,2,0],
-"wip20200710.html#h20200710":[0,2,0]
+"wip20200710.html#h20200710":[0,2,0],
+"wip20200711.html":[0,3],
+"wip20200711.html#autotoc_md295":[0,3,1],
+"wip20200711.html#h20200711":[0,3,0]
 };

@@ -64,7 +64,7 @@ $(document).ready(function(){initNavTree('wip20200709.html',''); initResizable()
 </div>
 <div class="textblock"><h1><a class="anchor" id="h20200709"></a>
 Mixed compilation</h1>
-<p>I recently tried a mixed language project, using Java and Groovy, and Gradle seemed to get very confused when source code for both languages was present. I assumed this was due to joint compilation not being correctly configured. i.e. it was using both the Java compiler <b>and</b> the Groovy compiler, instead of using <code>groovyc</code> for both. It might not be that simple; I may be a fundamental Gradle problem.</p>
+<p>I recently tried a mixed language project, using Java and Groovy. Gradle seemed to get very confused when source code for both languages was present. I assumed this was due to joint compilation not being correctly configured. i.e. it was using both the Java compiler <em>and</em> the Groovy compiler, instead of using <code>groovyc</code> for both. It might not be that simple; I may be a fundamental Gradle problem.</p>
 <h1><a class="anchor" id="autotoc_md288"></a>
 New Groovy projects fail</h1>
 <p>This morning I created a template Groovy app, using <code>gradle init</code>. It builds and the tests run. The <code>gradle run</code> then fails with a class not found error. This is the same issue I had with the Java + Groovy project. The main <code>*.class</code> files are being deleted after the build task runs. (<em>So how does the test succeed?</em>) They do exist in the distribution zip though, and unzipping that into a temp folder giver a running app. This is exactly the same issue I had with my mixed language project. I dropped back to Java 8 and saw the same problem.</p>
@@ -88,7 +88,7 @@ title="@terry_ebdon" href="https://twitter.com/@terry_ebdon">twitter.</a> </p>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Jul 10 2020 16:53:34 for Developer&#39;s Diary by
+    <li class="footer">Generated on Sun Jul 12 2020 11:01:11 for Developer&#39;s Diary by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.18 </li>
   </ul>

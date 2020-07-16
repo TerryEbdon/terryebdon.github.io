@@ -25,8 +25,12 @@
 var NAVTREE =
 [
   [ "Developer's Diary", "index.html", [
-    [ "15-Jul-2020 Data in the UI", "index.html", [
-      [ "Data bound controls", "index.html#h20200715", null ]
+    [ "16-Jul-2020", "index.html", [
+      [ "Distractions", "index.html#h20200716", null ],
+      [ "Legacy", "index.html#autotoc_md298", null ],
+      [ "The plan", "index.html#autotoc_md299", [
+        [ "Reporting", "index.html#autotoc_md300", null ]
+      ] ]
     ] ],
     [ "09-Jul-2020 Gradle broken", "wip20200709.html", [
       [ "Mixed compilation", "wip20200709.html#h20200709", null ],
@@ -52,16 +56,20 @@ var NAVTREE =
       [ "Add GUI classes to Groovy", "wip20200712.html#autotoc_md296", null ],
       [ "Version conflicts", "wip20200712.html#autotoc_md297", null ]
     ] ],
+    [ "15-Jul-2020 Data in the UI", "wip20200715.html", [
+      [ "Data bound controls", "wip20200715.html#h20200715", null ]
+    ] ],
     [ "Archives", "archive.html", "archive" ],
     [ "Photography", "photography.html", "photography" ],
-    [ "About Me", "AboutMe.html", null ]
+    [ "About Me", "AboutMe.html", null ],
+    [ "Todo List", "todo.html", null ]
   ] ]
 ];
 
 var NAVTREEINDEX =
 [
 "AboutMe.html",
-"wip20190312.html#autotoc_md194"
+"wip20190312.html#autotoc_md191"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

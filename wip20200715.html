@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer&#39;s Diary: 15-Jul-2020</title>
+<title>Developer&#39;s Diary: 15-Jul-2020 Data in the UI</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -53,19 +53,23 @@ $(document).ready(function(){initNavTree('wip20200715.html',''); initResizable()
 <div id="doc-content">
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">15-Jul-2020 </div>  </div>
+<div class="title">15-Jul-2020 Data in the UI </div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><h1><a class="anchor" id="h20200715"></a>
 Data bound controls</h1>
-<p>I replicated a few of my VBA dialogues with WindowBuilder. At this stage I just want to duplicate existing functionality with a similar interface. I noticed there's an option for "*Swing Automatic Databinding*", so I'll give that a try.</p>
+<p>I replicated a few of my VBA dialogues with WindowBuilder. At this stage I just want to duplicate existing functionality with a similar interface. I noticed there's an option for <code>Swing Automatic Databinding</code>, so I'll give that a try.</p>
 <div class="image">
 <img src="2020-07-15_swing_auto_databinding_menu.jpg" alt=""/>
 </div>
- <p>It requires a JavaBean, but WindowBuilder doesn't recognise Groovy Beans. Guess I'll have to use the old school approach.</p>
-<p> 
+ <p>It requires a JavaBean; WindowBuilder doesn't recognise Groovy Beans. Guess I'll have to use the old school approach. Eclipse saved me some time, with the <code>source / Generate Getters and Setters</code> option.</p>
+<div class="image">
+<img src="2020-07-15_eclipse_gen_getters_setters.jpg" alt=""/>
+</div>
+ <p> 
 <a class='btn' href='wip20200712.html'>12-JUL-2020 👈</a>
 <a class='btn' href='#h20200715'>Top of page</a>
+<a class='btn' href='index.html'>👉 16-JUL-2020</a>
 <!-- <a class='btn' href='wip20200716.html'>👉 16-JUL-2020</a> -->
 </p>
 <p><span class="copyright">&copy; 2020 <a href="AboutMe.html" title="Terry Ebdon">Terry Ebdon.</a></span><br  />
@@ -80,7 +84,7 @@ title="@terry_ebdon" href="https://twitter.com/@terry_ebdon">twitter.</a> </p>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Jul 16 2020 00:01:09 for Developer&#39;s Diary by
+    <li class="footer">Generated on Thu Jul 16 2020 15:53:17 for Developer&#39;s Diary by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.18 </li>
   </ul>

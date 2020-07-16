@@ -25,30 +25,33 @@
 var NAVTREE =
 [
   [ "Developer's Diary", "index.html", [
-    [ "2020-07", "index.html", "index" ],
-    [ "2017-06", "wip201706.html", "wip201706" ],
-    [ "Splitting the windows path", "wip20170710.html", [
-      [ "Splitting the windows path", "wip20170710.html#autotoc_md132", null ],
-      [ "Splitting with Groovy", "wip20170710.html#autotoc_md133", null ],
-      [ "Useful output", "wip20170710.html#autotoc_md134", null ]
+    [ "15-Jul-2020 Data in the UI", "index.html", [
+      [ "Data bound controls", "index.html#h20200715", null ]
     ] ],
-    [ "Parsing SimpleMind XML - Part One", "wip20170711.html", [
-      [ "The Problems", "wip20170711.html#autotoc_md135", null ],
-      [ "The SMMX files", "wip20170711.html#autotoc_md136", null ],
-      [ "Parsing the XML", "wip20170711.html#autotoc_md137", null ],
-      [ "Related web pages.", "wip20170711.html#autotoc_md138", null ]
+    [ "09-Jul-2020 Gradle broken", "wip20200709.html", [
+      [ "Mixed compilation", "wip20200709.html#h20200709", null ],
+      [ "New Groovy projects fail", "wip20200709.html#autotoc_md288", null ],
+      [ "Old vs New", "wip20200709.html#autotoc_md289", null ]
     ] ],
-    [ "2017-07", "wip201707.html", "wip201707" ],
-    [ "2019-02", "wip201902.html", "wip201902" ],
-    [ "2019-03", "wip201903.html", "wip201903" ],
-    [ "2019-05", "wip201905.html", "wip201905" ],
-    [ "2019-09", "wip201909.html", "wip201909" ],
-    [ "2019-11", "wip201911.html", "wip201911" ],
-    [ "2019-12", "wip201912.html", "wip201912" ],
-    [ "2020-02", "wip202002.html", "wip202002" ],
-    [ "2020-03", "wip202003.html", "wip202003" ],
-    [ "2020-05", "wip202005.html", "wip202005" ],
-    [ "2020-06", "wip202006.html", "wip202006" ],
+    [ "10-Jul-2020 Gradle fixed", "wip20200710.html", [
+      [ "Clean Gradle", "wip20200710.html#h20200710", null ],
+      [ "Up-to-date", "wip20200710.html#autotoc_md290", [
+        [ "Missing classes", "wip20200710.html#autotoc_md291", null ],
+        [ "Failing configuration", "wip20200710.html#autotoc_md292", null ]
+      ] ],
+      [ "Problem solved", "wip20200710.html#autotoc_md293", [
+        [ "Working configuration", "wip20200710.html#autotoc_md294", null ]
+      ] ]
+    ] ],
+    [ "11-Jul-2020 Gradle rolled forward", "wip20200711.html", [
+      [ "Gradle version", "wip20200711.html#h20200711", null ],
+      [ "Change of plans", "wip20200711.html#autotoc_md295", null ]
+    ] ],
+    [ "12-Jul-2020 Groovy, Gradle & Eclipse", "wip20200712.html", [
+      [ "Eclipse issues", "wip20200712.html#h20200712", null ],
+      [ "Add GUI classes to Groovy", "wip20200712.html#autotoc_md296", null ],
+      [ "Version conflicts", "wip20200712.html#autotoc_md297", null ]
+    ] ],
     [ "Archives", "archive.html", "archive" ],
     [ "Photography", "photography.html", "photography" ],
     [ "About Me", "AboutMe.html", null ]

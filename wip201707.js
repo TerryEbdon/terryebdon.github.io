@@ -67,5 +67,16 @@ var wip201707 =
     [ "09-Jul-2017", "wip20170709.html", [
       [ "Verifying Checksums with Ant and Groovy", "wip20170709.html#autotoc_md130", null ],
       [ "Related web pages", "wip20170709.html#autotoc_md131", null ]
+    ] ],
+    [ "Splitting the windows path", "wip20170710.html", [
+      [ "Splitting the windows path", "wip20170710.html#autotoc_md132", null ],
+      [ "Splitting with Groovy", "wip20170710.html#autotoc_md133", null ],
+      [ "Useful output", "wip20170710.html#autotoc_md134", null ]
+    ] ],
+    [ "Parsing SimpleMind XML - Part One", "wip20170711.html", [
+      [ "The Problems", "wip20170711.html#autotoc_md135", null ],
+      [ "The SMMX files", "wip20170711.html#autotoc_md136", null ],
+      [ "Parsing the XML", "wip20170711.html#autotoc_md137", null ],
+      [ "Related web pages.", "wip20170711.html#autotoc_md138", null ]
     ] ]
 ];

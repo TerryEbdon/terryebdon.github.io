@@ -32,6 +32,9 @@ var wip202005 =
     [ "26-May-2020 Creating weekly pages", "wip20200526.html", [
       [ "Weekly changes", "wip20200526.html#h20200526", null ]
     ] ],
+    [ "27-May-2020 VS Code wraps", "wip20200527.html", [
+      [ "VS Code Rulers & Wraps", "wip20200527.html#h20200527", null ]
+    ] ],
     [ "30-May-2020 Smelly design", "wip20200530.html", [
       [ "WebDoxy design changes", "wip20200530.html#h20200530", null ]
     ] ],

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer&#39;s Diary: 16-Jul-2020</title>
+<title>Developer&#39;s Diary: 17-Jul-2020 The big picture</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -53,37 +53,47 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <div id="doc-content">
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">16-Jul-2020 </div>  </div>
+<div class="title">17-Jul-2020 The big picture </div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="toc"><h3>Table of Contents</h3>
-<ul><li class="level1"><a href="#h20200716">Distractions</a></li>
-<li class="level1"><a href="#autotoc_md298">Legacy</a></li>
-<li class="level1"><a href="#autotoc_md299">The plan</a><ul><li class="level2"><a href="#autotoc_md300">Reporting</a></li>
-</ul>
-</li>
+<ul><li class="level1"><a href="#h20200717">Photo Shoot</a></li>
+<li class="level1"><a href="#autotoc_md301">Console Input</a></li>
 </ul>
 </div>
 <div class="textblock"><p><a class="anchor" id="mainpage"></a></p>
-<h1><a class="anchor" id="h20200716"></a>
-Distractions</h1>
-<p>I've been looking into Swing data bindings. This is a distraction. My priority should be to get a basic working app, without worrying about the GUI. WindowBuilder looks like it can create a <em>good enough</em> graphical UI, which I can implement at a later date.</p>
-<h1><a class="anchor" id="autotoc_md298"></a>
-Legacy</h1>
-<p>This is a re-implementation of an existing project that uses Microsoft Access. I'd like to transition to the replacement app before my Microsoft 365 subscription is renewed. I'll almost certainly renew the subscription, as I make heavy use of OneDrive and MS Office is just better than the competition. But, much as I like Access (yes, really), it's not something I want to use for a "business critical" function.</p>
-<h1><a class="anchor" id="autotoc_md299"></a>
-The plan</h1>
-<p>To get the new app running PDQ I'll duplicate the database schema with HSQLDB, <a class="el" href="wip20200212.html">as mentioned in February</a>, and create a simple command line interface in Groovy. Once the CLI is feature complete I'll add the GUI.</p>
+<h1><a class="anchor" id="h20200717"></a>
+Photo Shoot</h1>
+<p>NewPostProd will be used to create <a href="https://www.autohotkey.com/">AutoHotKey</a> scripts which in turn automate the <a href="https://geosetter.de/en/main-en/">GeoSetter</a> GUI. This allows me to <em>very</em> rapidly add tags, captions etc. to hundreds of images. I currently use Adobe <a href="https://lightroom.adobe.com/">Lightroom</a> for Digital Asset Management, i.e. to hold my photo catalogue, but find GeoSetter is much better for the initial key wording and captioning. Doing it from scratch in Lightroom or AfterShot Pro would take several hours. With GeoSetter the time drops to an hour or less. Add in my scripts and, on a good day, I can tag and caption everything in about 10 minutes. It's a substantial time saver.</p>
 <div class="plantumlgraph">
-<img src="2020-07-16_zoo_overview.png" />
+<img src="npp_problem_statement.png" />
 </div>
-<h2><a class="anchor" id="autotoc_md300"></a>
-Reporting</h2>
-<p>I've shown <code>Reporting</code> as distinct from the business classes. I expect this will initially be a series for SQL stored procedure, run from SQuirreL SQL Client. These procedures will, hopefully, be very close to the existing Access queries. Merging them into the business classes will be pretty easy, but can be deferred until the bulk of the project is complete.</p>
-<p> 
-<a class='btn' href='wip20200715.html'>15-JUL-2020 👈</a>
-<a class='btn' href='#h20200716'>Top of page</a>
-<!-- <a class='btn' href='wip20200717.html'>👉 17-JUL-2020</a> -->
+<h1><a class="anchor" id="autotoc_md301"></a>
+Console Input</h1>
+<p>I put together some simple text menus for the NewPostProd CLI interface. I tripped over the same console input problem that I'd fixed in <a href="https://github.com/TerryEbdon/Trk21">Trk21</a>, Gradle doesn't wire stdin to System.in unless you tell it to. This breaks the <code>Gradle run</code> command.</p>
+<p>It's an easy work-around, just add this to <code>build.gradle</code>:</p>
+<div class="fragment"><div class="line">run {</div>
+<div class="line">  standardInput = System.in</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>I'd forgotten that this was needed. <a href="https://github.com/TerryEbdon/Trk21">Trk21</a> also avoids using <code>System.console().readLine()</code> as that doesn't work with <a href="https://kobo.github.io/groovyserv/">GroovyServ</a>. The work around is to use <code>new Scanner(System.in).next()</code>. I've re-used Trk21's <code>TrekCli.getLine()</code> method in NewPostProd.</p>
+<div class="fragment"><div class="line"><span class="keyword">class </span>Cli {</div>
+<div class="line">  <span class="keyword">private</span> <span class="keyword">final</span> Scanner sc = <span class="keyword">new</span> Scanner( System.in )</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// …</span></div>
+<div class="line"> </div>
+<div class="line">  private String getLine( final String prompt ) {</div>
+<div class="line">    printf prompt</div>
+<div class="line">    <span class="keywordflow">try</span> {</div>
+<div class="line">      sc.next().toLowerCase() - <span class="charliteral">&#39;\r&#39;</span></div>
+<div class="line">    } <span class="keywordflow">catch</span> ( NoSuchElementException ex ) { <span class="comment">// Caused by user entering CTRL+Z</span></div>
+<div class="line">      <span class="stringliteral">&#39;&#39;</span></div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> 
+<a class='btn' href='wip20200716.html'>16-JUL-2020 👈</a>
+<a class='btn' href='#h20200717'>Top of page</a>
+<!-- <a class='btn' href='wip20200718.html'>👉 18-JUL-2020</a> -->
 </p>
 <p><span class="copyright">&copy; 2020 <a href="AboutMe.html" title="Terry Ebdon">Terry Ebdon.</a></span><br  />
 <p>Find me coding on <a title="terry_ebdon on BitBucket"
@@ -97,7 +107,7 @@ title="@terry_ebdon" href="https://twitter.com/@terry_ebdon">twitter.</a> </p>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Jul 16 2020 15:53:20 for Developer&#39;s Diary by
+    <li class="footer">Generated on Fri Jul 17 2020 17:29:41 for Developer&#39;s Diary by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.18 </li>
   </ul>

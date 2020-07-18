@@ -25,9 +25,12 @@
 var NAVTREE =
 [
   [ "Developer's Diary", "index.html", [
-    [ "17-Jul-2020 The big picture", "index.html", [
-      [ "Photo Shoot", "index.html#h20200717", null ],
-      [ "Console Input", "index.html#autotoc_md301", null ]
+    [ "18-Jul-2020 NPP Progress", "index.html", [
+      [ "GUI Created", "index.html#h20200718", null ],
+      [ "Form Layout", "index.html#autotoc_md302", null ],
+      [ "Mixed compilation", "index.html#autotoc_md303", null ],
+      [ "Eclipse, a mixed bag", "index.html#autotoc_md304", null ],
+      [ "Progress", "index.html#autotoc_md305", null ]
     ] ],
     [ "09-Jul-2020 Gradle broken", "wip20200709.html", [
       [ "Mixed compilation", "wip20200709.html#h20200709", null ],
@@ -63,17 +66,20 @@ var NAVTREE =
         [ "Reporting", "wip20200716.html#autotoc_md300", null ]
       ] ]
     ] ],
+    [ "17-Jul-2020 The big picture", "wip20200717.html", [
+      [ "Photo Shoot", "wip20200717.html#h20200717", null ],
+      [ "Console Input", "wip20200717.html#autotoc_md301", null ]
+    ] ],
     [ "Archives", "archive.html", "archive" ],
     [ "Photography", "photography.html", "photography" ],
-    [ "About Me", "AboutMe.html", null ],
-    [ "Todo List", "todo.html", null ]
+    [ "About Me", "AboutMe.html", null ]
   ] ]
 ];
 
 var NAVTREEINDEX =
 [
 "AboutMe.html",
-"wip20190312.html#autotoc_md193"
+"wip20190312.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

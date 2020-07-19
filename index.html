@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer&#39;s Diary: 18-Jul-2020 NPP Progress</title>
+<title>Developer&#39;s Diary: 19-Jul-2020 Unit testing</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -53,53 +53,23 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <div id="doc-content">
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">18-Jul-2020 NPP Progress </div>  </div>
+<div class="title">19-Jul-2020 Unit testing </div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="toc"><h3>Table of Contents</h3>
-<ul><li class="level1"><a href="#h20200718">GUI Created</a></li>
-<li class="level1"><a href="#autotoc_md302">Form Layout</a></li>
-<li class="level1"><a href="#autotoc_md303">Mixed compilation</a></li>
-<li class="level1"><a href="#autotoc_md304">Eclipse, a mixed bag</a></li>
-<li class="level1"><a href="#autotoc_md305">Progress</a></li>
+<ul><li class="level1"><a href="#h20200719">Web testing</a></li>
 </ul>
 </div>
 <div class="textblock"><p><a class="anchor" id="mainpage"></a></p>
-<h1><a class="anchor" id="h20200718"></a>
-GUI Created</h1>
-<p>I realised that the NewPostProd GUI doesn't need to use data bound controls. Some forms will not touch the database. With this in mind I revisited WindowBuilder Pro. I changed its default configuration to use member variables and create action events as class members. Unfortunately I'd put in quite a bit of work before I realised the defaults were wrong. But WindowBuilder Pro is fairly tolerant of changes to the generated code.</p>
-<div class="image">
-<img src="2020-07-18_window_builder_code_gen_prefs.jpg" alt=""/>
-</div>
- <h1><a class="anchor" id="autotoc_md302"></a>
-Form Layout</h1>
-<p>Gradle wouldn't compile classes that used the JGoodies Formlayout. I tried several versions from JCentral. Some were were retrieved but none worked.</p>
-<div class="fragment"><div class="line"><span class="comment">//  implementation &#39;com.jgoodies:forms:1.3.0&#39;</span></div>
-<div class="line"><span class="comment">//  implementation &#39;com.jgoodies:forms:1.2.1&#39;</span></div>
-<div class="line"><span class="comment">//  implementation &#39;com.jgoodies:forms:1.13.0&#39;</span></div>
-<div class="line"><span class="comment">//  implementation &#39;com.jgoodies:forms:1.8.0&#39;</span></div>
-</div><!-- fragment --><p>Eventually I discovered that:</p>
-<ol type="1">
-<li>The latest library versions are commercial only, just the ancient versions are free. From my perspective the software's been abandoned.</li>
-<li>I don't need this software, the grid and border layouts are fine.</li>
-</ol>
-<h1><a class="anchor" id="autotoc_md303"></a>
-Mixed compilation</h1>
-<p>Groovy can call into Java wih no problems. But Java couldn't see my Groovy classes. The quick fix was to move the Java code into the Groovy folder, allowing the Groovy compiler to handle everything.</p>
-<h1><a class="anchor" id="autotoc_md304"></a>
-Eclipse, a mixed bag</h1>
-<p>Eclipse can be a great product, I've always liked it. But it's not always the most friendly of IDEs. Without Eclipse I'd probably have used .NET for this port, so it's definitely a tool I'm glad to have. I found Eclipse to be very intolerant of classes being moved between namespaces by other software. Also its default key bindings are quite odd.</p>
-<h1><a class="anchor" id="autotoc_md305"></a>
-Progress</h1>
-<p>I have the <em>Create Photo Shoot</em> screen close to working. I hard-coded table data to avoid setting up a database. This is good enough to prove the code works. With a little effort I should soon be able to partially regenerate scripts used for previous photo shoots. Diffing the old and new files will give me some confidence in my progress.</p>
-<p><div class="plantumlgraph">
-<img src="2020-07-18_overview.png" />
-</div>
- </p>
+<h1><a class="anchor" id="h20200719"></a>
+Web testing</h1>
+<p>I diligently test page navigation before publishing these blog posts. Experience has shown me that it's the most likely error that could creep in. At some point I'll revisit WebDoxy's JournalPage creation logic. It should be possible to reliably generate the appropriate links. It's non-trivial as I don't post every day and there are special cases for the home page. A first step is to automate the testing.</p>
+<p>My favourite tool for web testing was Canoo WebTest. It seems to be Abandonware. Selenium is the obvious replacement. <a href="https://gebish.org/">Geb</a> browser automation should make it easy.</p>
 <p> 
-<a class='btn' href='wip20200717.html'>17-JUL-2020 👈</a>
-<a class='btn' href='#h20200718'>Top of page</a>
-<!-- <a class='btn' href='wip20200719.html'>👉 19-JUL-2020</a> -->
+<a class='btn' href='wip20200718.html'>18-JUL-2020 👈</a>
+<a class='btn' href='#h20200719'>Top of page</a>
+<!-- <a class='btn' href='wip20200720.html'>👉 20-JUL-2020</a> -->
+<!-- <a class='btn' href='index.html'>👉 20-JUL-2020</a> -->
 </p>
 <p><span class="copyright">&copy; 2020 <a href="AboutMe.html" title="Terry Ebdon">Terry Ebdon.</a></span><br  />
 <p>Find me coding on <a title="terry_ebdon on BitBucket"
@@ -113,7 +83,7 @@ title="@terry_ebdon" href="https://twitter.com/@terry_ebdon">twitter.</a> </p>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Jul 18 2020 22:43:21 for Developer&#39;s Diary by
+    <li class="footer">Generated on Sun Jul 19 2020 22:23:51 for Developer&#39;s Diary by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.18 </li>
   </ul>

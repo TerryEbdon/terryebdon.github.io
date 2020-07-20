@@ -83,7 +83,8 @@ var NAVTREE =
     ] ],
     [ "Archives", "archive.html", "archive" ],
     [ "Photography", "photography.html", "photography" ],
-    [ "About Me", "AboutMe.html", null ]
+    [ "About Me", "AboutMe.html", null ],
+    [ "Todo List", "todo.html", null ]
   ] ]
 ];
 

@@ -14,7 +14,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer&#39;s Diary: 02-Aug-2020 awk regex groups</title>
+<title>Developer&#39;s Diary: 03-Aug-2020 CLI sorting</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,65 +62,62 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <div id="doc-content">
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">02-Aug-2020 awk regex groups </div>  </div>
+<div class="title">03-Aug-2020 CLI sorting </div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="toc"><h3>Table of Contents</h3>
-<ul><li class="level1"><a href="#h20200802">Retrieving regex groups in awk</a><ul><li class="level2"><a href="#autotoc_md310">Disconnect version 1</a></li>
-<li class="level2"><a href="#autotoc_md311">Disconnect version 2</a></li>
+<ul><li class="level1"><a href="#h20200803">Sorting from the command line</a></li>
+<li class="level1"><a href="#autotoc_md312">Sort limitations</a><ul><li class="level2"><a href="#autotoc_md313">Windows sort</a><ul><li class="level3"><a href="#autotoc_md314">Limitations</a></li>
+</ul>
+</li>
+<li class="level2"><a href="#autotoc_md315">GNU &amp; POSIX sorts</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="textblock"><p><a class="anchor" id="mainpage"></a></p>
-<h1><a class="anchor" id="h20200802"></a>
-Retrieving regex groups in awk</h1>
-<p>Today I learned about gawk's enhancements to the <code>match()</code> function.</p>
-<p>I wanted to report on disconnection messages in a Minecraft server's log, where the disconnect line appeared in one of two versions:</p>
+<h1><a class="anchor" id="h20200803"></a>
+Sorting from the command line</h1>
+<p>I needed to add a sort step into a Windows command script running on a client system.</p>
+<p><div class="plantumlgraph">
+<img src="2020-08-03_cli_sort.png" />
+</div>
+ </p>
+<p>The input is a log file that had been pre-filtered by awk, and could be treated as space delimited. The required sort order was ascending by username (field 4) then timestamp (field 1). The safest way to do this is with a stable sort using field 4 as a single key. The stable sort preserves the logged order, within user, even if two log entries have the same timestamp.</p>
+<h1><a class="anchor" id="autotoc_md312"></a>
+Sort limitations</h1>
+<h2><a class="anchor" id="autotoc_md313"></a>
+Windows sort</h2>
+<p>The Windows utility seems very limited when compared to sort tools I've used in the past. Though it's interesting that this is the first time the command's simplicity has caused me a problem.</p>
+<h3><a class="anchor" id="autotoc_md314"></a>
+Limitations</h3>
 <ol type="1">
-<li><code>…iHezi lost connection: Disconnected</code></li>
-<li><code>…com.mojang…authlib.GameProfile@6c2ffd3b[id=&lt;null&gt;,name=GLX27,properties=…</code></li>
+<li>It can only sort text files</li>
+<li>A single key</li>
+<li>You can only give the key position, not its length</li>
+<li>Key is specified only by character position</li>
+<li>Sort is case insensitive (according to Microsoft, others disagree)</li>
+<li>No stable-sort option</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md310"></a>
-Disconnect version 1</h2>
-<p>The first version is easy:</p>
-<ul>
-<li>field 1 is a timestamp</li>
-<li>field 4 is a number with a <code>#</code> prefix</li>
-<li>field 7 is the status, e.g. "Disconnected"</li>
-</ul>
-<p>e.g. </p><div class="fragment"><div class="line">[16:07:29] [Server thread/INFO]: OkqySeany lost connection: Disconnected</div>
-</div><!-- fragment --><p>Reporting these disconnections is trivial:</p>
-<div class="fragment"><div class="line">print $1 &quot;\t&quot; $7 &quot;\t&quot; $4</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md311"></a>
-Disconnect version 2</h2>
-<p>The second version is more tricky. There username is now in field 4, but it's embedded in something resembling the output of a generated <code>toString()</code> method.</p>
-<p>In this example of field 4 the username, GLX27, is deeply embedded, so how do I extract it?</p>
-<div class="fragment"><div class="line">com.mojang.authlib.GameProfile@6c2ffd3b[<span class="keywordtype">id</span>=&lt;<span class="keyword">null</span>&gt;,name=GLX27,properties={},legacy=<span class="keyword">false</span>] (/199.26.81.77:64150) lost connection: Disconnected</div>
-</div><!-- fragment --><p>Normally I'd use awk's internal <code>sub()</code> function for something like this. But <code>sub()</code> doesn't allow access to regex groups. It lets me specify the groups, but I can't see what each group matched. The gawk implementation of <code>match()</code> gives me this functionality.</p>
-<p>This is the <code>match()</code> statement that extracts the username:</p>
-<div class="fragment"><div class="line">match( $4, /name=\y(.+)\y,properties/, array )</div>
-</div><!-- fragment --><p>Where <code>\y</code> is used to mark the word boundaries. I needed the contents of the bracketed group, i.e. the part between the <code>\y</code> markers. The <code>match()</code> function returns the groups as an array, passed in the last argument. i.e. it returns the username as <code>array[1]</code>.</p>
-<p>Putting it all together we get:</p>
-<div class="fragment"><div class="line">&quot;lost connection&quot; {</div>
-<div class="line">if ( index( $0, &quot;id=&lt;null&gt;&quot; ) &gt; 0 ) {</div>
-<div class="line">  # This is a version 2 log entry</div>
-<div class="line">  match( $4, /name=\y(.+)\y,properties/, array )</div>
-<div class="line">  $4 = array[1]   # Username</div>
-<div class="line">  $7 = $NF        # Status</div>
-<div class="line">}</div>
-<div class="line">print $1 &quot;\t&quot; $7 &quot;\t&quot; $4</div>
-</div><!-- fragment --><p>Here I'm conditionally replacing the fields used by the print statement. This allows a single line to contain the output format, avoiding mistakes if a change is required.</p>
-<p><a href="https://www.gnu.org/software/gawk/manual/html_node/String-Functions.html">match()</a> is very powerful, it does a lot more than I've discussed here.</p>
-<p>The above is an expanded explanation of the disconnect message handling outlined in <a href="https://stackoverflow.com/questions/63201356/how-do-i-filter-out-certain-text-with-awk-but-also-print-the-text/63205214#63205214">my answer</a> to a Stack Overflow question.</p>
-<p><a href="https://ko-fi.com/W7W71ZMVG"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi" style="pointer-events: none;" class="inline"/></a></p>
+<p>Point 1 isn't an issue here, but the key limitations, in points 2 and 3, were. I'd also be concerned that there's no option for a stable sort.</p>
+<p>I could have worked around this by modifying the awk script, that generates the input file, to include a key field at the start of each line. I didn't consider that as I wanted to avoid changes to working code on a live system.</p>
+<h2><a class="anchor" id="autotoc_md315"></a>
+GNU &amp; POSIX sorts</h2>
+<p>A POSIX compatible sort with a stable-sort extension, e.g. GNU sort, is significantly better, though it still has surprising limitations.</p>
+<ol type="1">
+<li>Can only sort text files</li>
+<li>Sort keys are based on field numbers</li>
+</ol>
 <p> 
-<a class='btn' href='wip20200720.html'>20-JUL-2020 👈</a>
-<a class='btn' href='#h20200802'>Top of page</a>
-<!-- <a class='btn' href='wip20200803.html'>👉 03-AUG-2020</a> -->
-<!-- <a class='btn' href='index.html'>👉 03-AUG-2020</a> -->
 </p>
-<p><span class="copyright">&copy; 2020 <a href="AboutMe.html" title="Terry Ebdon">Terry Ebdon.</a></span><br  />
+<p> 
+<a class='btn' href='wip20200802.html'>02-AUG-2020 👈</a>
+<a class='btn' href='#h20200803'>Top of page</a>
+<!-- <a class='btn' href='wip20200804.html'>👉 04-AUG-2020</a> -->
+<!-- <a class='btn' href='index.html'>👉 04-AUG-2020</a> -->
+</p>
+<p><a href="https://ko-fi.com/W7W71ZMVG" target="_blank"><img src="https://cdn.ko-fi.com/cdn/kofi5.png?v=2" alt="Buy Me a Coffee at ko-fi.com" height="36" style="border:0px;height:36px;" border="0" class="inline"/></a><br  />
+<span class="copyright">&copy; 2020 <a href="AboutMe.html" title="Terry Ebdon">Terry Ebdon.</a></span><br  />
 <p>Find me coding on <a title="terry_ebdon on GitHub"
 href="https://github.com/TerryEbdon">GitHub,</a> networking on <a
 title="Terry Ebdon on LinkedIn"
@@ -136,7 +133,7 @@ Stack Exchange</a> and hanging out on
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Aug 2 2020 16:17:28 for Developer&#39;s Diary by
+    <li class="footer">Generated on Mon Aug 3 2020 23:48:17 for Developer&#39;s Diary by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.18 </li>
   </ul>

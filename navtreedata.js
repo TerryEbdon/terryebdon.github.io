@@ -25,10 +25,13 @@
 var NAVTREE =
 [
   [ "Developer's Diary", "index.html", [
-    [ "02-Aug-2020 awk regex groups", "index.html", [
-      [ "Retrieving regex groups in awk", "index.html#h20200802", [
-        [ "Disconnect version 1", "index.html#autotoc_md310", null ],
-        [ "Disconnect version 2", "index.html#autotoc_md311", null ]
+    [ "03-Aug-2020 CLI sorting", "index.html", [
+      [ "Sorting from the command line", "index.html#h20200803", null ],
+      [ "Sort limitations", "index.html#autotoc_md312", [
+        [ "Windows sort", "index.html#autotoc_md313", [
+          [ "Limitations", "index.html#autotoc_md314", null ]
+        ] ],
+        [ "GNU & POSIX sorts", "index.html#autotoc_md315", null ]
       ] ]
     ] ],
     [ "09-Jul-2020 Gradle broken", "wip20200709.html", [
@@ -87,6 +90,12 @@ var NAVTREE =
         [ "Logging", "wip20200720.html#autotoc_md309", null ]
       ] ]
     ] ],
+    [ "02-Aug-2020 awk regex groups", "wip20200802.html", [
+      [ "Retrieving regex groups in awk", "wip20200802.html#h20200802", [
+        [ "Disconnect version 1", "wip20200802.html#autotoc_md310", null ],
+        [ "Disconnect version 2", "wip20200802.html#autotoc_md311", null ]
+      ] ]
+    ] ],
     [ "Archives", "archive.html", "archive" ],
     [ "Photography", "photography.html", "photography" ],
     [ "About Me", "AboutMe.html", null ]
@@ -96,7 +105,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "AboutMe.html",
-"wip20190312.html#autotoc_md192"
+"wip20190312.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -25,13 +25,13 @@
 var NAVTREE =
 [
   [ "Developer's Diary", "index.html", [
-    [ "03-Aug-2020 CLI sorting", "index.html", [
-      [ "Sorting from the command line", "index.html#h20200803", null ],
-      [ "Sort limitations", "index.html#autotoc_md312", [
-        [ "Windows sort", "index.html#autotoc_md313", [
-          [ "Limitations", "index.html#autotoc_md314", null ]
-        ] ],
-        [ "GNU & POSIX sorts", "index.html#autotoc_md315", null ]
+    [ "04-Aug-2020 HTC Advantage", "index.html", [
+      [ "Retro Computing", "index.html#h20200804", [
+        [ "Unsaleable?", "index.html#autotoc_md316", null ],
+        [ "Pining for the Fjords", "index.html#autotoc_md317", null ],
+        [ "It's alive!", "index.html#autotoc_md318", null ],
+        [ "Resurrection", "index.html#autotoc_md319", null ],
+        [ "Re-use", "index.html#autotoc_md320", null ]
       ] ]
     ] ],
     [ "09-Jul-2020 Gradle broken", "wip20200709.html", [
@@ -96,16 +96,26 @@ var NAVTREE =
         [ "Disconnect version 2", "wip20200802.html#autotoc_md311", null ]
       ] ]
     ] ],
+    [ "03-Aug-2020 CLI sorting", "wip20200803.html", [
+      [ "Sorting from the command line", "wip20200803.html#h20200803", null ],
+      [ "Sort limitations", "wip20200803.html#autotoc_md312", [
+        [ "Windows sort", "wip20200803.html#autotoc_md313", [
+          [ "Limitations", "wip20200803.html#autotoc_md314", null ]
+        ] ],
+        [ "GNU & POSIX sorts", "wip20200803.html#autotoc_md315", null ]
+      ] ]
+    ] ],
     [ "Archives", "archive.html", "archive" ],
     [ "Photography", "photography.html", "photography" ],
-    [ "About Me", "AboutMe.html", null ]
+    [ "About Me", "AboutMe.html", null ],
+    [ "Todo List", "todo.html", null ]
   ] ]
 ];
 
 var NAVTREEINDEX =
 [
 "AboutMe.html",
-"wip20190312.html"
+"wip20190311.html#autotoc_md190"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

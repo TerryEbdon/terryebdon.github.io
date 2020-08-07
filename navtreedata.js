@@ -25,13 +25,11 @@
 var NAVTREE =
 [
   [ "Developer's Diary", "index.html", [
-    [ "04-Aug-2020 HTC Advantage", "index.html", [
-      [ "Retro Computing", "index.html#h20200804", [
-        [ "Unsaleable?", "index.html#autotoc_md316", null ],
-        [ "Pining for the Fjords", "index.html#autotoc_md317", null ],
-        [ "It's alive!", "index.html#autotoc_md318", null ],
-        [ "Resurrection", "index.html#autotoc_md319", null ],
-        [ "Re-use", "index.html#autotoc_md320", null ]
+    [ "06-Aug-2020 Retro Dev", "index.html", [
+      [ "Advantage development", "index.html#h20200806", null ],
+      [ "Tiny dev machine", "index.html#autotoc_md321", null ],
+      [ "We can rebuild him", "index.html#autotoc_md322", [
+        [ "The distro", "index.html#autotoc_md323", null ]
       ] ]
     ] ],
     [ "09-Jul-2020 Gradle broken", "wip20200709.html", [
@@ -105,17 +103,25 @@ var NAVTREE =
         [ "GNU & POSIX sorts", "wip20200803.html#autotoc_md315", null ]
       ] ]
     ] ],
+    [ "04-Aug-2020 HTC Advantage", "wip20200804.html", [
+      [ "Retro Computing", "wip20200804.html#h20200804", [
+        [ "Unsaleable?", "wip20200804.html#autotoc_md316", null ],
+        [ "Pining for the Fjords", "wip20200804.html#autotoc_md317", null ],
+        [ "It's alive!", "wip20200804.html#autotoc_md318", null ],
+        [ "Resurrection", "wip20200804.html#autotoc_md319", null ],
+        [ "Re-use", "wip20200804.html#autotoc_md320", null ]
+      ] ]
+    ] ],
     [ "Archives", "archive.html", "archive" ],
     [ "Photography", "photography.html", "photography" ],
-    [ "About Me", "AboutMe.html", null ],
-    [ "Todo List", "todo.html", null ]
+    [ "About Me", "AboutMe.html", null ]
   ] ]
 ];
 
 var NAVTREEINDEX =
 [
 "AboutMe.html",
-"wip20190311.html#autotoc_md190"
+"wip20190312.html#autotoc_md191"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

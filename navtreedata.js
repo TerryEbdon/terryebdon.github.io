@@ -25,12 +25,9 @@
 var NAVTREE =
 [
   [ "Developer's Diary", "index.html", [
-    [ "06-Aug-2020 Retro Dev", "index.html", [
-      [ "Advantage development", "index.html#h20200806", null ],
-      [ "Tiny dev machine", "index.html#autotoc_md321", null ],
-      [ "We can rebuild him", "index.html#autotoc_md322", [
-        [ "The distro", "index.html#autotoc_md323", null ]
-      ] ]
+    [ "07-Aug-2020 Product photos", "index.html", [
+      [ "Stability", "index.html#h20200807", null ],
+      [ "Canon 5D Mark III", "index.html#autotoc_md324", null ]
     ] ],
     [ "09-Jul-2020 Gradle broken", "wip20200709.html", [
       [ "Mixed compilation", "wip20200709.html#h20200709", null ],
@@ -112,16 +109,24 @@ var NAVTREE =
         [ "Re-use", "wip20200804.html#autotoc_md320", null ]
       ] ]
     ] ],
+    [ "06-Aug-2020 Retro Dev", "wip20200806.html", [
+      [ "Advantage development", "wip20200806.html#h20200806", null ],
+      [ "Tiny dev machine", "wip20200806.html#autotoc_md321", null ],
+      [ "We can rebuild him", "wip20200806.html#autotoc_md322", [
+        [ "The distro", "wip20200806.html#autotoc_md323", null ]
+      ] ]
+    ] ],
     [ "Archives", "archive.html", "archive" ],
     [ "Photography", "photography.html", "photography" ],
-    [ "About Me", "AboutMe.html", null ]
+    [ "About Me", "AboutMe.html", null ],
+    [ "Todo List", "todo.html", null ]
   ] ]
 ];
 
 var NAVTREEINDEX =
 [
 "AboutMe.html",
-"wip20190312.html#autotoc_md191"
+"wip20190312.html#autotoc_md193"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
